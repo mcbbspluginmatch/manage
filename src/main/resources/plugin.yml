@@ -1,0 +1,39 @@
+name: gameplay
+main: cn.handy.Main
+version: 2.0.3
+author: handy
+commands:
+    tp:
+        description: tp到另外一个玩家
+        usage: 请使用 /<tp> [name]
+        permission: handy.tp
+        permission-message: §c你没有该命令的权限！
+    hat:
+        description: 把主手上的物品带到头上
+        usage: 请使用 /hat
+        permission: handy.hat
+        permission-message: §c你没有该命令的权限！
+    msg:
+        description: 游戏管理主命令
+        usage: 请使用 /msg查看相关命令
+        permission: handy.msg
+        permission-message: §c你没有该命令的权限！
+    tpa:
+        description: tpa到另外一个玩家
+        usage: 请使用 /<tpa> [name]
+    tpaccept:
+        description: 接受玩家传送请求
+        usage: 请使用 /tpaccept
+    tpdeny:
+        description: 拒绝玩家传送请求
+        usage: 请使用 /tpdeny
+    l:
+        description: 登录
+        usage: /l 密码
+permissions:
+    handy.tp:
+        default: op
+    handy.hat:
+        default: true
+    handy.msg:
+        default: op
