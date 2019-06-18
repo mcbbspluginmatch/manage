@@ -6,6 +6,7 @@ import cn.handy.entity.User;
 import cn.handy.utils.MysqlManagerUtil;
 import lombok.val;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -86,9 +87,8 @@ public class UserServiceImpl implements IUserService {
                 user.setPassWord(rst.getString(4));
                 user.setLoginIp(rst.getString(5));
                 user.setLoginDate(rst.getDate(6));
-                user.setLoginStatus(rst.getBoolean(7));
-                user.setRegIp(rst.getString(8));
-                user.setRegDate(rst.getDate(9));
+                user.setRegIp(rst.getString(7));
+                user.setRegDate(rst.getDate(8));
             }
             rst.close();
             ps.close();
@@ -99,5 +99,34 @@ public class UserServiceImpl implements IUserService {
             e.printStackTrace();
         }
         return user;
+    }
+
+    /**
+     * 注册
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Boolean register(User user) {
+        try {
+            String selectStr = UserSqlEnum.ADD_DATA.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getRealName());
+            ps.setString(3, user.getPassWord());
+            ps.setString(4, user.getLoginIp());
+            ps.setDate(5, new Date(user.getLoginDate().getTime()));
+            ps.setString(6, user.getRegIp());
+            ps.setDate(7, new Date(user.getRegDate().getTime()));
+            val rst = ps.executeUpdate();
+            ps.close();
+            return rst > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -3,6 +3,7 @@ package cn.handy.utils;
 import cn.handy.Main;
 import cn.handy.constants.CommandEnum;
 import cn.handy.constants.Constants;
+import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.entity.User;
 import cn.handy.executor.IExecutor;
 import lombok.val;
@@ -119,8 +120,15 @@ public class BaseUtil {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    if (!BaseUtil.isLogin(player.getName())) {
-                        player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
+                    val userService = new UserServiceImpl();
+                    // 判断该用户是否存在
+                    val rst = userService.findByUserName(player.getName().toLowerCase());
+                    if (rst) {
+                        if (!BaseUtil.isLogin(player.getName())) {
+                            player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
+                        }
+                    } else {
+                        player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
                     }
                 }
             }

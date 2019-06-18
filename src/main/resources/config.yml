@@ -1,16 +1,17 @@
 # 是否启用数据库
-isUseMysql: false
+isUseMysql: true
 # 是否启用每个玩家加入/退出游戏消息提醒
 # 启用数据库时才可开启
-isMessage: false
-# 是否启用登录系统 启用数据库时才可开启
-isUser: false
+isMessage: true
+# 是否启用登录系统
+# 启用数据库时才可开启
+isUser: true
 # 用于mysql数据库链接-isUseMysql为true时生效
 mysql:
-  ip: 127.0.0.1
+  ip: 106.12.156.212
   port: 3306
-  username: root
-  password: 123456
+  username: hanshuai
+  password: abc956812056
   databasename: minecraft
 
 # 默认全部玩家加入游戏欢迎语句
@@ -18,7 +19,10 @@ joinMessage: 欢迎 ${player} 加入服务器
 # 默认全部玩家离开游戏欢迎语句
 quitMessage: ${player} 离开了服务器
 
-#tpa传送延迟时间(单位秒)
+# tpa传送延迟时间(单位秒)
 tpaDelayTime: 3
-#tpa传送等待时间(单位秒)
+# tpa传送等待时间(单位秒)
 tpaWaitTime: 30
+
+# 是否开启help消息替换(替换的内容在help.yml中修改)
+isHelp: true

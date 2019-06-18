@@ -47,7 +47,7 @@ public class LoginExecutorImpl implements IExecutor {
                             sender.sendMessage("密码错误,请重新输入");
                         }
                     } else {
-                        sender.sendMessage(Constants.MSG_HELP);
+                        sender.sendMessage("登录参数有误,请重新输入");
                     }
                 } else {
                     sender.sendMessage("未启用数据库或该功能,该命令无效");

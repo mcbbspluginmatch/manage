@@ -22,7 +22,6 @@ public enum UserSqlEnum {
                     "`passWord` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL," +
                     "`loginIp` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL," +
                     "`loginDate` datetime(0) NULL DEFAULT NULL," +
-                    "`loginStatus` bit(1) NULL DEFAULT NULL," +
                     "`regIp` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL," +
                     "`regDate` datetime(1) NULL DEFAULT NULL," +
                     "PRIMARY KEY (`id`) USING BTREE" +
@@ -33,8 +32,8 @@ public enum UserSqlEnum {
      */
     ADD_DATA(
             "INSERT INTO `gp_user`" +
-                    "(`id`, `userName`, `realName`, `passWord`, `loginIp`, `loginDate`, `loginStatus`, `regIp`, `regDate`)" +
-                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+                    "(`id`, `userName`, `realName`, `passWord`, `loginIp`, `loginDate`, `regIp`, `regDate`)" +
+                    " VALUES (0, ?, ?, ?, ?, ?, ?, ?);"
     ),
     /**
      * 根据帐号密码查询来进行登录

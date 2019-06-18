@@ -47,5 +47,5 @@ public abstract class Constants {
     /**
      * 命令白名单
      */
-    public final static Pattern[] COMMAND_WHITE_LISTS = new Pattern[]{Pattern.compile("/l(ogin)?(\\z| .*)")};
+    public final static Pattern[] COMMAND_WHITE_LISTS = new Pattern[]{Pattern.compile("/l(ogin)?(\\z| .*)"),Pattern.compile("/reg?(\\z| .*)")};
 }

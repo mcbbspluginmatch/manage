@@ -1,6 +1,6 @@
-name: gameplay
+name: manage
 main: cn.handy.Main
-version: 2.0.3
+version: 1.1.0
 author: handy
 commands:
     tp:
@@ -30,6 +30,12 @@ commands:
     l:
         description: 登录
         usage: /l 密码
+    reg:
+        description: 注册
+        usage: /reg 密码
+    help:
+        description: 帮助
+        usage: /help
 permissions:
     handy.tp:
         default: op

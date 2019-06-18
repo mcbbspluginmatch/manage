@@ -5,10 +5,10 @@ import cn.handy.utils.BaseUtil;
 import cn.handy.utils.MysqlManagerUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
-import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -22,6 +22,7 @@ import java.io.File;
  */
 public class Main extends JavaPlugin {
     public static FileConfiguration config;
+    public static FileConfiguration HelpConfig;
     public static Plugin plugin;
 
     /**
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {
      */
     @Override
     public void onEnable() {
+        plugin = this;
         // 创建配置文件文件夹和配置文件
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
@@ -39,22 +41,31 @@ public class Main extends JavaPlugin {
         }
         reloadConfig();
         config = getConfig();
-        plugin = this;
-        // 注册监听器
-        Bukkit.getPluginManager().registerEvents(new MyListener(), this);
 
-        Server server = getServer();
         // 判断是否启用数据库
         val isUseMysql = config.getBoolean("isUseMysql");
         if (isUseMysql) {
-            // 利用BukkitRunnable创建新线程，防止使用SQL而堵塞主线程
             new BukkitRunnable() {
+                @Override
                 public void run() {
                     MysqlManagerUtil.get().enableMySQL();
                 }
             }.runTaskAsynchronously(this);
         }
-        this.getLogger().info("gameplay插件启动成功");
+        this.saveResource("config.yml", false);
+
+        // 判断是否启用Help列表替换
+        val isHelp = config.getBoolean("isHelp");
+        if (isHelp) {
+            File file1 = new File(getDataFolder(), "help.yml");
+            FileConfiguration lang = YamlConfiguration.loadConfiguration(file1);
+            HelpConfig = lang;
+        }
+
+        // 注册监听器
+        Bukkit.getPluginManager().registerEvents(new MyListener(), this);
+
+        this.getLogger().info("manage插件启动成功");
     }
 
     /**
@@ -68,7 +79,7 @@ public class Main extends JavaPlugin {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, final String[] args) {
-        val executor = BaseUtil.getIExecutor(sender,label);
+        val executor = BaseUtil.getIExecutor(sender, label);
         return executor.command(sender, cmd, label, args);
     }
 
@@ -82,6 +93,6 @@ public class Main extends JavaPlugin {
         if (isUseMysql) {
             MysqlManagerUtil.get().shutdown();
         }
-        this.getLogger().info("gameplay插件关闭");
+        this.getLogger().info("manage插件关闭");
     }
 }

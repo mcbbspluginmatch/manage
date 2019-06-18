@@ -87,12 +87,6 @@ public class MyListener implements Listener {
         val isUser = Main.config.getBoolean("isUser");
         if (isUser) {
             val userName = event.getName();
-            val userService = new UserServiceImpl();
-            // 判断该用户是否存在
-            val rst = userService.findByUserName(userName);
-            if (!rst) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "您的账号未注册,请前往官网注册后在进行登录");
-            }
             if (BaseUtil.isLogin(userName)) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "玩家 " + userName + " 已经在线了!");
             }

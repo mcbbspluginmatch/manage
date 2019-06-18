@@ -17,7 +17,6 @@ public class User {
     private String passWord;
     private String loginIp;
     private Date loginDate;
-    private Boolean loginStatus;
     private String regIp;
     private Date regDate;
 }

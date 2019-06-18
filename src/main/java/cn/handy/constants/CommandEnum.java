@@ -20,7 +20,9 @@ public enum CommandEnum {
     HAT("hat", "HatExecutorImpl", "handy.hat"),
     MSG("msg", "MsgExecutorImpl", "handy.msg"),
     LOGIN("l", "LoginExecutorImpl", ""),
-    NOT_HASPERMISSION("not", "ErrorExecutorImpl", "");
+    REG("reg", "RegExecutorImpl", ""),
+    HELP("help", "HelpExecutorImpl", ""),
+    NOT("not", "ErrorExecutorImpl", "");
 
     private String command;
     private String className;
@@ -32,7 +34,7 @@ public enum CommandEnum {
                 return commandEnum;
             }
         }
-        return NOT_HASPERMISSION;
+        return NOT;
     }
 
     public static CommandEnum getCommandEnum(CommandSender sender, String command) {
@@ -48,6 +50,6 @@ public enum CommandEnum {
                 }
             }
         }
-        return NOT_HASPERMISSION;
+        return NOT;
     }
 }
