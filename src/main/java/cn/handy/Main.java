@@ -37,9 +37,9 @@ public class Main extends JavaPlugin {
         }
         File file = new File(getDataFolder(), "config.yml");
         if (!(file.exists())) {
-            saveDefaultConfig();
+            this.saveDefaultConfig();
         }
-        reloadConfig();
+        this.reloadConfig();
         config = getConfig();
 
         // 判断是否启用数据库
@@ -52,11 +52,11 @@ public class Main extends JavaPlugin {
                 }
             }.runTaskAsynchronously(this);
         }
-        this.saveResource("config.yml", false);
 
         // 判断是否启用Help列表替换
         val isHelp = config.getBoolean("isHelp");
         if (isHelp) {
+            this.saveResource("help.yml",false);
             File file1 = new File(getDataFolder(), "help.yml");
             FileConfiguration lang = YamlConfiguration.loadConfiguration(file1);
             HelpConfig = lang;
