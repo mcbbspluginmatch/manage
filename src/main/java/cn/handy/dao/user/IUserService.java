@@ -50,4 +50,13 @@ public interface IUserService {
      * @return
      */
     User findByUserNameAndLoginIp(String userName, String loginIp);
+
+
+    /**
+     * 更新
+     *
+     * @param user
+     * @return
+     */
+    Boolean update(User user);
 }

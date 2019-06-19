@@ -166,4 +166,29 @@ public class UserServiceImpl implements IUserService {
         }
         return user;
     }
+
+    /**
+     * 更新
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public Boolean update(User user) {
+        try {
+            String selectStr = UserSqlEnum.UPDATE.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            ps.setString(1, user.getLoginIp());
+            ps.setDate(2, new Date(user.getLoginDate().getTime()));
+            ps.setLong(3, user.getId());
+            val rst = ps.executeUpdate();
+            ps.close();
+            return rst > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

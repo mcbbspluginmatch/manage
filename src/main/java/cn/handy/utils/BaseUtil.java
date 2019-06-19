@@ -129,18 +129,19 @@ public class BaseUtil {
                     if (rst) {
                         val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
                         if (user.getId() != null) {
-                            player.sendMessage("§aip相同,免密码登录成功!");
+                            player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
                             Constants.userSet.add(user);
-                        }
-                        if (!BaseUtil.isLogin(player.getName())) {
-                            player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
+                        } else {
+                            if (!BaseUtil.isLogin(player.getName())) {
+                                player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
+                            }
                         }
                     } else {
                         player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
                     }
                 }
             }
-        }.runTaskTimerAsynchronously(Main.plugin, 0, 5 * 20);
+        }.runTaskLaterAsynchronously(Main.plugin, 0);
     }
 
     /**

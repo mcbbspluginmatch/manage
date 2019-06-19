@@ -52,6 +52,9 @@ public enum UserSqlEnum {
      */
     SELECT_COUNT_BY_USERNAME(
             "SELECT COUNT(1) FROM `gp_user` WHERE `userName` = ?"
+    ),
+    UPDATE(
+            "UPDATE `gp_user` SET `loginIp` = '?', `loginDate` = '?' WHERE `id` = ?"
     );
 
     private String command;
