@@ -129,4 +129,41 @@ public class UserServiceImpl implements IUserService {
         }
         return false;
     }
+
+    /**
+     * 根据帐号和ip来进行查询
+     *
+     * @param userName 帐号
+     * @param loginIp  ip
+     * @return
+     */
+    @Override
+    public User findByUserNameAndLoginIp(String userName, String loginIp) {
+        User user = new User();
+        try {
+            String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            ps.setString(1, userName);
+            ps.setString(2, loginIp);
+            val rst = ps.executeQuery();
+            while (rst.next()) {
+                user.setId(rst.getLong(1));
+                user.setUserName(rst.getString(2));
+                user.setRealName(rst.getString(3));
+                user.setPassWord(rst.getString(4));
+                user.setLoginIp(rst.getString(5));
+                user.setLoginDate(rst.getDate(6));
+                user.setRegIp(rst.getString(7));
+                user.setRegDate(rst.getDate(8));
+            }
+            rst.close();
+            ps.close();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
 }

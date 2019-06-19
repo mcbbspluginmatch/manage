@@ -40,4 +40,14 @@ public interface IUserService {
      * @return
      */
     Boolean register(User user);
+
+
+    /**
+     * 根据帐号和ip来进行查询
+     *
+     * @param userName 帐号
+     * @param loginIp  ip
+     * @return
+     */
+    User findByUserNameAndLoginIp(String userName, String loginIp);
 }

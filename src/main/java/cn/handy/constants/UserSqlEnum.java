@@ -42,6 +42,12 @@ public enum UserSqlEnum {
             "SELECT * FROM `gp_user` WHERE `userName` = ? AND `passWord` = ?"
     ),
     /**
+     * 根据帐号和ip来进行查询
+     */
+    SELECT_BY_USERNAME_AND_LOGIN_IP(
+            "SELECT * FROM `gp_user` WHERE `userName` = ? AND `loginIp` = ?"
+    ),
+    /**
      * 查询是否有该账户
      */
     SELECT_COUNT_BY_USERNAME(

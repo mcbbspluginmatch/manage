@@ -124,8 +124,14 @@ public class BaseUtil {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     val userService = new UserServiceImpl();
                     // 判断该用户是否存在
-                    val rst = userService.findByUserName(player.getName().toLowerCase());
+                    String userName = player.getName().toLowerCase();
+                    val rst = userService.findByUserName(userName);
                     if (rst) {
+                        val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
+                        if (user.getId() != null) {
+                            player.sendMessage("§aip相同,免密码登录成功!");
+                            Constants.userSet.add(user);
+                        }
                         if (!BaseUtil.isLogin(player.getName())) {
                             player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
                         }
