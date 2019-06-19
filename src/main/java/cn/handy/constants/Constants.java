@@ -45,7 +45,14 @@ public abstract class Constants {
     public final static String PACKAGE_NAME = "cn.handy.executor.impl.";
 
     /**
-     * 命令白名单
+     * 命令白名单正则
      */
-    public final static Pattern[] COMMAND_WHITE_LISTS = new Pattern[]{Pattern.compile("/l(ogin)?(\\z| .*)"),Pattern.compile("/reg?(\\z| .*)")};
+    public final static Pattern[] COMMAND_WHITE_LISTS = new Pattern[]{Pattern.compile("/l(ogin)?(\\z| .*)"), Pattern.compile("/reg?(\\z| .*)")};
+
+
+    /**
+     * 数字正则
+     */
+    public final static Pattern NUMERIC = Pattern.compile("[0-9]*");
+
 }

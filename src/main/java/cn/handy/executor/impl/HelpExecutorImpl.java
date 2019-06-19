@@ -2,6 +2,7 @@ package cn.handy.executor.impl;
 
 import cn.handy.Main;
 import cn.handy.executor.IExecutor;
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.ListPageUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -34,7 +35,7 @@ public class HelpExecutorImpl implements IExecutor {
     public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
         // 判断是否启用Help列表替换
         val isHelp = Main.config.getBoolean("isHelp");
-        if (!isHelp){
+        if (!isHelp) {
             sender.sendMessage("未启用help指令帮助");
             return true;
         }
@@ -45,7 +46,10 @@ public class HelpExecutorImpl implements IExecutor {
         int pageNum = 1;
         if (args != null && args.length == 1) {
             String arg = args[0];
-            pageNum = Integer.parseInt(arg);
+            val rst = BaseUtil.isNumeric(arg);
+            if (rst) {
+                pageNum = Integer.parseInt(arg);
+            }
         }
         // 对list进行分页
         ListPageUtil listPageUtil = new ListPageUtil(help, pageNum, 10);
@@ -68,7 +72,7 @@ public class HelpExecutorImpl implements IExecutor {
             sender.sendMessage(message);
         }
         // 大于总页数--出现上一页
-        if (pageNum >= totalPage) {
+        if (pageNum != 1 && pageNum >= totalPage) {
             TextComponent message = new TextComponent(ChatColor.AQUA + "[上一页]----------------------------");
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/help " + (pageNum - 1)));
             sender.sendMessage(message);

@@ -12,6 +12,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.regex.Matcher;
+
 /**
  * @author hanshuai
  * @Description: {常用方法}
@@ -133,5 +135,19 @@ public class BaseUtil {
                 }
             }
         }.runTaskTimerAsynchronously(Main.plugin, 0, 5 * 20);
+    }
+
+    /**
+     * 利用正则表达式判断字符串是否是数字
+     *
+     * @param str
+     * @return
+     */
+    public static Boolean isNumeric(String str) {
+        Matcher isNum = Constants.NUMERIC.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
     }
 }
