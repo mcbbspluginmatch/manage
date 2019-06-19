@@ -8,10 +8,10 @@ isMessage: true
 isUser: true
 # 用于mysql数据库链接-isUseMysql为true时生效
 mysql:
-  ip: 127.0.0.1
+  ip: 106.12.156.212
   port: 3306
-  username: root
-  password: 123456
+  username: hanshuai
+  password: abc956812056
   databasename: minecraft
 
 # 默认全部玩家加入游戏欢迎语句
