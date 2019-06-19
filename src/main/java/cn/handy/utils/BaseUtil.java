@@ -127,12 +127,13 @@ public class BaseUtil {
                     String userName = player.getName().toLowerCase();
                     val rst = userService.findByUserName(userName);
                     if (rst) {
-                        val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
-                        if (user.getId() != null) {
-                            player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
-                            Constants.userSet.add(user);
-                        } else {
-                            if (!BaseUtil.isLogin(player.getName())) {
+                        if (!BaseUtil.isLogin(player.getName())) {
+                            // 判断是否免密码登陆
+                            val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
+                            if (user.getId() != null) {
+                                player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
+                                Constants.userSet.add(user);
+                            }else{
                                 player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
                             }
                         }
@@ -141,7 +142,7 @@ public class BaseUtil {
                     }
                 }
             }
-        }.runTaskLaterAsynchronously(Main.plugin, 0);
+        }.runTaskTimerAsynchronously(Main.plugin, 0, 5 * 20);
     }
 
     /**

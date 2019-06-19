@@ -54,7 +54,7 @@ public enum UserSqlEnum {
             "SELECT COUNT(1) FROM `gp_user` WHERE `userName` = ?"
     ),
     UPDATE(
-            "UPDATE `gp_user` SET `loginIp` = '?', `loginDate` = '?' WHERE `id` = ?"
+            "UPDATE `gp_user` SET `loginIp` = ?, `loginDate` = ? WHERE `id` = ?"
     );
 
     private String command;
