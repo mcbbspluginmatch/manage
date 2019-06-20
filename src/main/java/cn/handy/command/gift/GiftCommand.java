@@ -41,7 +41,7 @@ public class GiftCommand extends Command {
             // 获取主手的物品
             ItemStack gift = inv.getItemInMainHand();
             if (gift.getAmount() < 1) {
-                sender.sendMessage(ChatColor.RED + "你的主手上必须有物品");
+                sendPlayer.sendMessage(ChatColor.RED + "你的主手上必须有物品");
             } else {
                 // 如果有子参数为玩家就给这个玩家发送礼物
                 if (args != null && args.length > 0){
@@ -49,6 +49,8 @@ public class GiftCommand extends Command {
                     PlayerInventory inventory = player.getInventory();
                     inventory.addItem(gift);
                     player.updateInventory();
+                    sender.sendMessage(ChatColor.AQUA+"礼物成功发给了"+player.getName());
+                    player.sendMessage(ChatColor.AQUA+"你收到了"+sender.getName()+"的礼物");
                 }else{
                     // 不然就读取现在的玩家给现在的玩家都发该礼物
                     for (Player player : Bukkit.getOnlinePlayers()) {
@@ -56,7 +58,9 @@ public class GiftCommand extends Command {
                         // 设置手上的物品
                         inventory.addItem(gift);
                         player.updateInventory();
+                        player.sendMessage(ChatColor.AQUA+"你收到了"+sender.getName()+"的礼物");
                     }
+                    sender.sendMessage(ChatColor.AQUA+"礼物成功发给了在线全部玩家");
                 }
             }
         } else {

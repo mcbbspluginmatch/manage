@@ -50,6 +50,7 @@ public class HatCommand extends Command {
                 // 设置手上的物品
                 inv.setItemInMainHand(helm);
                 player.updateInventory();
+                sender.sendMessage(ChatColor.AQUA+"帽子设置成功,快去看看吧~");
             }
         } else {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
