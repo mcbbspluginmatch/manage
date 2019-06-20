@@ -1,13 +1,11 @@
 package cn.handy;
 
+import cn.handy.command.EnableCommand;
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.listener.MyListener;
-import cn.handy.utils.BaseUtil;
+import cn.handy.listener.ManageListener;
 import cn.handy.utils.MysqlManagerUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -21,7 +19,7 @@ import java.io.File;
  * @Description: {主方法}
  * @date 2019/5/17 16:06
  */
-public class Main extends JavaPlugin {
+public class Manage extends JavaPlugin {
     public static FileConfiguration config;
     public static FileConfiguration HelpConfig;
     public static Plugin plugin;
@@ -47,7 +45,7 @@ public class Main extends JavaPlugin {
         saveConfigCache();
 
         // 注册监听器
-        Bukkit.getPluginManager().registerEvents(new MyListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ManageListener(), this);
 
         // 使用子线程创建表和获取数据库链接
         if (BaseConfigCache.isMessage || BaseConfigCache.isUser) {
@@ -59,26 +57,17 @@ public class Main extends JavaPlugin {
             }.runTaskAsynchronously(this);
         }
         // 创建help
-        this.saveResource("help.yml", false);
-        File helpFile = new File(getDataFolder(), "help.yml");
-        FileConfiguration lang = YamlConfiguration.loadConfiguration(helpFile);
-        HelpConfig = lang;
-        this.getLogger().info("manage插件启动成功");
-    }
+        if (BaseConfigCache.isHelp){
+            this.saveResource("help.yml", false);
+            File helpFile = new File(getDataFolder(), "help.yml");
+            FileConfiguration lang = YamlConfiguration.loadConfiguration(helpFile);
+            HelpConfig = lang;
+        }
 
-    /**
-     * 命令
-     *
-     * @param sender
-     * @param cmd
-     * @param label
-     * @param args
-     * @return
-     */
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, final String[] args) {
-        val executor = BaseUtil.getIExecutor(sender, label);
-        return executor.command(sender, cmd, label, args);
+        // 注册命令
+        EnableCommand.regCommand();
+
+        this.getLogger().info("manage插件启动成功");
     }
 
     /**
@@ -98,9 +87,18 @@ public class Main extends JavaPlugin {
      * 保存各个独立模块开启状态
      */
     private void saveConfigCache() {
-        val isMessage = Main.config.getBoolean("isMessage");
-        val isUser = Main.config.getBoolean("isUser");
+        val isMessage = Manage.config.getBoolean("isMessage");
+        val isUser = Manage.config.getBoolean("isUser");
+        val isHat = Manage.config.getBoolean("isHat");
+        val isHelp = Manage.config.getBoolean("isHelp");
+        val isTp = Manage.config.getBoolean("isTp");
+        val isGift = Manage.config.getBoolean("isGift");
+
         BaseConfigCache.isMessage = isMessage;
         BaseConfigCache.isUser = isUser;
+        BaseConfigCache.isHat = isHat;
+        BaseConfigCache.isHelp = isHelp;
+        BaseConfigCache.isTp = isTp;
+        BaseConfigCache.isGift = isGift;
     }
 }

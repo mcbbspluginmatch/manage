@@ -1,8 +1,7 @@
-package cn.handy.executor.impl;
+package cn.handy.command.tp;
 
-import cn.handy.Main;
+import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
-import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
@@ -12,25 +11,32 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+
 /**
  * @author hanshuai
- * @Description: {}
- * @date 2019/6/12 15:54
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class TpacceptExecutorImpl implements IExecutor {
+public class TpacceptCommand extends Command {
+
+    public TpacceptCommand() {
+        // 命令
+        super("tpaccept");
+    }
 
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean execute(CommandSender sender, String label, String[] args) {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             final Player player = (Player) sender;
             if (BaseConstants.currentRequest.containsKey(player.getName())) {
                 String receiveName = BaseConstants.currentRequest.get(player.getName());
                 final Player receivePlayer = Bukkit.getServer().getPlayer(receiveName);
-                if (receivePlayer != null){
+                if (receivePlayer != null) {
                     // 传送延迟
-                    val tpaDelayTime = Main.config.getLong("tpaDelayTime");
-                    sender.sendMessage("已接受"+receiveName+"的传送请求.");
+                    val tpaDelayTime = Manage.config.getLong("tpaDelayTime");
+                    sender.sendMessage("已接受" + receiveName + "的传送请求.");
                     receivePlayer.sendMessage(ChatColor.GRAY + "" + tpaDelayTime + "秒后开始传送...");
                     new BukkitRunnable() {
                         @Override
@@ -38,9 +44,9 @@ public class TpacceptExecutorImpl implements IExecutor {
                             receivePlayer.teleport(player.getLocation());
                             BaseConstants.currentRequest.remove(player.getName());
                         }
-                    }.runTaskLater(Main.plugin, tpaDelayTime * 20);
-                }else {
-                    sender.sendMessage(ChatColor.AQUA + receiveName+"现在不在线,传送取消.");
+                    }.runTaskLater(Manage.plugin, tpaDelayTime * 20);
+                } else {
+                    sender.sendMessage(ChatColor.AQUA + receiveName + "现在不在线,传送取消.");
                 }
             } else {
                 sender.sendMessage(ChatColor.AQUA + "您没有任何当前的tp请求.");

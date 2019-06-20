@@ -1,24 +1,31 @@
-package cn.handy.executor.impl;
+package cn.handy.command.tp;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 /**
  * @author hanshuai
- * @Description: {}
- * @date 2019/6/12 16:03
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class TpdenyExecutorImpl implements IExecutor {
+public class TpdenyCommand extends Command {
+
+    public TpdenyCommand() {
+        // 命令
+        super("tpdeny");
+    }
 
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean execute(CommandSender sender, String label, final String[] args) {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player player = (Player) sender;

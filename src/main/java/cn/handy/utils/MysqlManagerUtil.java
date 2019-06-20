@@ -1,6 +1,6 @@
 package cn.handy.utils;
 
-import cn.handy.Main;
+import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
@@ -34,11 +34,11 @@ public class MysqlManagerUtil {
     }
 
     public void enableMySQL() {
-        ip = Main.config.getString("mysql.ip");
-        databaseName = Main.config.getString("mysql.databasename");
-        userName = Main.config.getString("mysql.username");
-        userPassword = Main.config.getString("mysql.password");
-        port = Main.config.getInt("mysql.port");
+        ip = Manage.config.getString("mysql.ip");
+        databaseName = Manage.config.getString("mysql.databasename");
+        userName = Manage.config.getString("mysql.username");
+        userPassword = Manage.config.getString("mysql.password");
+        port = Manage.config.getInt("mysql.port");
         // 构建数据库连接
         connectMySQL();
 
@@ -69,7 +69,7 @@ public class MysqlManagerUtil {
                     e.printStackTrace();
                 }
             }
-        }.runTaskTimerAsynchronously(Main.plugin, 0, 3600 * 20);
+        }.runTaskTimerAsynchronously(Manage.plugin, 0, 3600 * 20);
     }
 
     /**

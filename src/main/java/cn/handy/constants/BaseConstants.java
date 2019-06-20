@@ -1,7 +1,6 @@
 package cn.handy.constants;
 
 import cn.handy.entity.User;
-import org.bukkit.ChatColor;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,14 +34,11 @@ public abstract class BaseConstants {
      * msg帮助语句
      */
     public final static String MSG_HELP =
-            ChatColor.GOLD + "/msg set [玩家名] [进入提醒] [退出提醒]   " + ChatColor.AQUA + "设置玩家的进入和退出消息\n"
-                    + ChatColor.GOLD + "/msg del [玩家名]        " + ChatColor.AQUA + "删除玩家的进入和退出消息\n"
-                    + ChatColor.GOLD + "/msg see [玩家名]        " + ChatColor.AQUA + "查询玩家的进入和退出消息";
-
-    /**
-     * 包名
-     */
-    public final static String PACKAGE_NAME = "cn.handy.executor.impl.";
+                    "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一\n" +
+                    "§e/msg set [玩家名] [进入提醒] [退出提醒]     " + "§f设置玩家的进入和退出消息\n" +
+                    "§e/msg del [玩家名]     " + "§f删除玩家的进入和退出消息\n" +
+                    "§e/msg see [玩家名]     " + "§f查询玩家的进入和退出消息\n" +
+                    "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
 
     /**
      * 命令白名单正则

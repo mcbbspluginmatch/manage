@@ -1,8 +1,6 @@
-package cn.handy.executor.impl;
+package cn.handy.command.help;
 
-import cn.handy.Main;
-import cn.handy.constants.BaseConfigCache;
-import cn.handy.executor.IExecutor;
+import cn.handy.Manage;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.ListPageUtil;
 import com.google.gson.Gson;
@@ -18,23 +16,19 @@ import java.util.List;
 
 /**
  * @author hanshuai
- * @Description: {help指令}
- * @date 2019/6/18 13:47
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class HelpExecutorImpl implements IExecutor {
+public class HelpCommand extends Command {
 
-    /**
-     * 帮助
-     *
-     * @param sender 发送人
-     * @param cmd    命令
-     * @param label  命令
-     * @param args   参数
-     * @return
-     */
+    public HelpCommand() {
+        // 命令
+        super("help");
+    }
+
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
-        String jsonArray = Main.HelpConfig.getString("helps");
+    public boolean execute(CommandSender sender, String label, final String[] args) {
+        String jsonArray = Manage.HelpConfig.getString("helps");
         Gson gson = new Gson();
         List<String> help = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
         }.getType());

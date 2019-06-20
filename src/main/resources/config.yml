@@ -1,8 +1,3 @@
-#---------------------------需要mysql功能start---------------------------
-# 是否启用登录系统(如果使用请填好mysql.yml)
-isUser: true
-# 是否启用每个玩家加入/退出游戏消息提醒(如果使用请填好mysql.yml)
-isMessage: true
 # 用于mysql数据库链接
 mysql:
   ip: 127.0.0.1
@@ -10,11 +5,24 @@ mysql:
   username: root
   password: 123456
   databasename: minecraft
-#---------------------------需要mysql功能end---------------------------
+#需要开启的功能start------------------------
+# 是否启用登录系统
+isUser: true
+# 是否启用每个玩家加入/退出游戏消息提醒
+isMessage: true
+# 是否启用hat命令
+isHat: true
+# 是否启用help帮助
+isHelp: true
+# 是否启用tp系统
+isTp: true
+# 是否启用送礼物系统
+isGift: true
+#需要开启的功能end--------------------------
 
-# 默认全部玩家加入游戏欢迎语句
+# 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
-# 默认全部玩家离开游戏欢迎语句
+# 默认全部玩家离开游戏欢迎语句(isMessage启用时候生效)
 quitMessage: ${player} 离开了服务器
 # tpa传送延迟时间(单位秒)
 tpaDelayTime: 3

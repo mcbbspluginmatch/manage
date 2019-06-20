@@ -1,6 +1,6 @@
 package cn.handy.listener;
 
-import cn.handy.Main;
+import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.dao.message.impl.MessageServiceImpl;
@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * @Description: {监听器}
  * @date 2019/5/17 17:16
  */
-public class MyListener implements Listener {
+public class ManageListener implements Listener {
 
     /**
      * 进去游戏事件
@@ -43,21 +43,22 @@ public class MyListener implements Listener {
     public void onPlayerJoinGame(PlayerJoinEvent event) {
         String userName = event.getPlayer().getName();
 
+        // 没有登录的话发送登录提醒
         if (BaseConfigCache.isUser && !BaseUtil.isLogin(userName)) {
-            // 发送登录提醒
-            BaseUtil.loginRemind((Player) event);
+            BaseUtil.loginRemind(event.getPlayer());
         }
 
-        String joinMessage = Main.config.getString("joinMessage");
+        // 发送上线提醒
         if (BaseConfigCache.isMessage) {
             val messageService = new MessageServiceImpl();
             val message = messageService.findByUserName(userName);
+            String joinMessage = Manage.config.getString("joinMessage");
             if (message.getId() != null) {
                 joinMessage = message.getJoinMessage();
             }
+            joinMessage = joinMessage.replace("${player}", userName);
+            event.setJoinMessage(joinMessage);
         }
-        joinMessage = joinMessage.replace("${player}", userName);
-        event.setJoinMessage(joinMessage);
     }
 
     /**
@@ -68,20 +69,22 @@ public class MyListener implements Listener {
     @EventHandler
     public void onPlayerQuitGame(PlayerQuitEvent event) {
         String userName = event.getPlayer().getName();
-        String quitMessage = Main.config.getString("quitMessage");
-        if (BaseConfigCache.isMessage) {
-            val messageService = new MessageServiceImpl();
-            val message = messageService.findByUserName(userName);
-            if (message.getId() != null) {
-                quitMessage = message.getQuitMessage();
-            }
-        }
-        quitMessage = quitMessage.replace("${player}", userName);
-        event.setQuitMessage(quitMessage);
 
         // 清空用户登录缓存
         if (BaseConfigCache.isUser) {
             BaseUtil.removeUser(userName);
+        }
+
+        // 发送下线提醒
+        if (BaseConfigCache.isMessage) {
+            val messageService = new MessageServiceImpl();
+            val message = messageService.findByUserName(userName);
+            String quitMessage = Manage.config.getString("quitMessage");
+            if (message.getId() != null) {
+                quitMessage = message.getQuitMessage();
+            }
+            quitMessage = quitMessage.replace("${player}", userName);
+            event.setQuitMessage(quitMessage);
         }
     }
 
@@ -107,17 +110,18 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
-        }
-        String input = event.getMessage().toLowerCase();
-        for (Pattern regex : BaseConstants.COMMAND_WHITE_LISTS) {
-            if (regex.matcher(input).find()) {
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
                 return;
             }
+            String input = event.getMessage().toLowerCase();
+            for (Pattern regex : BaseConstants.COMMAND_WHITE_LISTS) {
+                if (regex.matcher(input).find()) {
+                    return;
+                }
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
-
     }
 
     /**
@@ -127,10 +131,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -140,10 +146,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -153,10 +161,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -166,10 +176,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        if (!(event.getWhoClicked() instanceof Player) || BaseUtil.isLogin(event.getWhoClicked().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (!(event.getWhoClicked() instanceof Player) || BaseUtil.isLogin(event.getWhoClicked().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -179,13 +191,15 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (!(event.getDamager() instanceof Player)) {
+                return;
+            }
+            if (BaseUtil.isLogin(event.getDamager().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        if (BaseUtil.isLogin(event.getDamager().getName())) {
-            return;
-        }
-        event.setCancelled(true);
     }
 
     /**
@@ -195,10 +209,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -208,10 +224,12 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -221,13 +239,15 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onEntityPickupItem(EntityPickupItemEvent event) {
-        if (!BaseUtil.isPlayer(event.getEntity())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (!BaseUtil.isPlayer(event.getEntity())) {
+                return;
+            }
+            if (BaseUtil.isLogin(event.getEntity().getName())) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        if (BaseUtil.isLogin(event.getEntity().getName())) {
-            return;
-        }
-        event.setCancelled(true);
     }
 
     /**
@@ -237,13 +257,15 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (BaseUtil.isLogin(event.getPlayer().getName())) {
-            return;
+        if (BaseConfigCache.isUser) {
+            if (BaseUtil.isLogin(event.getPlayer().getName())) {
+                return;
+            }
+            if ((Math.abs(event.getFrom().getZ()) - Math.abs(event.getTo().getZ())) == 0
+                    && (Math.abs(event.getFrom().getX()) - Math.abs(event.getTo().getX())) == 0) {
+                return;
+            }
+            event.setCancelled(true);
         }
-        if ((Math.abs(event.getFrom().getZ()) - Math.abs(event.getTo().getZ())) == 0
-                && (Math.abs(event.getFrom().getX()) - Math.abs(event.getTo().getX())) == 0) {
-            return;
-        }
-        event.setCancelled(true);
     }
 }

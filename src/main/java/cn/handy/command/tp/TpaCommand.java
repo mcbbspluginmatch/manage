@@ -1,8 +1,7 @@
-package cn.handy.executor.impl;
+package cn.handy.command.tp;
 
-import cn.handy.Main;
+import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
-import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
@@ -11,21 +10,28 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 /**
  * @author hanshuai
- * @Description: {tpa方法}
- * @date 2019/6/12 14:42
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class TpaExecutorImpl implements IExecutor {
+public class TpaCommand extends Command {
+
+    public TpaCommand() {
+        // 命令
+        super("tpa");
+    }
 
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, final String[] args) {
+    public boolean execute(CommandSender sender, String label,  String[] args) {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             val sendPlayer = (Player) sender;
             // 判断是否冷却
             Long keepAlive;
-            val tpaWaitTime = Main.config.getLong("tpaWaitTime");
+            val tpaWaitTime = Manage.config.getLong("tpaWaitTime");
             if (BaseConstants.tpaWaitTime.containsKey(sendPlayer.getName())) {
                 keepAlive = (System.currentTimeMillis() - BaseConstants.tpaWaitTime.get(sendPlayer.getName())) / 1000L;
                 if (keepAlive < tpaWaitTime) {

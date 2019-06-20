@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.destroystokyo.paper:paper-api:1.14.2-R0.1-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190618.192800-43.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190619.225205-45.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190618.192800-43-javadoc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190619.225205-45-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190618.192800-43-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../apache-maven-3.3.9/yidu/com/destroystokyo/paper/paper-api/1.14.2-R0.1-SNAPSHOT/paper-api-1.14.2-R0.1-20190619.225205-45-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

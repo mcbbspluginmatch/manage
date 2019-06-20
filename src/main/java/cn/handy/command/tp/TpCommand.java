@@ -1,6 +1,5 @@
-package cn.handy.executor.impl;
+package cn.handy.command.tp;
 
-import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
@@ -10,18 +9,31 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+
 /**
  * @author hanshuai
- * @Description: {tp方法}
- * @date 2019/6/12 14:43
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class TpExecutorImpl implements IExecutor {
+public class TpCommand extends Command {
+
+    public TpCommand() {
+        // 命令
+        super("tp");
+        // 权限
+        this.setPermission("handy.tp");
+    }
 
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, final String[] args) {
+    public boolean execute(CommandSender sender, String label, final String[] args) {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player sendPlayer = (Player) sender;
+            if (!sendPlayer.hasPermission("handy.tp")){
+                sendPlayer.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+                return true;
+            }
             if (args != null && args.length > 0) {
                 Player receivePlayer = Bukkit.getServer().getPlayer(args[0]);
                 if (receivePlayer != null) {

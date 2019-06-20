@@ -1,9 +1,10 @@
-package cn.handy.executor.impl;
+package cn.handy.command.hat;
 
-import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -11,18 +12,31 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
+import java.util.Arrays;
+
 /**
  * @author hanshuai
- * @Description: {hat指令}
- * @date 2019/6/12 17:25
+ * @Description: {指令注册类}
+ * @date 2019/6/20 10:42
  */
-public class HatExecutorImpl implements IExecutor {
+public class HatCommand extends Command {
+
+    public HatCommand() {
+        // 命令
+        super("hat");
+        // 权限
+        this.setPermission("handy.hat");
+    }
 
     @Override
-    public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
+    public boolean execute(CommandSender sender, String label, final String[] args) {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player player = (Player) sender;
+            if (!player.hasPermission("handy.hat")){
+                player.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+                return true;
+            }
             PlayerInventory inv = player.getInventory();
             // 获取主手的物品
             ItemStack held = inv.getItemInMainHand();

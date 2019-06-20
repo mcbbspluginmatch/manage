@@ -1,12 +1,9 @@
 package cn.handy.utils;
 
-import cn.handy.Main;
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.constants.CommandEnum;
 import cn.handy.constants.BaseConstants;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.entity.User;
-import cn.handy.executor.IExecutor;
 import lombok.val;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,37 +25,6 @@ public class BaseUtil {
      */
     public static Boolean isPlayer(CommandSender sender) {
         return sender instanceof Player;
-    }
-
-    /**
-     * 根据命令反射获取对应方法
-     *
-     * @param label
-     * @return
-     */
-    public static IExecutor getIExecutor(CommandSender sender, String label) {
-        try {
-            // 判断是否为玩家,是玩家需要走权限
-            val rst = isPlayer(sender);
-
-            CommandEnum commandEnum;
-            if (rst) {
-                commandEnum = CommandEnum.getCommandEnum(sender, label);
-            } else {
-                commandEnum = CommandEnum.getCommandEnum(label);
-            }
-            // 动态获取类
-            Class<?> aClass = Class.forName(BaseConstants.PACKAGE_NAME + commandEnum.getClassName());
-            IExecutor executor = (IExecutor) aClass.newInstance();
-            return executor;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -86,10 +52,6 @@ public class BaseUtil {
      * @return true是
      */
     public static Boolean isLogin(String userName) {
-        // 判断是否启用登录功能
-        if (!BaseConfigCache.isUser) {
-            return true;
-        }
         for (User user : BaseConstants.userSet) {
             if (user.getUserName().equals(userName.toLowerCase())) {
                 return true;
