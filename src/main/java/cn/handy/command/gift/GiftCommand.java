@@ -30,13 +30,13 @@ public class GiftCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.gift")){
+            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            return true;
+        }
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player sendPlayer = (Player) sender;
-            if (!sendPlayer.hasPermission("handy.gift")){
-                sendPlayer.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
-                return true;
-            }
             PlayerInventory inv = sendPlayer.getInventory();
             // 获取主手的物品
             ItemStack gift = inv.getItemInMainHand();

@@ -95,12 +95,7 @@ public class ManageListener implements Listener {
      */
     @EventHandler
     public void onPlayerLogin(AsyncPlayerPreLoginEvent event) {
-        if (BaseConfigCache.isUser) {
-            val userName = event.getName();
-            if (BaseUtil.isLogin(userName)) {
-                event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "玩家 " + userName + " 已经在线了!");
-            }
-        }
+        //TODO 暂时不处理
     }
 
     /**

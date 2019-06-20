@@ -30,13 +30,13 @@ public class HatCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.hat")){
+            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            return true;
+        }
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player player = (Player) sender;
-            if (!player.hasPermission("handy.hat")){
-                player.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
-                return true;
-            }
             PlayerInventory inv = player.getInventory();
             // 获取主手的物品
             ItemStack held = inv.getItemInMainHand();

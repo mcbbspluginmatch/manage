@@ -1,16 +1,16 @@
 package cn.handy.command.msg;
 
-import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.constants.MsgEnum;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.entity.Message;
+import cn.handy.utils.BaseUtil;
+import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-
-import java.util.Arrays;
+import org.bukkit.entity.Player;
 
 /**
  * @author hanshuai
@@ -28,22 +28,23 @@ public class MsgCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        // 判断是否开启msg功能
-        if (BaseConfigCache.isMessage) {
+        if (!sender.hasPermission("handy.msg")) {
+            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            return true;
+        }
+        val isPlayer = BaseUtil.isPlayer(sender);
+        if (isPlayer) {
             if (args != null && args.length > 0) {
-                if (!sender.hasPermission("handy.msg")){
-                    sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
-                    return true;
-                }
+                Player sendPlayer = (Player) sender;
                 MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
                 IMessageService messageService = new MessageServiceImpl();
                 Message message = new Message();
                 Boolean rst;
                 switch (msgEnum) {
                     case SET:
-                        message.setUserName(args[1]);
-                        message.setJoinMessage(args[2]);
-                        message.setQuitMessage(args[3]);
+                        message.setUserName(sendPlayer.getName());
+                        message.setJoinMessage(args[1]);
+                        message.setQuitMessage(args[2]);
                         rst = messageService.set(message);
                         if (rst) {
                             sender.sendMessage("设置成功");
@@ -52,7 +53,7 @@ public class MsgCommand extends Command {
                         }
                         break;
                     case DEL:
-                        rst = messageService.delete(args[1]);
+                        rst = messageService.delete(sendPlayer.getName());
                         if (rst) {
                             sender.sendMessage("删除成功");
                         } else {
@@ -60,7 +61,7 @@ public class MsgCommand extends Command {
                         }
                         break;
                     case SEE:
-                        Message user = messageService.findByUserName(args[1]);
+                        Message user = messageService.findByUserName(sendPlayer.getName());
                         if (user.getId() != null) {
                             sender.sendMessage(ChatColor.GOLD + user.getUserName() + "  |  "
                                     + ChatColor.GOLD + user.getJoinMessage() + "  |  "
@@ -77,7 +78,7 @@ public class MsgCommand extends Command {
                 sender.sendMessage(BaseConstants.MSG_HELP);
             }
         } else {
-            sender.sendMessage("未启用数据库或该功能,该命令无效");
+            sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
         }
         return true;
     }

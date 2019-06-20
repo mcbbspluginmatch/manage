@@ -27,13 +27,13 @@ public class TpCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.tp")){
+            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            return true;
+        }
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player sendPlayer = (Player) sender;
-            if (!sendPlayer.hasPermission("handy.tp")){
-                sendPlayer.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
-                return true;
-            }
             if (args != null && args.length > 0) {
                 Player receivePlayer = Bukkit.getServer().getPlayer(args[0]);
                 if (receivePlayer != null) {

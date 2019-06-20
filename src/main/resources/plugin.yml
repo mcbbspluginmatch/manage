@@ -1,13 +1,15 @@
 name: manage
 main: cn.handy.Manage
-version: 2.1.2
+version: 2.2.0
 author: handy
 permissions:
     handy.tp:
         default: op
     handy.gift:
         default: op
-    handy.msg:
+    handy.msgadmin:
         default: op
+    handy.msg:
+        default: true
     handy.hat:
         default: true

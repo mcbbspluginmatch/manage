@@ -31,15 +31,23 @@ public abstract class BaseConstants {
     public static Set<User> userSet = new HashSet<User>();
 
     /**
+     * msgAdmin帮助语句
+     */
+    public final static String MSG_ADMIN_HELP =
+            "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一\n" +
+                    "§e/msgadmin set [玩家名] [进入提醒] [退出提醒]     " + "§f设置玩家的进入和退出消息\n" +
+                    "§e/msgadmin del [玩家名]     " + "§f删除玩家的进入和退出消息\n" +
+                    "§e/msgadmin see [玩家名]     " + "§f查询玩家的进入和退出消息\n" +
+                    "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
+    /**
      * msg帮助语句
      */
     public final static String MSG_HELP =
-                    "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一\n" +
-                    "§e/msg set [玩家名] [进入提醒] [退出提醒]     " + "§f设置玩家的进入和退出消息\n" +
-                    "§e/msg del [玩家名]     " + "§f删除玩家的进入和退出消息\n" +
-                    "§e/msg see [玩家名]     " + "§f查询玩家的进入和退出消息\n" +
+            "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一\n" +
+                    "§e/msg set [进入提醒] [退出提醒]     " + "§f设置自己的进入和退出消息\n" +
+                    "§e/msg del     " + "§f删除自己的进入和退出消息\n" +
+                    "§e/msg see     " + "§f查询自己的进入和退出消息\n" +
                     "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
-
     /**
      * 命令白名单正则
      */

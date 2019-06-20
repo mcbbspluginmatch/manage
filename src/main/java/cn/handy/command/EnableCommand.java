@@ -6,6 +6,7 @@ import cn.handy.command.hat.HatCommand;
 import cn.handy.command.help.HelpCommand;
 import cn.handy.command.login.LoginCommand;
 import cn.handy.command.login.RegisterCommand;
+import cn.handy.command.msg.MsgAdminCommand;
 import cn.handy.command.msg.MsgCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
@@ -57,6 +58,7 @@ public class EnableCommand {
             commandMap.register(Manage.plugin.getDescription().getName(), new RegisterCommand());
         }
         if (BaseConfigCache.isMessage){
+            commandMap.register(Manage.plugin.getDescription().getName(), new MsgAdminCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgCommand());
         }
         if (BaseConfigCache.isTp){
