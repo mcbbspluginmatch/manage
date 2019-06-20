@@ -45,8 +45,8 @@ public class MessageServiceImpl implements IMessageService {
     public Boolean set(Message message) {
         try {
             // 查询有无数据
-            val isMessage = findByUserName(message.getUserName());
-            if (isMessage.getId() == null) {
+            val msg = findByUserName(message.getUserName());
+            if (msg.getId() == null) {
                 String addStr = MessageSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(addStr);
                 ps.setString(1, message.getUserName());

@@ -1,7 +1,7 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConstants;
 import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
@@ -24,8 +24,8 @@ public class TpacceptExecutorImpl implements IExecutor {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             final Player player = (Player) sender;
-            if (Constants.currentRequest.containsKey(player.getName())) {
-                String receiveName = Constants.currentRequest.get(player.getName());
+            if (BaseConstants.currentRequest.containsKey(player.getName())) {
+                String receiveName = BaseConstants.currentRequest.get(player.getName());
                 final Player receivePlayer = Bukkit.getServer().getPlayer(receiveName);
                 if (receivePlayer != null){
                     // 传送延迟
@@ -36,7 +36,7 @@ public class TpacceptExecutorImpl implements IExecutor {
                         @Override
                         public void run() {
                             receivePlayer.teleport(player.getLocation());
-                            Constants.currentRequest.remove(player.getName());
+                            BaseConstants.currentRequest.remove(player.getName());
                         }
                     }.runTaskLater(Main.plugin, tpaDelayTime * 20);
                 }else {

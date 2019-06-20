@@ -1,7 +1,8 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.executor.IExecutor;
@@ -34,17 +35,15 @@ public class LoginExecutorImpl implements IExecutor {
         new BukkitRunnable() {
             @Override
             public void run() {
-                // 判断是否启用数据库和开启msg功能
-                val isUseMysql = Main.config.getBoolean("isUseMysql");
-                val isUser = Main.config.getBoolean("isUser");
-                if (isUseMysql && isUser) {
+                // 判断是否开启User功能
+                if (BaseConfigCache.isUser) {
                     val sendPlayer = (Player) sender;
                     if (args != null && args.length == 1) {
                         IUserService userService = new UserServiceImpl();
                         val user = userService.login(sendPlayer.getName().toLowerCase(), args[0]);
                         if (user.getId() != null) {
                             sender.sendMessage("登录成功");
-                            Constants.userSet.add(user);
+                            BaseConstants.userSet.add(user);
                             // 保存本次登录ip和时间
                             user.setLoginDate(new Date());
                             user.setLoginIp(sendPlayer.getAddress().getAddress().getHostAddress());

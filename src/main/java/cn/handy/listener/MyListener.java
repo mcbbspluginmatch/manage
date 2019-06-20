@@ -1,9 +1,9 @@
 package cn.handy.listener;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
 import cn.handy.dao.message.impl.MessageServiceImpl;
-import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
 import org.bukkit.entity.Player;
@@ -42,9 +42,14 @@ public class MyListener implements Listener {
     @EventHandler
     public void onPlayerJoinGame(PlayerJoinEvent event) {
         String userName = event.getPlayer().getName();
+
+        if (BaseConfigCache.isUser && !BaseUtil.isLogin(userName)) {
+            // 发送登录提醒
+            BaseUtil.loginRemind((Player) event);
+        }
+
         String joinMessage = Main.config.getString("joinMessage");
-        val isMessage = Main.config.getBoolean("isMessage");
-        if (isMessage) {
+        if (BaseConfigCache.isMessage) {
             val messageService = new MessageServiceImpl();
             val message = messageService.findByUserName(userName);
             if (message.getId() != null) {
@@ -64,8 +69,7 @@ public class MyListener implements Listener {
     public void onPlayerQuitGame(PlayerQuitEvent event) {
         String userName = event.getPlayer().getName();
         String quitMessage = Main.config.getString("quitMessage");
-        val isMessage = Main.config.getBoolean("isMessage");
-        if (isMessage) {
+        if (BaseConfigCache.isMessage) {
             val messageService = new MessageServiceImpl();
             val message = messageService.findByUserName(userName);
             if (message.getId() != null) {
@@ -74,7 +78,11 @@ public class MyListener implements Listener {
         }
         quitMessage = quitMessage.replace("${player}", userName);
         event.setQuitMessage(quitMessage);
-        BaseUtil.removeUser(userName);
+
+        // 清空用户登录缓存
+        if (BaseConfigCache.isUser) {
+            BaseUtil.removeUser(userName);
+        }
     }
 
     /**
@@ -84,8 +92,7 @@ public class MyListener implements Listener {
      */
     @EventHandler
     public void onPlayerLogin(AsyncPlayerPreLoginEvent event) {
-        val isUser = Main.config.getBoolean("isUser");
-        if (isUser) {
+        if (BaseConfigCache.isUser) {
             val userName = event.getName();
             if (BaseUtil.isLogin(userName)) {
                 event.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, "玩家 " + userName + " 已经在线了!");
@@ -104,7 +111,7 @@ public class MyListener implements Listener {
             return;
         }
         String input = event.getMessage().toLowerCase();
-        for (Pattern regex : Constants.COMMAND_WHITE_LISTS) {
+        for (Pattern regex : BaseConstants.COMMAND_WHITE_LISTS) {
             if (regex.matcher(input).find()) {
                 return;
             }

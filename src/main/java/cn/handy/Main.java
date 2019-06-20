@@ -1,5 +1,6 @@
 package cn.handy;
 
+import cn.handy.constants.BaseConfigCache;
 import cn.handy.listener.MyListener;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.MysqlManagerUtil;
@@ -35,16 +36,21 @@ public class Main extends JavaPlugin {
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
-        File file = new File(getDataFolder(), "config.yml");
-        if (!(file.exists())) {
+        File configFile = new File(getDataFolder(), "config.yml");
+        if (!(configFile.exists())) {
             this.saveDefaultConfig();
         }
         this.reloadConfig();
         config = getConfig();
 
-        // 判断是否启用数据库
-        val isUseMysql = config.getBoolean("isUseMysql");
-        if (isUseMysql) {
+        // 保存cache
+        saveConfigCache();
+
+        // 注册监听器
+        Bukkit.getPluginManager().registerEvents(new MyListener(), this);
+
+        // 使用子线程创建表和获取数据库链接
+        if (BaseConfigCache.isMessage || BaseConfigCache.isUser) {
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -52,19 +58,11 @@ public class Main extends JavaPlugin {
                 }
             }.runTaskAsynchronously(this);
         }
-
-        // 判断是否启用Help列表替换
-        val isHelp = config.getBoolean("isHelp");
-        if (isHelp) {
-            this.saveResource("help.yml",false);
-            File file1 = new File(getDataFolder(), "help.yml");
-            FileConfiguration lang = YamlConfiguration.loadConfiguration(file1);
-            HelpConfig = lang;
-        }
-
-        // 注册监听器
-        Bukkit.getPluginManager().registerEvents(new MyListener(), this);
-
+        // 创建help
+        this.saveResource("help.yml", false);
+        File helpFile = new File(getDataFolder(), "help.yml");
+        FileConfiguration lang = YamlConfiguration.loadConfiguration(helpFile);
+        HelpConfig = lang;
         this.getLogger().info("manage插件启动成功");
     }
 
@@ -88,11 +86,21 @@ public class Main extends JavaPlugin {
      */
     @Override
     public void onDisable() {
-        val isUseMysql = config.getBoolean("isUseMysql");
         // 断开数据库连接
-        if (isUseMysql) {
+        if (BaseConfigCache.isUser || BaseConfigCache.isMessage) {
             MysqlManagerUtil.get().shutdown();
         }
         this.getLogger().info("manage插件关闭");
+    }
+
+
+    /**
+     * 保存各个独立模块开启状态
+     */
+    private void saveConfigCache() {
+        val isMessage = Main.config.getBoolean("isMessage");
+        val isUser = Main.config.getBoolean("isUser");
+        BaseConfigCache.isMessage = isMessage;
+        BaseConfigCache.isUser = isUser;
     }
 }

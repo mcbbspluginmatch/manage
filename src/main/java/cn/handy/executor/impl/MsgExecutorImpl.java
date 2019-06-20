@@ -1,7 +1,8 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
 import cn.handy.constants.MsgEnum;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
@@ -34,10 +35,8 @@ public class MsgExecutorImpl implements IExecutor {
         new BukkitRunnable() {
             @Override
             public void run() {
-                // 判断是否启用数据库和开启msg功能
-                val isUseMysql = Main.config.getBoolean("isUseMysql");
-                val isMessage = Main.config.getBoolean("isMessage");
-                if (isUseMysql && isMessage) {
+                // 判断是否开启msg功能
+                if (BaseConfigCache.isMessage) {
                     if (args != null && args.length > 0) {
                         MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
                         IMessageService messageService = new MessageServiceImpl();
@@ -74,11 +73,11 @@ public class MsgExecutorImpl implements IExecutor {
                                 }
                                 break;
                             default:
-                                sender.sendMessage(Constants.MSG_HELP);
+                                sender.sendMessage(BaseConstants.MSG_HELP);
                                 break;
                         }
                     } else {
-                        sender.sendMessage(Constants.MSG_HELP);
+                        sender.sendMessage(BaseConstants.MSG_HELP);
                     }
                 } else {
                     sender.sendMessage("未启用数据库或该功能,该命令无效");

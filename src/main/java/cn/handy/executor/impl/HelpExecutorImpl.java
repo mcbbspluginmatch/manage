@@ -1,6 +1,7 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
+import cn.handy.constants.BaseConfigCache;
 import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.ListPageUtil;
@@ -33,12 +34,6 @@ public class HelpExecutorImpl implements IExecutor {
      */
     @Override
     public Boolean command(CommandSender sender, Command cmd, String label, String[] args) {
-        // 判断是否启用Help列表替换
-        val isHelp = Main.config.getBoolean("isHelp");
-        if (!isHelp) {
-            sender.sendMessage("未启用help指令帮助");
-            return true;
-        }
         String jsonArray = Main.HelpConfig.getString("helps");
         Gson gson = new Gson();
         List<String> help = gson.fromJson(jsonArray, new TypeToken<List<String>>() {

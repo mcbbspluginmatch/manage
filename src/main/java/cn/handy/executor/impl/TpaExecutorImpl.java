@@ -1,7 +1,7 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConstants;
 import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
@@ -26,8 +26,8 @@ public class TpaExecutorImpl implements IExecutor {
             // 判断是否冷却
             Long keepAlive;
             val tpaWaitTime = Main.config.getLong("tpaWaitTime");
-            if (Constants.tpaWaitTime.containsKey(sendPlayer.getName())) {
-                keepAlive = (System.currentTimeMillis() - Constants.tpaWaitTime.get(sendPlayer.getName())) / 1000L;
+            if (BaseConstants.tpaWaitTime.containsKey(sendPlayer.getName())) {
+                keepAlive = (System.currentTimeMillis() - BaseConstants.tpaWaitTime.get(sendPlayer.getName())) / 1000L;
                 if (keepAlive < tpaWaitTime) {
                     sendPlayer.sendMessage(ChatColor.AQUA + "你必须等待" + (tpaWaitTime - keepAlive) + "秒后,才可以继续使用传送");
                     return true;
@@ -41,7 +41,7 @@ public class TpaExecutorImpl implements IExecutor {
                         sendPlayer.sendMessage(ChatColor.RED + "自己不能传送自己");
                     } else {
                         this.sendRequest(sendPlayer, receivePlayer);
-                        Constants.tpaWaitTime.put(sendPlayer.getName(), System.currentTimeMillis());
+                        BaseConstants.tpaWaitTime.put(sendPlayer.getName(), System.currentTimeMillis());
                     }
                 } else {
                     sendPlayer.sendMessage(ChatColor.AQUA + "你只能向在线玩家发送传送请求!");
@@ -70,6 +70,6 @@ public class TpaExecutorImpl implements IExecutor {
         recipient.sendMessage(ChatColor.GOLD + sender.getName() + ChatColor.RESET + "发送了一个传送请求给你:\n"
                 + sendTpAccept + sendTpDeny);
 
-        Constants.currentRequest.put(recipient.getName(), sender.getName());
+        BaseConstants.currentRequest.put(recipient.getName(), sender.getName());
     }
 }

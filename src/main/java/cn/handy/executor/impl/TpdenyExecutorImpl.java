@@ -1,6 +1,6 @@
 package cn.handy.executor.impl;
 
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConstants;
 import cn.handy.executor.IExecutor;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
@@ -22,12 +22,12 @@ public class TpdenyExecutorImpl implements IExecutor {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player player = (Player) sender;
-            if (Constants.currentRequest.containsKey(player.getName())) {
-                String receiveName = Constants.currentRequest.get(player.getName());
+            if (BaseConstants.currentRequest.containsKey(player.getName())) {
+                String receiveName = BaseConstants.currentRequest.get(player.getName());
                 Player receivePlayer = Bukkit.getServer().getPlayer(receiveName);
                 player.sendMessage("你已拒绝" + receivePlayer.getName() + "的传送");
                 receivePlayer.sendMessage(ChatColor.GRAY + player.getName() + "拒绝你的传送...");
-                Constants.currentRequest.remove(player.getName());
+                BaseConstants.currentRequest.remove(player.getName());
             } else {
                 sender.sendMessage(ChatColor.AQUA + "您没有任何当前的tp请求.");
             }

@@ -1,7 +1,8 @@
 package cn.handy.executor.impl;
 
 import cn.handy.Main;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.entity.User;
@@ -35,10 +36,8 @@ public class RegExecutorImpl implements IExecutor {
         new BukkitRunnable() {
             @Override
             public void run() {
-                // 判断是否启用数据库和开启msg功能
-                val isUseMysql = Main.config.getBoolean("isUseMysql");
-                val isUser = Main.config.getBoolean("isUser");
-                if (isUseMysql && isUser) {
+                // 判断是否开启user功能
+                if (BaseConfigCache.isUser) {
                     val sendPlayer = (Player) sender;
                     if (args != null && args.length == 2) {
                         if (args[0].equals(args[1])) {
@@ -54,7 +53,7 @@ public class RegExecutorImpl implements IExecutor {
                             val rst = userService.register(user);
                             if (rst) {
                                 sender.sendMessage("注册成功");
-                                Constants.userSet.add(user);
+                                BaseConstants.userSet.add(user);
                             } else {
                                 sender.sendMessage("注册失败");
                             }

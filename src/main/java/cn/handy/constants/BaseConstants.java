@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
  * @Description: {常量}
  * @date 2019/6/13 14:15
  */
-public abstract class Constants {
+public abstract class BaseConstants {
 
     /**
      * tpa指令传送cdMap

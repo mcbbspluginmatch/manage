@@ -1,16 +1,15 @@
 package cn.handy.utils;
 
 import cn.handy.Main;
+import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.CommandEnum;
-import cn.handy.constants.Constants;
+import cn.handy.constants.BaseConstants;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.entity.User;
 import cn.handy.executor.IExecutor;
 import lombok.val;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.regex.Matcher;
 
@@ -49,7 +48,7 @@ public class BaseUtil {
                 commandEnum = CommandEnum.getCommandEnum(label);
             }
             // 动态获取类
-            Class<?> aClass = Class.forName(Constants.PACKAGE_NAME + commandEnum.getClassName());
+            Class<?> aClass = Class.forName(BaseConstants.PACKAGE_NAME + commandEnum.getClassName());
             IExecutor executor = (IExecutor) aClass.newInstance();
             return executor;
         } catch (ClassNotFoundException e) {
@@ -88,11 +87,10 @@ public class BaseUtil {
      */
     public static Boolean isLogin(String userName) {
         // 判断是否启用登录功能
-        val isUser = Main.config.getBoolean("isUser");
-        if (!isUser) {
+        if (!BaseConfigCache.isUser) {
             return true;
         }
-        for (User user : Constants.userSet) {
+        for (User user : BaseConstants.userSet) {
             if (user.getUserName().equals(userName.toLowerCase())) {
                 return true;
             }
@@ -106,9 +104,9 @@ public class BaseUtil {
      * @param userName
      */
     public static void removeUser(String userName) {
-        for (User user : Constants.userSet) {
+        for (User user : BaseConstants.userSet) {
             if (user.getUserName().equals(userName.toLowerCase())) {
-                Constants.userSet.remove(user);
+                BaseConstants.userSet.remove(user);
                 break;
             }
         }
@@ -117,32 +115,23 @@ public class BaseUtil {
     /**
      * 登录提醒
      */
-    public static void loginRemind() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    val userService = new UserServiceImpl();
-                    // 判断该用户是否存在
-                    String userName = player.getName().toLowerCase();
-                    val rst = userService.findByUserName(userName);
-                    if (rst) {
-                        if (!BaseUtil.isLogin(player.getName())) {
-                            // 判断是否免密码登陆
-                            val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
-                            if (user.getId() != null) {
-                                player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
-                                Constants.userSet.add(user);
-                            }else{
-                                player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
-                            }
-                        }
-                    } else {
-                        player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
-                    }
-                }
+    public static void loginRemind(Player player) {
+        val userService = new UserServiceImpl();
+        // 判断该用户是否存在
+        String userName = player.getName().toLowerCase();
+        val rst = userService.findByUserName(userName);
+        if (rst) {
+            // 判断是否免密码登陆
+            val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
+            if (user.getId() != null) {
+                player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
+                BaseConstants.userSet.add(user);
+            } else {
+                player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
             }
-        }.runTaskTimerAsynchronously(Main.plugin, 0, 5 * 20);
+        } else {
+            player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
+        }
     }
 
     /**
@@ -152,7 +141,7 @@ public class BaseUtil {
      * @return
      */
     public static Boolean isNumeric(String str) {
-        Matcher isNum = Constants.NUMERIC.matcher(str);
+        Matcher isNum = BaseConstants.NUMERIC.matcher(str);
         if (!isNum.matches()) {
             return false;
         }

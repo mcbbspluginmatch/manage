@@ -1,6 +1,7 @@
 package cn.handy.utils;
 
 import cn.handy.Main;
+import cn.handy.constants.BaseConfigCache;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.dao.user.IUserService;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 
 /**
  * @author hanshuai
- * @Description: {数据库处理相关-单例}
+ * @Description: {数据库处理相关}
  * @date 2019/5/21 14:25
  */
 public class MysqlManagerUtil {
@@ -41,18 +42,15 @@ public class MysqlManagerUtil {
         // 构建数据库连接
         connectMySQL();
 
-        // 创建表
-        val isMessage = Main.config.getBoolean("isMessage");
-        val isUser = Main.config.getBoolean("isUser");
-        if (isMessage) {
+        // 创建消息表
+        if (BaseConfigCache.isMessage) {
             IMessageService messageService = new MessageServiceImpl();
             messageService.create();
         }
-        if (isUser) {
+        // 创建用户表
+        if (BaseConfigCache.isUser) {
             IUserService userService = new UserServiceImpl();
             userService.create();
-            // 登录提醒
-            BaseUtil.loginRemind();
         }
 
         // 创建一个每小时执行的心跳包
@@ -71,7 +69,7 @@ public class MysqlManagerUtil {
                     e.printStackTrace();
                 }
             }
-        }.runTaskTimerAsynchronously(Main.plugin, 0,3600 * 20);
+        }.runTaskTimerAsynchronously(Main.plugin, 0, 3600 * 20);
     }
 
     /**
