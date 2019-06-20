@@ -47,15 +47,11 @@ public class Manage extends JavaPlugin {
         // 注册监听器
         Bukkit.getPluginManager().registerEvents(new ManageListener(), this);
 
-        // 使用子线程创建表和获取数据库链接
+        // 创建表和获取数据库链接
         if (BaseConfigCache.isMessage || BaseConfigCache.isUser) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    MysqlManagerUtil.get().enableMySQL();
-                }
-            }.runTaskAsynchronously(this);
+            MysqlManagerUtil.get().enableMySQL();
         }
+
         // 创建help
         if (BaseConfigCache.isHelp){
             this.saveResource("help.yml", false);

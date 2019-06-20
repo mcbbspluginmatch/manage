@@ -12,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,8 +31,13 @@ public class HelpCommand extends Command {
     public boolean execute(CommandSender sender, String label, final String[] args) {
         String jsonArray = Manage.HelpConfig.getString("helps");
         Gson gson = new Gson();
-        List<String> help = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
-        }.getType());
+        List<String> help = new ArrayList<String>();
+        try {
+            help = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
+            }.getType());
+        } catch (Exception e) {
+            sender.sendMessage("您配置的help.yml有误,请检查json格式");
+        }
         int pageNum = 1;
         if (args != null && args.length == 1) {
             String arg = args[0];
