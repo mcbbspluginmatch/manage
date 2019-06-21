@@ -8,6 +8,7 @@ import cn.handy.command.login.LoginCommand;
 import cn.handy.command.login.RegisterCommand;
 import cn.handy.command.msg.MsgAdminCommand;
 import cn.handy.command.msg.MsgCommand;
+import cn.handy.command.reload.ReloadCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
@@ -47,27 +48,28 @@ public class EnableCommand {
         // 获取
         getCommandMap();
         // 注册命令
-        if (BaseConfigCache.isHat){
+        commandMap.register(Manage.plugin.getDescription().getName(), new ReloadCommand());
+        if (BaseConfigCache.isHat) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HatCommand());
         }
-        if (BaseConfigCache.isHelp){
+        if (BaseConfigCache.isHelp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HelpCommand());
         }
-        if (BaseConfigCache.isUser){
+        if (BaseConfigCache.isUser) {
             commandMap.register(Manage.plugin.getDescription().getName(), new LoginCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new RegisterCommand());
         }
-        if (BaseConfigCache.isMessage){
+        if (BaseConfigCache.isMessage) {
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgAdminCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgCommand());
         }
-        if (BaseConfigCache.isTp){
+        if (BaseConfigCache.isTp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new TpCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpaCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpacceptCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpdenyCommand());
         }
-        if (BaseConfigCache.isGift){
+        if (BaseConfigCache.isGift) {
             commandMap.register(Manage.plugin.getDescription().getName(), new GiftCommand());
         }
     }

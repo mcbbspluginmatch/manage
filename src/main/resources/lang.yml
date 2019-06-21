@@ -1,0 +1,8 @@
+# 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
+joinMessage: 欢迎 ${player} 加入服务器
+# 默认全部玩家离开游戏欢迎语句(isMessage启用时候生效)
+quitMessage: ${player} 离开了服务器
+# tpa传送延迟时间(单位秒)
+tpaDelayTime: 3
+# tpa传送等待时间(单位秒)
+tpaWaitTime: 30

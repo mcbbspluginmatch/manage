@@ -3,6 +3,7 @@ package cn.handy.command.tp;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.ConfigUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -35,7 +36,7 @@ public class TpacceptCommand extends Command {
                 final Player receivePlayer = Bukkit.getServer().getPlayer(receiveName);
                 if (receivePlayer != null) {
                     // 传送延迟
-                    val tpaDelayTime = Manage.config.getLong("tpaDelayTime");
+                    val tpaDelayTime = ConfigUtil.LangConfig.getLong("tpaDelayTime");
                     sender.sendMessage("已接受" + receiveName + "的传送请求.");
                     receivePlayer.sendMessage(ChatColor.GRAY + "" + tpaDelayTime + "秒后开始传送...");
                     new BukkitRunnable() {

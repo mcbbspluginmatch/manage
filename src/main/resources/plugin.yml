@@ -3,6 +3,8 @@ main: cn.handy.Manage
 version: 2.2.0
 author: handy
 permissions:
+    handy.manage:
+        default: op
     handy.tp:
         default: op
     handy.gift:

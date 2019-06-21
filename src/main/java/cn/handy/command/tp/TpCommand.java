@@ -28,7 +28,7 @@ public class TpCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
         if (!sender.hasPermission("handy.tp")){
-            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }
         val rst = BaseUtil.isPlayer(sender);

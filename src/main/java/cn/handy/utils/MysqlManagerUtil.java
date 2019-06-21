@@ -34,11 +34,11 @@ public class MysqlManagerUtil {
     }
 
     public void enableMySQL() {
-        ip = Manage.config.getString("mysql.ip");
-        databaseName = Manage.config.getString("mysql.databasename");
-        userName = Manage.config.getString("mysql.username");
-        userPassword = Manage.config.getString("mysql.password");
-        port = Manage.config.getInt("mysql.port");
+        ip = ConfigUtil.config.getString("mysql.ip");
+        databaseName = ConfigUtil.config.getString("mysql.databasename");
+        userName = ConfigUtil.config.getString("mysql.username");
+        userPassword = ConfigUtil.config.getString("mysql.password");
+        port = ConfigUtil.config.getInt("mysql.port");
         // 构建数据库连接
         connectMySQL();
 

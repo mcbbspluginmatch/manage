@@ -29,7 +29,7 @@ public class MsgCommand extends Command {
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
         if (!sender.hasPermission("handy.msg")) {
-            sender.sendMessage(ChatColor.RED + "§c你没有该命令的权限!");
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }
         val isPlayer = BaseUtil.isPlayer(sender);

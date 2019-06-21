@@ -2,6 +2,7 @@ package cn.handy.command.help;
 
 import cn.handy.Manage;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.ConfigUtil;
 import cn.handy.utils.ListPageUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -29,7 +30,7 @@ public class HelpCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        String jsonArray = Manage.HelpConfig.getString("helps");
+        String jsonArray = ConfigUtil.HelpConfig.getString("helps");
         Gson gson = new Gson();
         List<String> help = new ArrayList<String>();
         try {

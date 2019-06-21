@@ -48,6 +48,11 @@ public abstract class BaseConstants {
                     "§e/msg del     " + "§f删除自己进/出消息\n" +
                     "§e/msg see     " + "§f查询自己进/出消息\n" +
                     "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
+
+    public final static String MANAGE_MSG =
+            "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
+                    "§e/manage reload help     " + "§f重载本插件的help文本\n" +
+                    "§e/manage reload lang     " + "§f重载本插件的lang文本";
     /**
      * 命令白名单正则
      */

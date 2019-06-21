@@ -5,6 +5,7 @@ import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.ConfigUtil;
 import lombok.val;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -52,7 +53,7 @@ public class ManageListener implements Listener {
         if (BaseConfigCache.isMessage) {
             val messageService = new MessageServiceImpl();
             val message = messageService.findByUserName(userName);
-            String joinMessage = Manage.config.getString("joinMessage");
+            String joinMessage = ConfigUtil.LangConfig.getString("joinMessage");
             if (message.getId() != null) {
                 joinMessage = message.getJoinMessage();
             }
@@ -79,7 +80,7 @@ public class ManageListener implements Listener {
         if (BaseConfigCache.isMessage) {
             val messageService = new MessageServiceImpl();
             val message = messageService.findByUserName(userName);
-            String quitMessage = Manage.config.getString("quitMessage");
+            String quitMessage = ConfigUtil.LangConfig.getString("quitMessage");
             if (message.getId() != null) {
                 quitMessage = message.getQuitMessage();
             }

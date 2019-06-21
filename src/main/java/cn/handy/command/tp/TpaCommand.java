@@ -3,6 +3,7 @@ package cn.handy.command.tp;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.ConfigUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -31,7 +32,7 @@ public class TpaCommand extends Command {
             val sendPlayer = (Player) sender;
             // 判断是否冷却
             Long keepAlive;
-            val tpaWaitTime = Manage.config.getLong("tpaWaitTime");
+            val tpaWaitTime = ConfigUtil.LangConfig.getLong("tpaWaitTime");
             if (BaseConstants.tpaWaitTime.containsKey(sendPlayer.getName())) {
                 keepAlive = (System.currentTimeMillis() - BaseConstants.tpaWaitTime.get(sendPlayer.getName())) / 1000L;
                 if (keepAlive < tpaWaitTime) {
