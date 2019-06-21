@@ -45,8 +45,10 @@ public class ConfigUtil {
     public static void getHelpConfig() {
         // 创建help
         if (BaseConfigCache.isHelp) {
-            Manage.plugin.saveResource("help.yml", false);
             File helpFile = new File(Manage.plugin.getDataFolder(), "help.yml");
+            if (!(helpFile.exists())) {
+                Manage.plugin.saveResource("help.yml", false);
+            }
             FileConfiguration help = YamlConfiguration.loadConfiguration(helpFile);
             HelpConfig = help;
         }
@@ -56,8 +58,10 @@ public class ConfigUtil {
      * 加载lang文件
      */
     public static void getLangConfig() {
-        Manage.plugin.saveResource("lang.yml", false);
         File langFile = new File(Manage.plugin.getDataFolder(), "lang.yml");
+        if (!(langFile.exists())) {
+            Manage.plugin.saveResource("lang.yml", false);
+        }
         FileConfiguration lang = YamlConfiguration.loadConfiguration(langFile);
         LangConfig = lang;
     }
@@ -66,6 +70,7 @@ public class ConfigUtil {
     /**
      * 保存各个独立模块开启状态
      */
+
     private static void saveConfigCache() {
         val isMessage = ConfigUtil.config.getBoolean("isMessage");
         val isUser = ConfigUtil.config.getBoolean("isUser");
