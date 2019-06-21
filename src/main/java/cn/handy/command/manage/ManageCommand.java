@@ -27,10 +27,10 @@ public class ManageCommand extends Command {
             return true;
         }
         if (args != null && args.length == 2) {
-            if (args[0].equals("manage") && args[1].equals("help")) {
+            if (args[0].equals("reload") && args[1].equals("help")) {
                 ConfigUtil.getHelpConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载help.yml成功!");
-            } else if (args[0].equals("manage") && args[1].equals("lang")) {
+            } else if (args[0].equals("reload") && args[1].equals("lang")) {
                 ConfigUtil.getLangConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载lang.yml成功!");
             } else {
