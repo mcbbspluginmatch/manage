@@ -2,6 +2,7 @@ package cn.handy.utils;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
+import lombok.val;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -30,8 +31,11 @@ public class ConfigUtil {
         }
         Manage.plugin.reloadConfig();
         config = Manage.plugin.getConfig();
-
+        // 保存cache
+        saveConfigCache();
+        // 加载help
         getHelpConfig();
+        // 加载lang
         getLangConfig();
     }
 
@@ -56,5 +60,25 @@ public class ConfigUtil {
         File langFile = new File(Manage.plugin.getDataFolder(), "lang.yml");
         FileConfiguration lang = YamlConfiguration.loadConfiguration(langFile);
         LangConfig = lang;
+    }
+
+
+    /**
+     * 保存各个独立模块开启状态
+     */
+    private static void saveConfigCache() {
+        val isMessage = ConfigUtil.config.getBoolean("isMessage");
+        val isUser = ConfigUtil.config.getBoolean("isUser");
+        val isHat = ConfigUtil.config.getBoolean("isHat");
+        val isHelp = ConfigUtil.config.getBoolean("isHelp");
+        val isTp = ConfigUtil.config.getBoolean("isTp");
+        val isGift = ConfigUtil.config.getBoolean("isGift");
+
+        BaseConfigCache.isMessage = isMessage;
+        BaseConfigCache.isUser = isUser;
+        BaseConfigCache.isHat = isHat;
+        BaseConfigCache.isHelp = isHelp;
+        BaseConfigCache.isTp = isTp;
+        BaseConfigCache.isGift = isGift;
     }
 }
