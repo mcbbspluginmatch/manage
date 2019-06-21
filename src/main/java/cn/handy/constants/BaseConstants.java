@@ -51,8 +51,8 @@ public abstract class BaseConstants {
 
     public final static String MANAGE_MSG =
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
-                    "§e/manage reload help     " + "§f重载本插件的help文本\n" +
-                    "§e/manage reload lang     " + "§f重载本插件的lang文本";
+                    "§e/manage manage help     " + "§f重载本插件的help文本\n" +
+                    "§e/manage manage lang     " + "§f重载本插件的lang文本";
     /**
      * 命令白名单正则
      */

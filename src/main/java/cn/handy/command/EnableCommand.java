@@ -8,7 +8,7 @@ import cn.handy.command.login.LoginCommand;
 import cn.handy.command.login.RegisterCommand;
 import cn.handy.command.msg.MsgAdminCommand;
 import cn.handy.command.msg.MsgCommand;
-import cn.handy.command.reload.ReloadCommand;
+import cn.handy.command.manage.ManageCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
@@ -48,7 +48,7 @@ public class EnableCommand {
         // 获取
         getCommandMap();
         // 注册命令
-        commandMap.register(Manage.plugin.getDescription().getName(), new ReloadCommand());
+        commandMap.register(Manage.plugin.getDescription().getName(), new ManageCommand());
         if (BaseConfigCache.isHat) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HatCommand());
         }

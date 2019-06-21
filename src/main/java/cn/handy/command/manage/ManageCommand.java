@@ -1,24 +1,19 @@
-package cn.handy.command.reload;
+package cn.handy.command.manage;
 
-import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.ConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
 
 /**
  * @author hanshuai
  * @Description: {}
  * @date 2019/6/20 17:39
  */
-public class ReloadCommand extends Command {
+public class ManageCommand extends Command {
 
-    public ReloadCommand() {
+    public ManageCommand() {
         // 命令
         super("manage");
         // 权限
@@ -32,11 +27,12 @@ public class ReloadCommand extends Command {
             return true;
         }
         if (args != null && args.length == 2) {
-            if (args[0].equals("reload") && args[1].equals("help")) {
-                File helpFile = new File(Manage.plugin.getDataFolder(), "help.yml");
-                FileConfiguration lang = YamlConfiguration.loadConfiguration(helpFile);
-                ConfigUtil.HelpConfig = lang;
-                sender.sendMessage(ChatColor.AQUA + "manage重载本插件的help文本成功!");
+            if (args[0].equals("manage") && args[1].equals("help")) {
+                ConfigUtil.getHelpConfig();
+                sender.sendMessage(ChatColor.AQUA + "manage重载help.yml成功!");
+            } else if (args[0].equals("manage") && args[1].equals("lang")) {
+                ConfigUtil.getLangConfig();
+                sender.sendMessage(ChatColor.AQUA + "manage重载lang.yml成功!");
             } else {
                 sender.sendMessage(BaseConstants.MANAGE_MSG);
             }
