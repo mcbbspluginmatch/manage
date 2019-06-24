@@ -1,6 +1,6 @@
 name: manage
 main: cn.handy.Manage
-version: 3.0.0
+version: 3.0.1
 author: handy
 permissions:
     handy.manage:
