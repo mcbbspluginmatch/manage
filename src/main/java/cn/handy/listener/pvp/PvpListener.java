@@ -47,7 +47,7 @@ public class PvpListener implements Listener {
         if (rst) {
             ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
         } else {
-            ParticleEffectUtil.particleEffect(event.getPlayer(), Color.GREEN);
+            ParticleEffectUtil.particleEffect(event.getPlayer(), Color.WHITE);
         }
     }
 
@@ -105,6 +105,7 @@ public class PvpListener implements Listener {
                 event.setCancelled(true);
                 damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
             } else if (!entityRst) {
+                event.setCancelled(true);
                 damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
             }
         }
@@ -131,6 +132,7 @@ public class PvpListener implements Listener {
                     event.setCancelled(true);
                     damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
                 } else if (!entityRst) {
+                    event.setCancelled(true);
                     damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                 }
             }
@@ -159,6 +161,7 @@ public class PvpListener implements Listener {
                         event.setCancelled(true);
                         damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
                     } else if (!entityRst) {
+                        event.setCancelled(true);
                         damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                     }
                 }
@@ -187,6 +190,7 @@ public class PvpListener implements Listener {
                         event.setCancelled(true);
                         damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
                     } else if (!entityRst) {
+                        event.setCancelled(true);
                         damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                     }
                 }
@@ -212,6 +216,7 @@ public class PvpListener implements Listener {
                     event.setCancelled(true);
                     damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
                 } else if (!entityRst) {
+                    event.setCancelled(true);
                     damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                 }
             }

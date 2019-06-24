@@ -53,7 +53,7 @@ public class PvpCommand extends Command {
                 } else if (args[0].equalsIgnoreCase("off")) {
                     pvp.setPvpStatus(false);
                     BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
-                    ParticleEffectUtil.particleEffect(sendPlayer, Color.GREEN);
+                    ParticleEffectUtil.particleEffect(sendPlayer, Color.WHITE);
                 }
                 new BukkitRunnable() {
                     @Override
