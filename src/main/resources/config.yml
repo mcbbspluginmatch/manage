@@ -1,9 +1,9 @@
 # 用于mysql数据库链接
 mysql:
-  ip: 106.12.156.212
+  ip: 127.0.0.1
   port: 3306
-  username: hanshuai
-  password: abc956812056
+  username: root
+  password: 123456
   databasename: minecraft
 #需要开启的功能start------------------------
 # 是否启用登录系统
