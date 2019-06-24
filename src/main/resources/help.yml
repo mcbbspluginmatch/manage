@@ -9,4 +9,6 @@ helps: '[
 "§e/tpa [name]   §f请求传送到一个玩家的位置",
 "§e/tpaccept   §f接受玩家传送",
 "§e/tpdeny   §f拒绝玩家传送"
+"§e/pvp on   §f设置自己PVP为开启状态"
+"§e/pvp off   §f设置自己PVP为关闭状态"
 ]'

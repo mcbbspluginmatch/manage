@@ -43,7 +43,7 @@ public class PvpListener implements Listener {
         if (pvp.getId() != null) {
             rst = pvp.getPvpStatus();
         }
-        BaseConstants.PvpMap.put(pvp.getUserName(), rst);
+        BaseConstants.PvpMap.put(userName, rst);
         // 粒子效果
         if (BaseConfigCache.isPvpParticle) {
             if (rst) {
