@@ -11,6 +11,5 @@ import lombok.Data;
 public class Pvp {
     private Integer id;
     private String userName;
-    private Boolean pvp;
-    private Boolean particles;
+    private Boolean pvpStatus;
 }

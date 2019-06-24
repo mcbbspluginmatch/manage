@@ -48,9 +48,8 @@ public class PvpServiceImpl implements IPvpService {
             if (rst) {
                 String addSql = PvpSqlEnum.UPDATE.getCommand();
                 PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(addSql);
-                ps.setBoolean(1, pvp.getPvp());
-                ps.setBoolean(2, pvp.getParticles());
-                ps.setString(3, pvp.getUserName());
+                ps.setBoolean(1, pvp.getPvpStatus());
+                ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
                 ps.close();
                 return count > 0;
@@ -58,8 +57,7 @@ public class PvpServiceImpl implements IPvpService {
                 String addSql = PvpSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
-                ps.setBoolean(2, pvp.getPvp());
-                ps.setBoolean(3, pvp.getParticles());
+                ps.setBoolean(2, pvp.getPvpStatus());
                 val count = ps.executeUpdate();
                 ps.close();
                 return count > 0;
@@ -78,21 +76,20 @@ public class PvpServiceImpl implements IPvpService {
      */
     @Override
     public Boolean findCountByUserName(String userName) {
-        Long count = 0L;
+        int count = 0;
         try {
             String pvpCmd = PvpSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
             PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(pvpCmd);
             val rst = ps.executeQuery();
             while (rst.next()) {
-                count = rst.getLong(1);
+                count = rst.getInt(1);
             }
             rst.close();
             ps.close();
-            return count > 0;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return count > 0;
     }
 
     /**
@@ -112,12 +109,10 @@ public class PvpServiceImpl implements IPvpService {
             while (rst.next()) {
                 pvp.setId(rst.getInt(1));
                 pvp.setUserName(rst.getString(2));
-                pvp.setPvp(rst.getBoolean(3));
-                pvp.setParticles(rst.getBoolean(4));
+                pvp.setPvpStatus(rst.getBoolean(3));
             }
             rst.close();
             ps.close();
-            return pvp;
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {

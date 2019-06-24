@@ -1,5 +1,6 @@
 package cn.handy.command.msg;
 
+import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.constants.MsgEnum;
 import cn.handy.dao.message.IMessageService;
@@ -11,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
@@ -35,43 +37,57 @@ public class MsgCommand extends Command {
         val isPlayer = BaseUtil.isPlayer(sender);
         if (isPlayer) {
             if (args != null && args.length > 0) {
-                Player sendPlayer = (Player) sender;
+                final Player sendPlayer = (Player) sender;
                 MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
-                IMessageService messageService = new MessageServiceImpl();
-                Message message = new Message();
-                Boolean rst;
+                final IMessageService messageService = new MessageServiceImpl();
+                final Message message = new Message();
                 switch (msgEnum) {
                     case SET:
                         message.setUserName(sendPlayer.getName());
                         message.setJoinMessage(args[1]);
                         message.setQuitMessage(args[2]);
-                        rst = messageService.set(message);
-                        if (rst) {
-                            sender.sendMessage("设置成功");
-                        } else {
-                            sender.sendMessage("设置失败");
-                        }
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                Boolean rst = messageService.set(message);
+                                if (rst) {
+                                    sendPlayer.sendMessage("设置成功");
+                                } else {
+                                    sendPlayer.sendMessage("设置失败");
+                                }
+                            }
+                        }.runTaskAsynchronously(Manage.plugin);
                         break;
                     case DEL:
-                        rst = messageService.delete(sendPlayer.getName());
-                        if (rst) {
-                            sender.sendMessage("删除成功");
-                        } else {
-                            sender.sendMessage("删除失败");
-                        }
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                Boolean rst = messageService.delete(sendPlayer.getName());
+                                if (rst) {
+                                    sendPlayer.sendMessage("删除成功");
+                                } else {
+                                    sendPlayer.sendMessage("删除失败");
+                                }
+                            }
+                        }.runTaskAsynchronously(Manage.plugin);
                         break;
                     case SEE:
-                        Message user = messageService.findByUserName(sendPlayer.getName());
-                        if (user.getId() != null) {
-                            sender.sendMessage(ChatColor.GOLD + user.getUserName() + "  |  "
-                                    + ChatColor.GOLD + user.getJoinMessage() + "  |  "
-                                    + ChatColor.GOLD + user.getQuitMessage());
-                        } else {
-                            sender.sendMessage("未查询到数据");
-                        }
+                        new BukkitRunnable() {
+                            @Override
+                            public void run() {
+                                Message user = messageService.findByUserName(sendPlayer.getName());
+                                if (user.getId() != null) {
+                                    sendPlayer.sendMessage(ChatColor.GOLD + user.getUserName() + "进入游戏提醒为:\n"
+                                            + ChatColor.GOLD + user.getJoinMessage() + "退出游戏提醒为:\n"
+                                            + ChatColor.GOLD + user.getQuitMessage());
+                                } else {
+                                    sendPlayer.sendMessage("未查询到数据");
+                                }
+                            }
+                        }.runTaskAsynchronously(Manage.plugin);
                         break;
                     default:
-                        sender.sendMessage(BaseConstants.MSG_HELP);
+                        sendPlayer.sendMessage(BaseConstants.MSG_HELP);
                         break;
                 }
             } else {

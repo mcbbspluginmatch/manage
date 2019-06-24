@@ -1,15 +1,19 @@
 package cn.handy.command.pvp;
 
+import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.dao.pvp.impl.PvpServiceImpl;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
@@ -34,25 +38,34 @@ public class PvpCommand extends Command {
         val isPlayer = BaseUtil.isPlayer(sender);
         if (!isPlayer) {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
+            return true;
         }
         if (label.equalsIgnoreCase("pvp")) {
             if (args != null && args.length == 1) {
-                Player sendPlayer = (Player) sender;
-                IPvpService pvpService = new PvpServiceImpl();
-                Pvp pvp = new Pvp();
+                final Player sendPlayer = (Player) sender;
+                final IPvpService pvpService = new PvpServiceImpl();
+                final Pvp pvp = new Pvp();
                 pvp.setUserName(sendPlayer.getName());
                 if (args[0].equalsIgnoreCase("on")) {
-                    pvp.setPvp(true);
+                    pvp.setPvpStatus(true);
+                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
+                    ParticleEffectUtil.particleEffect(sendPlayer, Color.GREEN);
                 } else if (args[0].equalsIgnoreCase("off")) {
-                    pvp.setPvp(false);
+                    pvp.setPvpStatus(false);
+                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
+                    ParticleEffectUtil.particleEffect(sendPlayer, Color.RED);
                 }
-                pvp.setParticles(true);
-                val rst = pvpService.set(pvp);
-                if (rst) {
-                    sender.sendMessage("设置成功");
-                } else {
-                    sender.sendMessage("设置失败");
-                }
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        val rst = pvpService.set(pvp);
+                        if (rst) {
+                            sendPlayer.sendMessage("设置成功");
+                        } else {
+                            sendPlayer.sendMessage("设置失败");
+                        }
+                    }
+                }.runTaskAsynchronously(Manage.plugin);
             } else {
                 sender.sendMessage(BaseConstants.PVP_HELP);
             }
