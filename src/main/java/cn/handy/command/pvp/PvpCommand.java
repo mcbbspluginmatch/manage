@@ -48,11 +48,11 @@ public class PvpCommand extends Command {
                 pvp.setUserName(sendPlayer.getName());
                 if (args[0].equalsIgnoreCase("on")) {
                     pvp.setPvpStatus(true);
-                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
+                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
                     ParticleEffectUtil.particleEffect(sendPlayer, Color.GREEN);
                 } else if (args[0].equalsIgnoreCase("off")) {
                     pvp.setPvpStatus(false);
-                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
+                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
                     ParticleEffectUtil.particleEffect(sendPlayer, Color.RED);
                 }
                 new BukkitRunnable() {

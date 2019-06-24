@@ -39,7 +39,7 @@ public class PvpListener implements Listener {
         String userName = event.getPlayer().getName().toLowerCase();
         val pvpService = new PvpServiceImpl();
         Pvp pvp = pvpService.findByUserName(userName);
-        Boolean rst = false;
+        Boolean rst = true;
         if (pvp.getId() != null) {
             rst = pvp.getPvpStatus();
         }
@@ -104,9 +104,11 @@ public class PvpListener implements Listener {
             if (entityPlayer == damagePlayer) {
                 return;
             }
-            if (damageRst || entityRst) {
+            if (!damageRst) {
                 event.setCancelled(true);
-                damagePlayer.sendMessage("pvp已关闭,无法进行伤害...");
+                damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
+            } else if (!entityRst) {
+                damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
             }
         }
     }
@@ -128,9 +130,11 @@ public class PvpListener implements Listener {
                 Boolean damageRst = BaseConstants.PvpMap.get(damagePlayer.getName().toLowerCase());
                 Player entityPlayer = (Player) event.getEntity();
                 Boolean entityRst = BaseConstants.PvpMap.get(entityPlayer.getName().toLowerCase());
-                if (damageRst || entityRst) {
+                if (!damageRst) {
                     event.setCancelled(true);
-                    damagePlayer.sendMessage("pvp已关闭,无法进行伤害...");
+                    damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
+                } else if (!entityRst) {
+                    damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                 }
             }
         }
@@ -154,9 +158,11 @@ public class PvpListener implements Listener {
                     Boolean damageRst = BaseConstants.PvpMap.get(damagePlayer.getName().toLowerCase());
                     Player entityPlayer = (Player) event.getEntity();
                     Boolean entityRst = BaseConstants.PvpMap.get(entityPlayer.getName().toLowerCase());
-                    if (damageRst || entityRst) {
+                    if (!damageRst) {
                         event.setCancelled(true);
-                        damagePlayer.sendMessage("pvp已关闭,无法进行伤害...");
+                        damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
+                    } else if (!entityRst) {
+                        damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                     }
                 }
             }
@@ -180,9 +186,11 @@ public class PvpListener implements Listener {
                     Boolean damageRst = BaseConstants.PvpMap.get(damagePlayer.getName().toLowerCase());
                     Player entityPlayer = (Player) event.getEntity();
                     Boolean entityRst = BaseConstants.PvpMap.get(entityPlayer.getName().toLowerCase());
-                    if (damageRst || entityRst) {
+                    if (!damageRst) {
                         event.setCancelled(true);
-                        damagePlayer.sendMessage("pvp已关闭,无法进行伤害...");
+                        damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
+                    } else if (!entityRst) {
+                        damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                     }
                 }
             }
@@ -203,9 +211,11 @@ public class PvpListener implements Listener {
             Boolean entityRst = BaseConstants.PvpMap.get(entityPlayer.getName().toLowerCase());
             if (damagePlayer.getInventory().getItemInMainHand().getType() == Material.FISHING_ROD
                     || damagePlayer.getInventory().getItemInOffHand().getType() == Material.FISHING_ROD) {
-                if (damageRst || entityRst) {
+                if (!damageRst) {
                     event.setCancelled(true);
-                    damagePlayer.sendMessage("pvp已关闭,无法进行伤害...");
+                    damagePlayer.sendMessage("您的pvp已关闭,无法进行伤害...");
+                } else if (!entityRst) {
+                    damagePlayer.sendMessage("对方的pvp已关闭,无法进行伤害...");
                 }
             }
         }
