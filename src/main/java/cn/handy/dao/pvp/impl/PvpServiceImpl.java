@@ -80,6 +80,7 @@ public class PvpServiceImpl implements IPvpService {
         try {
             String pvpCmd = PvpSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
             PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(pvpCmd);
+            ps.setString(1,userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
                 count = rst.getInt(1);
