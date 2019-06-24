@@ -1,6 +1,5 @@
 package cn.handy.listener.pvp;
 
-import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.dao.pvp.impl.PvpServiceImpl;
 import cn.handy.entity.Pvp;
@@ -45,12 +44,10 @@ public class PvpListener implements Listener {
         }
         BaseConstants.PvpMap.put(userName, rst);
         // 粒子效果
-        if (BaseConfigCache.isPvpParticle) {
-            if (rst) {
-                ParticleEffectUtil.particleEffect(event.getPlayer(), Color.GREEN);
-            } else {
-                ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
-            }
+        if (rst) {
+            ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
+        } else {
+            ParticleEffectUtil.particleEffect(event.getPlayer(), Color.GREEN);
         }
     }
 
