@@ -1,15 +1,9 @@
 package cn.handy.utils;
 
-import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import cn.handy.dao.user.impl.UserServiceImpl;
-import cn.handy.entity.User;
-import lombok.val;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 
 /**
@@ -41,5 +35,15 @@ public class BaseUtil {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 颜色代码转换
+     *
+     * @param string
+     * @return
+     */
+    public static String replaceChatColor(String string) {
+        return string.replace("&", "§");
     }
 }

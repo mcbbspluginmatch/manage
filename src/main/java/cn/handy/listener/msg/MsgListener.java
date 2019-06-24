@@ -1,6 +1,7 @@
 package cn.handy.listener.msg;
 
 import cn.handy.dao.message.impl.MessageServiceImpl;
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.ConfigUtil;
 import lombok.val;
 import org.bukkit.event.EventHandler;
@@ -30,7 +31,7 @@ public class MsgListener implements Listener {
             joinMessage = message.getJoinMessage();
         }
         joinMessage = joinMessage.replace("${player}", userName);
-        event.setJoinMessage(joinMessage);
+        event.setJoinMessage(BaseUtil.replaceChatColor(joinMessage));
     }
 
     /**
@@ -48,6 +49,6 @@ public class MsgListener implements Listener {
             quitMessage = message.getQuitMessage();
         }
         quitMessage = quitMessage.replace("${player}", userName);
-        event.setQuitMessage(quitMessage);
+        event.setQuitMessage(BaseUtil.replaceChatColor(quitMessage));
     }
 }

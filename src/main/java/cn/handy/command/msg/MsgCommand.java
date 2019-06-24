@@ -48,8 +48,8 @@ public class MsgCommand extends Command {
                             return true;
                         }
                         message.setUserName(sendPlayer.getName());
-                        message.setJoinMessage(args[1]);
-                        message.setQuitMessage(args[2]);
+                        message.setJoinMessage(BaseUtil.replaceChatColor(args[1]));
+                        message.setQuitMessage(BaseUtil.replaceChatColor(args[2]));
                         new BukkitRunnable() {
                             @Override
                             public void run() {

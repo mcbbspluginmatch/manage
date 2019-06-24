@@ -55,7 +55,7 @@ public class HelpCommand extends Command {
         // 分页数据
         List<String> data = listPageUtil.getData();
         for (String datum : data) {
-            sender.sendMessage(datum);
+            sender.sendMessage(BaseUtil.replaceChatColor(datum));
         }
 
         // 大于1并小于总页数--出现上一页跟下一页
