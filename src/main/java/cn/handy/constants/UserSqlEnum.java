@@ -15,7 +15,7 @@ public enum UserSqlEnum {
      * 如果没有user表,创建之
      */
     CREATE_USER(
-            "CREATE TABLE IF NOT EXISTS `gp_user`  (" +
+            "CREATE TABLE IF NOT EXISTS `mg_user`  (" +
                     "`id` bigint(11) NOT NULL AUTO_INCREMENT," +
                     "`userName` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL," +
                     "`realName` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL," +
@@ -31,7 +31,7 @@ public enum UserSqlEnum {
      * 新增数据
      */
     ADD_DATA(
-            "INSERT INTO `gp_user`" +
+            "INSERT INTO `mg_user`" +
                     "(`id`, `userName`, `realName`, `passWord`, `loginIp`, `loginDate`, `regIp`, `regDate`)" +
                     " VALUES (0, ?, ?, ?, ?, ?, ?, ?);"
     ),
@@ -39,22 +39,22 @@ public enum UserSqlEnum {
      * 根据帐号密码查询来进行登录
      */
     SELECT_BY_USERNAME_AND_PASSWORD(
-            "SELECT * FROM `gp_user` WHERE `userName` = ? AND `passWord` = ?"
+            "SELECT * FROM `mg_user` WHERE `userName` = ? AND `passWord` = ?"
     ),
     /**
      * 根据帐号和ip来进行查询
      */
     SELECT_BY_USERNAME_AND_LOGIN_IP(
-            "SELECT * FROM `gp_user` WHERE `userName` = ? AND `loginIp` = ?"
+            "SELECT * FROM `mg_user` WHERE `userName` = ? AND `loginIp` = ?"
     ),
     /**
      * 查询是否有该账户
      */
     SELECT_COUNT_BY_USERNAME(
-            "SELECT COUNT(1) FROM `gp_user` WHERE `userName` = ?"
+            "SELECT COUNT(1) FROM `mg_user` WHERE `userName` = ?"
     ),
     UPDATE(
-            "UPDATE `gp_user` SET `loginIp` = ?, `loginDate` = ? WHERE `id` = ?"
+            "UPDATE `mg_user` SET `loginIp` = ?, `loginDate` = ? WHERE `id` = ?"
     );
 
     private String command;

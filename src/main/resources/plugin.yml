@@ -1,6 +1,6 @@
 name: manage
 main: cn.handy.Manage
-version: 2.3.0
+version: 3.0.0
 author: handy
 permissions:
     handy.manage:
@@ -14,4 +14,6 @@ permissions:
     handy.msg:
         default: true
     handy.hat:
+        default: true
+    handy.pvp:
         default: true

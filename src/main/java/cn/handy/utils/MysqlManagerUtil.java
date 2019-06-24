@@ -4,6 +4,8 @@ import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
+import cn.handy.dao.pvp.IPvpService;
+import cn.handy.dao.pvp.impl.PvpServiceImpl;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import lombok.val;
@@ -51,6 +53,12 @@ public class MysqlManagerUtil {
         if (BaseConfigCache.isUser) {
             IUserService userService = new UserServiceImpl();
             userService.create();
+        }
+
+        // 创建pvp表
+        if (BaseConfigCache.isPvp) {
+            IPvpService pvpService = new PvpServiceImpl();
+            pvpService.create();
         }
 
         // 创建一个每小时执行的心跳包

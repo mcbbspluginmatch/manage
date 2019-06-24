@@ -14,8 +14,7 @@ import java.io.File;
  * @date 2019/6/21 9:54
  */
 public class ConfigUtil {
-    public static FileConfiguration config, HelpConfig, LangConfig;
-
+    public static FileConfiguration config, HelpConfig, LangConfig, pvpConfig;
 
     /**
      * 初始化加载文件
@@ -49,8 +48,7 @@ public class ConfigUtil {
             if (!(helpFile.exists())) {
                 Manage.plugin.saveResource("help.yml", false);
             }
-            FileConfiguration help = YamlConfiguration.loadConfiguration(helpFile);
-            HelpConfig = help;
+            HelpConfig = YamlConfiguration.loadConfiguration(helpFile);
         }
     }
 
@@ -62,15 +60,12 @@ public class ConfigUtil {
         if (!(langFile.exists())) {
             Manage.plugin.saveResource("lang.yml", false);
         }
-        FileConfiguration lang = YamlConfiguration.loadConfiguration(langFile);
-        LangConfig = lang;
+        LangConfig = YamlConfiguration.loadConfiguration(langFile);
     }
-
 
     /**
      * 保存各个独立模块开启状态
      */
-
     private static void saveConfigCache() {
         val isMessage = ConfigUtil.config.getBoolean("isMessage");
         val isUser = ConfigUtil.config.getBoolean("isUser");
@@ -78,6 +73,8 @@ public class ConfigUtil {
         val isHelp = ConfigUtil.config.getBoolean("isHelp");
         val isTp = ConfigUtil.config.getBoolean("isTp");
         val isGift = ConfigUtil.config.getBoolean("isGift");
+        val isPvp = ConfigUtil.config.getBoolean("isPvp");
+        val isPvpParticle = ConfigUtil.config.getBoolean("isPvpParticle");
 
         BaseConfigCache.isMessage = isMessage;
         BaseConfigCache.isUser = isUser;
@@ -85,5 +82,7 @@ public class ConfigUtil {
         BaseConfigCache.isHelp = isHelp;
         BaseConfigCache.isTp = isTp;
         BaseConfigCache.isGift = isGift;
+        BaseConfigCache.isPvp = isPvp;
+        BaseConfigCache.isPvpParticle = isPvpParticle;
     }
 }

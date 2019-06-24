@@ -31,6 +31,11 @@ public abstract class BaseConstants {
     public static Set<User> userSet = new HashSet<User>();
 
     /**
+     * 用户PVP缓存信息
+     */
+    public static Map<String, Boolean> PvpMap = new HashMap();
+
+    /**
      * msgAdmin帮助语句
      */
     public final static String MSG_ADMIN_HELP =
@@ -53,6 +58,13 @@ public abstract class BaseConstants {
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
                     "§e/manage reload lang     " + "§f重载本插件的lang文本";
+
+
+    public final static String PVP_HELP =
+            "§e§m一一一一一一一§f[§ePVP管理§f]§e§m一一一一一一一\n" +
+                    "§e/pvp on     " + "§f设置自己PVP为开启状态\n" +
+                    "§e/pvp off     " + "§f设置自己PVP为关闭状态";
+
     /**
      * 命令白名单正则
      */

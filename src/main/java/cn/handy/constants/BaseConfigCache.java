@@ -16,4 +16,7 @@ public abstract class BaseConfigCache {
     public static Boolean isHelp = false;
     public static Boolean isTp = false;
     public static Boolean isGift = false;
+    public static Boolean isPvp = false;
+    public static Boolean isPvpParticle = false;
 }
+

@@ -18,5 +18,7 @@ isHelp: true
 isTp: true
 # 是否启用送礼物系统
 isGift: true
+# 是否启用pvp管理和对应的粒子特效
+isPvp: true
+isPvpParticle: true
 #需要开启的功能end--------------------------
-

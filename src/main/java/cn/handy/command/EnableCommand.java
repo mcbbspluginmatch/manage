@@ -9,6 +9,7 @@ import cn.handy.command.login.RegisterCommand;
 import cn.handy.command.msg.MsgAdminCommand;
 import cn.handy.command.msg.MsgCommand;
 import cn.handy.command.manage.ManageCommand;
+import cn.handy.command.pvp.PvpCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
@@ -71,6 +72,9 @@ public class EnableCommand {
         }
         if (BaseConfigCache.isGift) {
             commandMap.register(Manage.plugin.getDescription().getName(), new GiftCommand());
+        }
+        if (BaseConfigCache.isPvp) {
+            commandMap.register(Manage.plugin.getDescription().getName(), new PvpCommand());
         }
     }
 }

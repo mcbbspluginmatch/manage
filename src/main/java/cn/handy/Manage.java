@@ -2,10 +2,9 @@ package cn.handy;
 
 import cn.handy.command.EnableCommand;
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.listener.ManageListener;
 import cn.handy.utils.ConfigUtil;
+import cn.handy.utils.ListenerUtil;
 import cn.handy.utils.MysqlManagerUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -26,7 +25,7 @@ public class Manage extends JavaPlugin {
         // 加载配置文件
         ConfigUtil.getConfig();
         // 注册监听器
-        Bukkit.getPluginManager().registerEvents(new ManageListener(), this);
+        ListenerUtil.getListener();
         // 注册命令
         EnableCommand.regCommand();
         // 创建表和获取数据库链接
