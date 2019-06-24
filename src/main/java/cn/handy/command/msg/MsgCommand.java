@@ -43,6 +43,10 @@ public class MsgCommand extends Command {
                 final Message message = new Message();
                 switch (msgEnum) {
                     case SET:
+                        if (args.length != 3){
+                            sender.sendMessage(BaseConstants.MSG_HELP);
+                            return true;
+                        }
                         message.setUserName(sendPlayer.getName());
                         message.setJoinMessage(args[1]);
                         message.setQuitMessage(args[2]);
