@@ -81,7 +81,7 @@ public class UserMySqlServiceImpl implements IUserService {
             ps.setString(2, passWord);
             val rst = ps.executeQuery();
             while (rst.next()) {
-                user.setId(rst.getLong(1));
+                user.setId(rst.getInt(1));
                 user.setUserName(rst.getString(2));
                 user.setRealName(rst.getString(3));
                 user.setPassWord(rst.getString(4));
@@ -147,7 +147,7 @@ public class UserMySqlServiceImpl implements IUserService {
             ps.setString(2, loginIp);
             val rst = ps.executeQuery();
             while (rst.next()) {
-                user.setId(rst.getLong(1));
+                user.setId(rst.getInt(1));
                 user.setUserName(rst.getString(2));
                 user.setRealName(rst.getString(3));
                 user.setPassWord(rst.getString(4));
