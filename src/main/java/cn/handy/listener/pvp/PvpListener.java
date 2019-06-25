@@ -4,7 +4,7 @@ import cn.handy.constants.BaseConstants;
 import cn.handy.constants.Beans;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.particleEffect.ParticleEffectUtil;
+import cn.handy.utils.particleeffect.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.Color;
 import org.bukkit.Material;

@@ -6,10 +6,8 @@ import cn.handy.constants.Beans;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.particleEffect.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -50,11 +48,9 @@ public class PvpCommand extends Command {
                 if (args[0].equalsIgnoreCase("on")) {
                     pvp.setPvpStatus(true);
                     BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
-                    ParticleEffectUtil.particleEffect(sendPlayer, Color.RED);
                 } else if (args[0].equalsIgnoreCase("off")) {
                     pvp.setPvpStatus(false);
                     BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
-                    ParticleEffectUtil.particleEffect(sendPlayer, Color.WHITE);
                 }
                 new BukkitRunnable() {
                     @Override
