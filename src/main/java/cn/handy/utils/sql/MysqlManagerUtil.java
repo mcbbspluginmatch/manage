@@ -1,13 +1,14 @@
-package cn.handy.utils;
+package cn.handy.utils.sql;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.dao.message.IMessageService;
-import cn.handy.dao.message.impl.MessageServiceImpl;
+import cn.handy.dao.message.impl.MessageMySqlServiceImpl;
 import cn.handy.dao.pvp.IPvpService;
-import cn.handy.dao.pvp.impl.PvpServiceImpl;
+import cn.handy.dao.pvp.impl.PvpMySqlServiceImpl;
 import cn.handy.dao.user.IUserService;
-import cn.handy.dao.user.impl.UserServiceImpl;
+import cn.handy.dao.user.impl.UserMySqlServiceImpl;
+import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -27,7 +28,7 @@ public class MysqlManagerUtil {
     private String userName;
     private String userPassword;
     private int port;
-    public static Connection connection;
+    public static Connection mySqlConnection;
 
     public static MysqlManagerUtil instance = null;
 
@@ -46,18 +47,18 @@ public class MysqlManagerUtil {
 
         // 创建消息表
         if (BaseConfigCache.isMessage) {
-            IMessageService messageService = new MessageServiceImpl();
+            IMessageService messageService = new MessageMySqlServiceImpl();
             messageService.create();
         }
         // 创建用户表
         if (BaseConfigCache.isUser) {
-            IUserService userService = new UserServiceImpl();
+            IUserService userService = new UserMySqlServiceImpl();
             userService.create();
         }
 
         // 创建pvp表
         if (BaseConfigCache.isPvp) {
-            IPvpService pvpService = new PvpServiceImpl();
+            IPvpService pvpService = new PvpMySqlServiceImpl();
             pvpService.create();
         }
 
@@ -67,7 +68,7 @@ public class MysqlManagerUtil {
             public void run() {
                 try {
                     String selectStr = "SELECT 'X'";
-                    PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+                    PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
                     val rst = ps.executeQuery();
                     rst.close();
                     ps.close();
@@ -85,7 +86,7 @@ public class MysqlManagerUtil {
      */
     private void connectMySQL() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + databaseName + "?useSSL=false", userName, userPassword);
+            mySqlConnection = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + databaseName + "?useSSL=false", userName, userPassword);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -96,7 +97,7 @@ public class MysqlManagerUtil {
      */
     public void shutdown() {
         try {
-            connection.close();
+            mySqlConnection.close();
         } catch (SQLException e) {
             //断开连接失败
             e.printStackTrace();

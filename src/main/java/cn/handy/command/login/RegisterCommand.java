@@ -1,8 +1,7 @@
 package cn.handy.command.login;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.dao.user.IUserService;
-import cn.handy.dao.user.impl.UserServiceImpl;
+import cn.handy.constants.Beans;
 import cn.handy.entity.User;
 import lombok.val;
 import org.bukkit.command.Command;
@@ -31,7 +30,7 @@ public class RegisterCommand extends Command {
         val sendPlayer = (Player) sender;
         if (args != null && args.length == 2) {
             if (args[0].equals(args[1])) {
-                IUserService userService = new UserServiceImpl();
+                val userService = Beans.getBeans().getUserService();
                 User user = new User();
                 user.setUserName(sendPlayer.getName().toLowerCase());
                 user.setRealName(sendPlayer.getName());

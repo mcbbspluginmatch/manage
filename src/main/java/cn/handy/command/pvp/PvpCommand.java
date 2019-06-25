@@ -2,11 +2,11 @@ package cn.handy.command.pvp;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
+import cn.handy.constants.Beans;
 import cn.handy.dao.pvp.IPvpService;
-import cn.handy.dao.pvp.impl.PvpServiceImpl;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.ParticleEffectUtil;
+import cn.handy.utils.particleEffect.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
@@ -43,9 +43,10 @@ public class PvpCommand extends Command {
         if (label.equalsIgnoreCase("pvp")) {
             if (args != null && args.length == 1) {
                 final Player sendPlayer = (Player) sender;
-                final IPvpService pvpService = new PvpServiceImpl();
+                final IPvpService pvpService = Beans.getBeans().getPvpService();
                 final Pvp pvp = new Pvp();
                 pvp.setUserName(sendPlayer.getName());
+                pvp.setParticle(true);
                 if (args[0].equalsIgnoreCase("on")) {
                     pvp.setPvpStatus(true);
                     BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);

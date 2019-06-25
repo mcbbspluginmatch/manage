@@ -1,10 +1,10 @@
 package cn.handy.command.msg;
 
 import cn.handy.constants.BaseConstants;
+import cn.handy.constants.Beans;
 import cn.handy.constants.MsgEnum;
-import cn.handy.dao.message.IMessageService;
-import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.entity.Message;
+import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -31,7 +31,7 @@ public class MsgAdminCommand extends Command {
         }
         if (args != null && args.length > 0) {
             MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
-            IMessageService messageService = new MessageServiceImpl();
+            val messageService = Beans.getBeans().getMessageService();
             Message message = new Message();
             Boolean rst;
             switch (msgEnum) {

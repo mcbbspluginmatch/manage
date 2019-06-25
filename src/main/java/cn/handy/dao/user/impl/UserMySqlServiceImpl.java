@@ -1,9 +1,9 @@
 package cn.handy.dao.user.impl;
 
-import cn.handy.constants.UserSqlEnum;
+import cn.handy.constants.mysql.UserMySqlEnum;
 import cn.handy.dao.user.IUserService;
 import cn.handy.entity.User;
-import cn.handy.utils.MysqlManagerUtil;
+import cn.handy.utils.sql.MysqlManagerUtil;
 import lombok.val;
 
 import java.sql.Date;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
  * @Description: {}
  * @date 2019/6/13 14:09
  */
-public class UserServiceImpl implements IUserService {
+public class UserMySqlServiceImpl implements IUserService {
 
     /**
      * 如果不存在表则创建表
@@ -25,8 +25,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Boolean create() {
         try {
-            String userCmd = UserSqlEnum.CREATE_USER.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(userCmd);
+            String userCmd = UserMySqlEnum.CREATE_USER.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(userCmd);
             val rst = ps.executeUpdate();
             ps.close();
             return rst > 0;
@@ -46,8 +46,8 @@ public class UserServiceImpl implements IUserService {
     public Boolean findByUserName(String userName) {
         Long count = 0L;
         try {
-            String selectStr = UserSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = UserMySqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
             ps.setString(1, userName.toLowerCase());
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -75,8 +75,8 @@ public class UserServiceImpl implements IUserService {
     public User login(String userName, String passWord) {
         User user = new User();
         try {
-            String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, passWord);
             val rst = ps.executeQuery();
@@ -110,8 +110,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Boolean register(User user) {
         try {
-            String selectStr = UserSqlEnum.ADD_DATA.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = UserMySqlEnum.ADD_DATA.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getRealName());
             ps.setString(3, user.getPassWord());
@@ -141,8 +141,8 @@ public class UserServiceImpl implements IUserService {
     public User findByUserNameAndLoginIp(String userName, String loginIp) {
         User user = new User();
         try {
-            String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, loginIp);
             val rst = ps.executeQuery();
@@ -176,8 +176,8 @@ public class UserServiceImpl implements IUserService {
     @Override
     public Boolean update(User user) {
         try {
-            String selectStr = UserSqlEnum.UPDATE.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = UserMySqlEnum.UPDATE.getCommand();
+            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
             ps.setString(1, user.getLoginIp());
             ps.setDate(2, new Date(user.getLoginDate().getTime()));
             ps.setLong(3, user.getId());

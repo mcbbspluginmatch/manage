@@ -10,6 +10,7 @@ public abstract class BaseConfigCache {
     /**
      * 模块化功能保存
      */
+    public static Boolean isUseMySql = false;
     public static Boolean isUser = false;
     public static Boolean isMessage = false;
     public static Boolean isHat = false;

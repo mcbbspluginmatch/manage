@@ -12,4 +12,5 @@ public class Pvp {
     private Integer id;
     private String userName;
     private Boolean pvpStatus;
+    private Boolean particle;
 }

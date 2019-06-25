@@ -1,10 +1,10 @@
 package cn.handy.listener.pvp;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.dao.pvp.impl.PvpServiceImpl;
+import cn.handy.constants.Beans;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.ParticleEffectUtil;
+import cn.handy.utils.particleEffect.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -36,7 +36,7 @@ public class PvpListener implements Listener {
     @EventHandler
     public void onPlayerJoinGame(PlayerJoinEvent event) {
         String userName = event.getPlayer().getName().toLowerCase();
-        val pvpService = new PvpServiceImpl();
+        val pvpService = Beans.getBeans().getPvpService();
         Pvp pvp = pvpService.findByUserName(userName);
         Boolean rst = true;
         if (pvp.getId() != null) {

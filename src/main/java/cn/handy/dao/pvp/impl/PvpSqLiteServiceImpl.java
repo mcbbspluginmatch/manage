@@ -1,9 +1,9 @@
 package cn.handy.dao.pvp.impl;
 
-import cn.handy.constants.PvpSqlEnum;
+import cn.handy.constants.sqlite.PvpSqLiteEnum;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
-import cn.handy.utils.MysqlManagerUtil;
+import cn.handy.utils.sql.SqLiteManagerUtil;
 import lombok.val;
 
 import java.sql.PreparedStatement;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
  * @Description: {}
  * @date 2019/6/24 10:48
  */
-public class PvpServiceImpl implements IPvpService {
+public class PvpSqLiteServiceImpl implements IPvpService {
 
     /**
      * 创建表
@@ -24,8 +24,8 @@ public class PvpServiceImpl implements IPvpService {
     @Override
     public Boolean create() {
         try {
-            String pvpCmd = PvpSqlEnum.CREATE_PVP.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(pvpCmd);
+            String pvpCmd = PvpSqLiteEnum.CREATE_PVP.getCommand();
+            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(pvpCmd);
             val rst = ps.executeUpdate();
             ps.close();
             return rst > 0;
@@ -46,18 +46,19 @@ public class PvpServiceImpl implements IPvpService {
         try {
             val rst = findCountByUserName(pvp.getUserName());
             if (rst) {
-                String addSql = PvpSqlEnum.UPDATE.getCommand();
-                PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(addSql);
+                String addSql = PvpSqLiteEnum.UPDATE_PVP_STATUS.getCommand();
+                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(addSql);
                 ps.setBoolean(1, pvp.getPvpStatus());
                 ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
                 ps.close();
                 return count > 0;
             } else {
-                String addSql = PvpSqlEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(addSql);
+                String addSql = PvpSqLiteEnum.ADD_DATA.getCommand();
+                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
                 ps.setBoolean(2, pvp.getPvpStatus());
+                ps.setBoolean(3, pvp.getParticle());
                 val count = ps.executeUpdate();
                 ps.close();
                 return count > 0;
@@ -78,9 +79,9 @@ public class PvpServiceImpl implements IPvpService {
     public Boolean findCountByUserName(String userName) {
         int count = 0;
         try {
-            String pvpCmd = PvpSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(pvpCmd);
-            ps.setString(1,userName);
+            String pvpCmd = PvpSqLiteEnum.SELECT_COUNT_BY_USERNAME.getCommand();
+            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(pvpCmd);
+            ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
                 count = rst.getInt(1);
@@ -103,8 +104,8 @@ public class PvpServiceImpl implements IPvpService {
     public Pvp findByUserName(String userName) {
         Pvp pvp = new Pvp();
         try {
-            String selectStr = PvpSqlEnum.SELECT_BY_USERNAME.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.connection.prepareStatement(selectStr);
+            String selectStr = PvpSqLiteEnum.SELECT_BY_USERNAME.getCommand();
+            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {

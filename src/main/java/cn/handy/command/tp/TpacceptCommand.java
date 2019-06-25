@@ -3,7 +3,7 @@ package cn.handy.command.tp;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.ConfigUtil;
+import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,8 +11,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Arrays;
 
 /**
  * @author hanshuai

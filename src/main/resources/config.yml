@@ -1,3 +1,5 @@
+# 请选择是否要使用mysql,不使用的话默认使用sqLite来储存信息
+isUseMySql: false
 # 用于mysql数据库链接
 mysql:
   ip: 127.0.0.1

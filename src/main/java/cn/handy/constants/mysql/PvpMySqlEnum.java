@@ -1,4 +1,4 @@
-package cn.handy.constants;
+package cn.handy.constants.mysql;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PvpSqlEnum {
+public enum PvpMySqlEnum {
     /**
      * 如果没有pvp表,创建之
      */
@@ -19,16 +19,17 @@ public enum PvpSqlEnum {
                     "`id` int(11) NOT NULL AUTO_INCREMENT," +
                     "`userName` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL," +
                     "`pvpStatus` bit(1) NOT NULL DEFAULT b'0'," +
+                    "`particle` bit(1) NOT NULL DEFAULT b'0'," +
                     "PRIMARY KEY (`id`) USING BTREE" +
-                    ") ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;"
+                    ") ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;"
     ),
     /**
      * 新增数据
      */
     ADD_DATA(
             "INSERT INTO `mg_pvp`" +
-                    "(`id`, `userName`, `pvpStatus`)" +
-                    " VALUES (0, ?, ?);"
+                    "(`id`, `userName`, `pvpStatus`,`particle`)" +
+                    " VALUES (0, ?, ?, ?);"
     ),
     /**
      * 根据帐号查询
@@ -43,10 +44,16 @@ public enum PvpSqlEnum {
             "SELECT COUNT(1) FROM `mg_pvp` WHERE `userName` = ?"
     ),
     /**
-     * 更新
+     * 更新pvpStatus
      */
-    UPDATE(
+    UPDATE_PVP_STATUS(
             "UPDATE `mg_pvp` SET `pvpStatus` = ? WHERE `userName` = ?"
+    ),
+    /**
+     * 更新particle
+     */
+    UPDATE_PARTICLE(
+            "UPDATE `mg_pvp` SET `particle` = ? WHERE `userName` = ?"
     );
     private String command;
 }

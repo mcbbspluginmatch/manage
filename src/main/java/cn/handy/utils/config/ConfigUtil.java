@@ -1,4 +1,4 @@
-package cn.handy.utils;
+package cn.handy.utils.config;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
@@ -67,6 +67,7 @@ public class ConfigUtil {
      * 保存各个独立模块开启状态
      */
     private static void saveConfigCache() {
+        val isUseMySql = ConfigUtil.config.getBoolean("isUseMySql");
         val isMessage = ConfigUtil.config.getBoolean("isMessage");
         val isUser = ConfigUtil.config.getBoolean("isUser");
         val isHat = ConfigUtil.config.getBoolean("isHat");
@@ -76,6 +77,7 @@ public class ConfigUtil {
         val isPvp = ConfigUtil.config.getBoolean("isPvp");
         val isPvpParticle = ConfigUtil.config.getBoolean("isPvpParticle");
 
+        BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
         BaseConfigCache.isUser = isUser;
         BaseConfigCache.isHat = isHat;

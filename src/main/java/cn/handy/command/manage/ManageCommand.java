@@ -1,7 +1,7 @@
 package cn.handy.command.manage;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.utils.ConfigUtil;
+import cn.handy.utils.config.ConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

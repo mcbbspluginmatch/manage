@@ -1,8 +1,7 @@
 package cn.handy.command.login;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.dao.user.IUserService;
-import cn.handy.dao.user.impl.UserServiceImpl;
+import cn.handy.constants.Beans;
 import lombok.val;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -29,7 +28,7 @@ public class LoginCommand extends Command {
     public boolean execute(CommandSender sender, String label, final String[] args) {
         val sendPlayer = (Player) sender;
         if (args != null && args.length == 1) {
-            IUserService userService = new UserServiceImpl();
+            val userService = Beans.getBeans().getUserService();
             val user = userService.login(sendPlayer.getName().toLowerCase(), args[0]);
             if (user.getId() != null) {
                 sender.sendMessage("登录成功");

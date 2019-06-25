@@ -2,9 +2,9 @@ package cn.handy.command.msg;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
+import cn.handy.constants.Beans;
 import cn.handy.constants.MsgEnum;
 import cn.handy.dao.message.IMessageService;
-import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.entity.Message;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
@@ -39,11 +39,11 @@ public class MsgCommand extends Command {
             if (args != null && args.length > 0) {
                 final Player sendPlayer = (Player) sender;
                 MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
-                final IMessageService messageService = new MessageServiceImpl();
+                final IMessageService messageService = Beans.getBeans().getMessageService();
                 final Message message = new Message();
                 switch (msgEnum) {
                     case SET:
-                        if (args.length != 3){
+                        if (args.length != 3) {
                             sender.sendMessage(BaseConstants.MSG_HELP);
                             return true;
                         }

@@ -1,4 +1,4 @@
-package cn.handy.constants;
+package cn.handy.constants.mysql;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum MessageSqlEnum {
+public enum MsgMySqlEnum {
     /**
      * 创建表
      */

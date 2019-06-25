@@ -1,7 +1,7 @@
 package cn.handy.listener.user;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.dao.user.impl.UserServiceImpl;
+import cn.handy.constants.Beans;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import lombok.val;
@@ -42,7 +42,7 @@ public class UserListener implements Listener {
     public void onPlayerJoinGame(PlayerJoinEvent event) {
         // 发送登录提醒
         Player player = event.getPlayer();
-        val userService = new UserServiceImpl();
+        val userService = Beans.getBeans().getUserService();
         // 判断该用户是否存在
         String userName = player.getName().toLowerCase();
         val rst = userService.findByUserName(userName);

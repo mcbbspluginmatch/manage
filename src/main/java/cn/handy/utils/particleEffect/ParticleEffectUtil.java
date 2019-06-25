@@ -1,4 +1,4 @@
-package cn.handy.utils;
+package cn.handy.utils.particleEffect;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
