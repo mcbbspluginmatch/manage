@@ -7,6 +7,7 @@ import cn.handy.entity.Pvp;
 import cn.handy.utils.sql.SqLiteManagerUtil;
 import lombok.val;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,9 +27,11 @@ public class PvpSqLiteServiceImpl implements IPvpService {
     public Boolean create() {
         try {
             String pvpCmd = PvpSqLiteEnum.CREATE_PVP.getCommand();
-            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
+            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(pvpCmd);
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,22 +49,25 @@ public class PvpSqLiteServiceImpl implements IPvpService {
     public Boolean set(Pvp pvp) {
         try {
             val rst = findCountByUserName(pvp.getUserName());
+            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
             if (rst) {
                 String addSql = PvpSqLiteEnum.UPDATE_PVP_STATUS.getCommand();
-                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(addSql);
+                PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setBoolean(1, pvp.getPvpStatus());
                 ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
                 return count > 0;
             } else {
                 String addSql = PvpSqLiteEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(addSql);
+                PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
                 ps.setBoolean(2, pvp.getPvpStatus());
                 ps.setBoolean(3, pvp.getParticle());
                 val count = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
                 return count > 0;
             }
         } catch (SQLException e) {
@@ -81,7 +87,8 @@ public class PvpSqLiteServiceImpl implements IPvpService {
         int count = 0;
         try {
             String pvpCmd = PvpSqLiteEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
+            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(pvpCmd);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -89,6 +96,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +114,8 @@ public class PvpSqLiteServiceImpl implements IPvpService {
         Pvp pvp = new Pvp();
         try {
             String selectStr = PvpSqLiteEnum.SELECT_BY_USERNAME.getCommand();
-            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -116,6 +125,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {

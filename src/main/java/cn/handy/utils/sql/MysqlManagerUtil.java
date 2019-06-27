@@ -32,9 +32,7 @@ public class MysqlManagerUtil {
     private int port;
 
     private int initSize = 5;
-    private int maxSize = 8;
     private LinkedList<Connection> connList = new LinkedList<Connection>();
-    private int currentSize = 0;
 
     //声明对象时自动注册驱动
     static {
@@ -57,7 +55,6 @@ public class MysqlManagerUtil {
         for (int i = 0; i < initSize; i++) {
             Connection connection = this.getConnection();
             connList.add(connection);
-            currentSize++;
         }
 
         // 创建消息表
@@ -121,15 +118,13 @@ public class MysqlManagerUtil {
             Connection connection = connList.getFirst();
             connList.removeFirst();
             return connection;
-        } else if (connList.size() == 0 && currentSize < maxSize) {
+        } else {
             //连接池被拿空，且连接数没有达到上限，创建新的连接
-            currentSize++;
             connList.addLast(this.getConnection());
             Connection connection = connList.getFirst();
             connList.removeFirst();
             return connection;
         }
-        throw new RuntimeException("连接数达到上限，请等待");
     }
 
     /**

@@ -87,15 +87,13 @@ public class SqLiteManagerUtil {
             Connection connection = connList.getFirst();
             connList.removeFirst();
             return connection;
-        } else if (connList.size() == 0 && currentSize < maxSize) {
+        } else {
             //连接池被拿空，且连接数没有达到上限，创建新的连接
-            currentSize++;
             connList.addLast(this.getConnection());
             Connection connection = connList.getFirst();
             connList.removeFirst();
             return connection;
         }
-        throw new RuntimeException("连接数达到上限，请等待");
     }
 
     /**

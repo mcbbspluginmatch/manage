@@ -7,6 +7,7 @@ import cn.handy.entity.Message;
 import cn.handy.utils.sql.MysqlManagerUtil;
 import lombok.val;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,9 +27,11 @@ public class MessageMySqlServiceImpl implements IMessageService {
     public Boolean create() {
         try {
             String msgCmd = MsgMySqlEnum.CREATE_MESSAGE.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(msgCmd);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(msgCmd);
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -47,23 +50,26 @@ public class MessageMySqlServiceImpl implements IMessageService {
         try {
             // 查询有无数据
             val msg = findByUserName(message.getUserName());
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
             if (msg.getId() == null) {
                 String addStr = MsgMySqlEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(addStr);
+                PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setString(1, message.getUserName());
                 ps.setString(2, message.getJoinMessage());
                 ps.setString(3, message.getQuitMessage());
                 val rst = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
                 return rst > 0;
             } else {
                 String updateStr = MsgMySqlEnum.UPDATE_DATA.getCommand();
-                PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(updateStr);
+                PreparedStatement ps = conn.prepareStatement(updateStr);
                 ps.setString(1, message.getJoinMessage());
                 ps.setString(2, message.getQuitMessage());
                 ps.setString(3, message.getUserName());
                 val rst = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
                 return rst > 0;
             }
         } catch (SQLException e) {
@@ -84,10 +90,12 @@ public class MessageMySqlServiceImpl implements IMessageService {
     public Boolean delete(String userName) {
         try {
             String deleteStr = MsgMySqlEnum.DELETE_DATA.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(deleteStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(deleteStr);
             ps.setString(1, userName);
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +116,8 @@ public class MessageMySqlServiceImpl implements IMessageService {
         Message message = new Message();
         try {
             String selectStr = MsgMySqlEnum.SELECT_DATA.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -119,6 +128,7 @@ public class MessageMySqlServiceImpl implements IMessageService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return message;
         } catch (SQLException e) {
             e.printStackTrace();

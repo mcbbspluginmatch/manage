@@ -7,6 +7,7 @@ import cn.handy.entity.User;
 import cn.handy.utils.sql.MysqlManagerUtil;
 import lombok.val;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -27,9 +28,11 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean create() {
         try {
             String userCmd = UserMySqlEnum.CREATE_USER.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(userCmd);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(userCmd);
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,7 +51,8 @@ public class UserMySqlServiceImpl implements IUserService {
         Long count = 0L;
         try {
             String selectStr = UserMySqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName.toLowerCase());
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -56,6 +60,7 @@ public class UserMySqlServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return count > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -77,7 +82,8 @@ public class UserMySqlServiceImpl implements IUserService {
         User user = new User();
         try {
             String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps =conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, passWord);
             val rst = ps.executeQuery();
@@ -93,6 +99,7 @@ public class UserMySqlServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,7 +119,8 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean register(User user) {
         try {
             String selectStr = UserMySqlEnum.ADD_DATA.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getRealName());
             ps.setString(3, user.getPassWord());
@@ -122,6 +130,7 @@ public class UserMySqlServiceImpl implements IUserService {
             ps.setDate(7, new Date(user.getRegDate().getTime()));
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -143,7 +152,8 @@ public class UserMySqlServiceImpl implements IUserService {
         User user = new User();
         try {
             String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, loginIp);
             val rst = ps.executeQuery();
@@ -159,6 +169,7 @@ public class UserMySqlServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -178,12 +189,14 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean update(User user) {
         try {
             String selectStr = UserMySqlEnum.UPDATE.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, user.getLoginIp());
             ps.setDate(2, new Date(user.getLoginDate().getTime()));
             ps.setLong(3, user.getId());
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();

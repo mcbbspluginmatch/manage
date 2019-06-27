@@ -7,6 +7,7 @@ import cn.handy.entity.Pvp;
 import cn.handy.utils.sql.MysqlManagerUtil;
 import lombok.val;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -26,9 +27,11 @@ public class PvpMySqlServiceImpl implements IPvpService {
     public Boolean create() {
         try {
             String pvpCmd = PvpMySqlEnum.CREATE_PVP.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(pvpCmd);
             val rst = ps.executeUpdate();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -46,22 +49,25 @@ public class PvpMySqlServiceImpl implements IPvpService {
     public Boolean set(Pvp pvp) {
         try {
             val rst = findCountByUserName(pvp.getUserName());
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
             if (rst) {
                 String addSql = PvpMySqlEnum.UPDATE_PVP_STATUS.getCommand();
-                PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(addSql);
+                PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setBoolean(1, pvp.getPvpStatus());
                 ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
                 return count > 0;
             } else {
                 String addSql = PvpMySqlEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(addSql);
+                PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
                 ps.setBoolean(2, pvp.getPvpStatus());
                 ps.setBoolean(3, pvp.getParticle());
                 val count = ps.executeUpdate();
                 ps.close();
+                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
                 return count > 0;
             }
         } catch (SQLException e) {
@@ -81,7 +87,8 @@ public class PvpMySqlServiceImpl implements IPvpService {
         int count = 0;
         try {
             String pvpCmd = PvpMySqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(pvpCmd);
             ps.setString(1,userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -89,6 +96,7 @@ public class PvpMySqlServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -106,7 +114,8 @@ public class PvpMySqlServiceImpl implements IPvpService {
         Pvp pvp = new Pvp();
         try {
             String selectStr = PvpMySqlEnum.SELECT_BY_USERNAME.getCommand();
-            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
+            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -116,6 +125,7 @@ public class PvpMySqlServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
+            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {
