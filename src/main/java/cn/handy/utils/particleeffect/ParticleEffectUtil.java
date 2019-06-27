@@ -1,7 +1,6 @@
 package cn.handy.utils.particleeffect;
 
 import cn.handy.Manage;
-import cn.handy.constants.BaseConfigCache;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -24,27 +23,25 @@ public class ParticleEffectUtil {
      * @param color
      */
     public static void particleEffect(final Player player, final Color color) {
-        if (BaseConfigCache.isPvpParticle) {
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    if (!player.isOnline()) {
-                        this.cancel();
-                    } else if (!player.isDead()) {
-                        double angle = 0;
-                        Particle.DustOptions dustOptions = new Particle.DustOptions(color, 1);
-                        Location location = player.getLocation();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!player.isOnline()) {
+                    this.cancel();
+                } else if (!player.isDead()) {
+                    double angle = 0;
+                    Particle.DustOptions dustOptions = new Particle.DustOptions(color, 1);
+                    Location location = player.getLocation();
 
-                        for (int i = 0; i < 25; i++) {
-                            double x = (radius * Math.sin(angle));
-                            double z = (radius * Math.cos(angle));
-                            angle += 0.251;
-                            player.getWorld().spawnParticle(Particle.REDSTONE, location.getX() + x, location.getY(), location.getZ() + z, 0, 0, 1, 0, dustOptions);
-                        }
+                    for (int i = 0; i < 25; i++) {
+                        double x = (radius * Math.sin(angle));
+                        double z = (radius * Math.cos(angle));
+                        angle += 0.251;
+                        player.getWorld().spawnParticle(Particle.REDSTONE, location.getX() + x, location.getY(), location.getZ() + z, 0, 0, 1, 0, dustOptions);
                     }
                 }
-            }.runTaskTimer(Manage.plugin, 0L, 2L);
-        }
+            }
+        }.runTaskTimer(Manage.plugin, 0L, 2L);
     }
 
 }
