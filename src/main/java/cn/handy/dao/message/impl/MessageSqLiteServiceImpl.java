@@ -1,5 +1,6 @@
 package cn.handy.dao.message.impl;
 
+import cn.handy.constants.Beans;
 import cn.handy.constants.sqlite.MsgSqLiteEnum;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.entity.Message;
@@ -25,7 +26,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
     public Boolean create() {
         try {
             String msgCmd = MsgSqLiteEnum.CREATE_MESSAGE.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(msgCmd);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(msgCmd);
             val rst = ps.executeUpdate();
             ps.close();
             return rst > 0;
@@ -48,7 +49,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
             val msg = findByUserName(message.getUserName());
             if (msg.getId() == null) {
                 String addStr = MsgSqLiteEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(addStr);
+                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(addStr);
                 ps.setString(1, message.getUserName());
                 ps.setString(2, message.getJoinMessage());
                 ps.setString(3, message.getQuitMessage());
@@ -57,7 +58,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
                 return rst > 0;
             } else {
                 String updateStr = MsgSqLiteEnum.UPDATE_DATA.getCommand();
-                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(updateStr);
+                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(updateStr);
                 ps.setString(1, message.getJoinMessage());
                 ps.setString(2, message.getQuitMessage());
                 ps.setString(3, message.getUserName());
@@ -83,7 +84,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
     public Boolean delete(String userName) {
         try {
             String deleteStr = MsgSqLiteEnum.DELETE_DATA.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(deleteStr);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(deleteStr);
             ps.setString(1, userName);
             val rst = ps.executeUpdate();
             ps.close();
@@ -107,7 +108,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
         Message message = new Message();
         try {
             String selectStr = MsgSqLiteEnum.SELECT_DATA.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {

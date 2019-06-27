@@ -1,5 +1,6 @@
 package cn.handy.dao.user.impl;
 
+import cn.handy.constants.Beans;
 import cn.handy.constants.mysql.UserMySqlEnum;
 import cn.handy.dao.user.IUserService;
 import cn.handy.entity.User;
@@ -26,7 +27,7 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean create() {
         try {
             String userCmd = UserMySqlEnum.CREATE_USER.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(userCmd);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(userCmd);
             val rst = ps.executeUpdate();
             ps.close();
             return rst > 0;
@@ -47,7 +48,7 @@ public class UserMySqlServiceImpl implements IUserService {
         Long count = 0L;
         try {
             String selectStr = UserMySqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, userName.toLowerCase());
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -76,7 +77,7 @@ public class UserMySqlServiceImpl implements IUserService {
         User user = new User();
         try {
             String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, passWord);
             val rst = ps.executeQuery();
@@ -111,7 +112,7 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean register(User user) {
         try {
             String selectStr = UserMySqlEnum.ADD_DATA.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getRealName());
             ps.setString(3, user.getPassWord());
@@ -142,7 +143,7 @@ public class UserMySqlServiceImpl implements IUserService {
         User user = new User();
         try {
             String selectStr = UserMySqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, loginIp);
             val rst = ps.executeQuery();
@@ -177,7 +178,7 @@ public class UserMySqlServiceImpl implements IUserService {
     public Boolean update(User user) {
         try {
             String selectStr = UserMySqlEnum.UPDATE.getCommand();
-            PreparedStatement ps = MysqlManagerUtil.mySqlConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getMysqlManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, user.getLoginIp());
             ps.setDate(2, new Date(user.getLoginDate().getTime()));
             ps.setLong(3, user.getId());

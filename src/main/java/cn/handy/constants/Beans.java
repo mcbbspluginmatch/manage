@@ -9,6 +9,8 @@ import cn.handy.dao.pvp.impl.PvpSqLiteServiceImpl;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserMySqlServiceImpl;
 import cn.handy.dao.user.impl.UserSqLiteServiceImpl;
+import cn.handy.utils.sql.MysqlManagerUtil;
+import cn.handy.utils.sql.SqLiteManagerUtil;
 
 /**
  * @author hanshuai
@@ -19,6 +21,8 @@ public class Beans {
     private static IUserService userService = null;
     private static IMessageService messageService = null;
     private static IPvpService pvpService = null;
+    private static MysqlManagerUtil mysqlManagerUtil = null;
+    private static SqLiteManagerUtil sqLiteManagerUtil = null;
 
     private Beans() {
     }
@@ -69,5 +73,19 @@ public class Beans {
             }
         }
         return messageService;
+    }
+
+    public MysqlManagerUtil getMysqlManagerUtil() {
+        if (mysqlManagerUtil == null) {
+            mysqlManagerUtil = new MysqlManagerUtil();
+        }
+        return mysqlManagerUtil;
+    }
+
+    public SqLiteManagerUtil getSqLiteManagerUtil() {
+        if (sqLiteManagerUtil == null) {
+            sqLiteManagerUtil = new SqLiteManagerUtil();
+        }
+        return sqLiteManagerUtil;
     }
 }

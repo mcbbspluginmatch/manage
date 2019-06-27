@@ -1,5 +1,6 @@
 package cn.handy.dao.pvp.impl;
 
+import cn.handy.constants.Beans;
 import cn.handy.constants.sqlite.PvpSqLiteEnum;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
@@ -25,7 +26,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
     public Boolean create() {
         try {
             String pvpCmd = PvpSqLiteEnum.CREATE_PVP.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(pvpCmd);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
             val rst = ps.executeUpdate();
             ps.close();
             return rst > 0;
@@ -47,7 +48,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
             val rst = findCountByUserName(pvp.getUserName());
             if (rst) {
                 String addSql = PvpSqLiteEnum.UPDATE_PVP_STATUS.getCommand();
-                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(addSql);
+                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(addSql);
                 ps.setBoolean(1, pvp.getPvpStatus());
                 ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
@@ -55,7 +56,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
                 return count > 0;
             } else {
                 String addSql = PvpSqLiteEnum.ADD_DATA.getCommand();
-                PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(addSql);
+                PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
                 ps.setBoolean(2, pvp.getPvpStatus());
                 ps.setBoolean(3, pvp.getParticle());
@@ -80,7 +81,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
         int count = 0;
         try {
             String pvpCmd = PvpSqLiteEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(pvpCmd);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(pvpCmd);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
@@ -105,7 +106,7 @@ public class PvpSqLiteServiceImpl implements IPvpService {
         Pvp pvp = new Pvp();
         try {
             String selectStr = PvpSqLiteEnum.SELECT_BY_USERNAME.getCommand();
-            PreparedStatement ps = SqLiteManagerUtil.sqLiteConnection.prepareStatement(selectStr);
+            PreparedStatement ps = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool().prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
