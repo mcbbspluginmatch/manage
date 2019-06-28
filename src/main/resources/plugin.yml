@@ -2,6 +2,7 @@ name: manage
 main: cn.handy.Manage
 version: 4.1.3
 author: handy
+api-version: 1.14.3
 permissions:
     handy.manage:
         default: op
