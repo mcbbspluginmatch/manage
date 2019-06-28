@@ -1,6 +1,6 @@
 package cn.handy.listener.msg;
 
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.config.ConfigUtil;
 import lombok.val;

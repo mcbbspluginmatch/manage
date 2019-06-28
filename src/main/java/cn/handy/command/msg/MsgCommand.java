@@ -2,11 +2,10 @@ package cn.handy.command.msg;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
-import cn.handy.constants.MsgEnum;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.entity.Message;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.Beans;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -38,11 +37,10 @@ public class MsgCommand extends Command {
         if (isPlayer) {
             if (args != null && args.length > 0) {
                 final Player sendPlayer = (Player) sender;
-                MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
                 final IMessageService messageService = Beans.getBeans().getMessageService();
                 final Message message = new Message();
-                switch (msgEnum) {
-                    case SET:
+                switch (args[0]) {
+                    case "set":
                         if (args.length != 3) {
                             sender.sendMessage(BaseConstants.MSG_HELP);
                             return true;
@@ -62,7 +60,7 @@ public class MsgCommand extends Command {
                             }
                         }.runTaskAsynchronously(Manage.plugin);
                         break;
-                    case DEL:
+                    case "del":
                         new BukkitRunnable() {
                             @Override
                             public void run() {
@@ -75,7 +73,7 @@ public class MsgCommand extends Command {
                             }
                         }.runTaskAsynchronously(Manage.plugin);
                         break;
-                    case SEE:
+                    case "see":
                         new BukkitRunnable() {
                             @Override
                             public void run() {

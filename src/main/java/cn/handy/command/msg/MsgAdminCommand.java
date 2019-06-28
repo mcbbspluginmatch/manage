@@ -1,9 +1,8 @@
 package cn.handy.command.msg;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
-import cn.handy.constants.MsgEnum;
 import cn.handy.entity.Message;
+import cn.handy.utils.Beans;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -30,12 +29,11 @@ public class MsgAdminCommand extends Command {
             return true;
         }
         if (args != null && args.length > 0) {
-            MsgEnum msgEnum = MsgEnum.getMsgEnum(args[0]);
             val messageService = Beans.getBeans().getMessageService();
             Message message = new Message();
             Boolean rst;
-            switch (msgEnum) {
-                case SET:
+            switch (args[0]) {
+                case "set":
                     message.setUserName(args[1]);
                     message.setJoinMessage(args[2]);
                     message.setQuitMessage(args[3]);
@@ -46,7 +44,7 @@ public class MsgAdminCommand extends Command {
                         sender.sendMessage("设置失败");
                     }
                     break;
-                case DEL:
+                case "del":
                     rst = messageService.delete(args[1]);
                     if (rst) {
                         sender.sendMessage("删除成功");
@@ -54,7 +52,7 @@ public class MsgAdminCommand extends Command {
                         sender.sendMessage("删除失败");
                     }
                     break;
-                case SEE:
+                case "see":
                     Message user = messageService.findByUserName(args[1]);
                     if (user.getId() != null) {
                         sender.sendMessage(ChatColor.GOLD + user.getUserName() + "  |  "

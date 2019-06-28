@@ -1,4 +1,4 @@
-package cn.handy.constants.mysql;
+package cn.handy.constants.sql;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,11 +10,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum PvpMySqlEnum {
+public enum PvpSqlEnum {
     /**
      * 如果没有pvp表,创建之
      */
-    CREATE_PVP(
+    CREATE_MYSQL_PVP(
             "CREATE TABLE IF NOT EXISTS `mg_pvp`  (" +
                     "`id` int(11) NOT NULL AUTO_INCREMENT," +
                     "`userName` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL," +
@@ -22,6 +22,18 @@ public enum PvpMySqlEnum {
                     "`particle` bit(1) NOT NULL DEFAULT b'0'," +
                     "PRIMARY KEY (`id`) USING BTREE" +
                     ") ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;"
+    ),
+    /**
+     * 如果没有pvp表,创建之
+     */
+    CREATE_SQ_LITE_PVP(
+            "CREATE TABLE IF NOT EXISTS `mg_pvp` (" +
+                    "`id` int(11) NOT NULL," +
+                    "`userName` varchar(16) NOT NULL," +
+                    "`pvpStatus` bit(1) NOT NULL," +
+                    "`particle` bit(1) NOT NULL," +
+                    "PRIMARY KEY (`id`)" +
+                    ");"
     ),
     /**
      * 新增数据

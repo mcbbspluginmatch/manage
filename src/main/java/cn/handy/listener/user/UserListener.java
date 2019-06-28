@@ -1,7 +1,7 @@
 package cn.handy.listener.user;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import lombok.val;

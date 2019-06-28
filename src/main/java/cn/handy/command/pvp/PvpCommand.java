@@ -2,7 +2,7 @@ package cn.handy.command.pvp;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;

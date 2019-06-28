@@ -1,9 +1,10 @@
 package cn.handy.dao.message.impl;
 
-import cn.handy.constants.Beans;
-import cn.handy.constants.sqlite.MsgSqLiteEnum;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.sql.MsgSqlEnum;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.entity.Message;
+import cn.handy.utils.Beans;
 import lombok.val;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  * @Description: {}
  * @date 2019/6/13 13:34
  */
-public class MessageSqLiteServiceImpl implements IMessageService {
+public class MessageServiceImpl implements IMessageService {
 
     /**
      * 如果不存在表则创建表
@@ -25,12 +26,15 @@ public class MessageSqLiteServiceImpl implements IMessageService {
     @Override
     public Boolean create() {
         try {
-            String msgCmd = MsgSqLiteEnum.CREATE_MESSAGE.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String msgCmd = MsgSqlEnum.CREATE_SQ_LITE_MESSAGE.getCommand();
+            if (BaseConfigCache.isUseMySql) {
+                msgCmd = MsgSqlEnum.CREATE_MYSQL_MESSAGE.getCommand();
+            }
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(msgCmd);
             val rst = ps.executeUpdate();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,26 +53,26 @@ public class MessageSqLiteServiceImpl implements IMessageService {
         try {
             // 查询有无数据
             val msg = findByUserName(message.getUserName());
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             if (msg.getId() == null) {
-                String addStr = MsgSqLiteEnum.ADD_DATA.getCommand();
+                String addStr = MsgSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setString(1, message.getUserName());
                 ps.setString(2, message.getJoinMessage());
                 ps.setString(3, message.getQuitMessage());
                 val rst = ps.executeUpdate();
                 ps.close();
-                Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+                Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
                 return rst > 0;
             } else {
-                String updateStr = MsgSqLiteEnum.UPDATE_DATA.getCommand();
+                String updateStr = MsgSqlEnum.UPDATE_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(updateStr);
                 ps.setString(1, message.getJoinMessage());
                 ps.setString(2, message.getQuitMessage());
                 ps.setString(3, message.getUserName());
                 val rst = ps.executeUpdate();
                 ps.close();
-                Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+                Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
                 return rst > 0;
             }
         } catch (SQLException e) {
@@ -88,13 +92,13 @@ public class MessageSqLiteServiceImpl implements IMessageService {
     @Override
     public Boolean delete(String userName) {
         try {
-            String deleteStr = MsgSqLiteEnum.DELETE_DATA.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String deleteStr = MsgSqlEnum.DELETE_DATA.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(deleteStr);
             ps.setString(1, userName);
             val rst = ps.executeUpdate();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
             ps.close();
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,8 +118,8 @@ public class MessageSqLiteServiceImpl implements IMessageService {
     public Message findByUserName(String userName) {
         Message message = new Message();
         try {
-            String selectStr = MsgSqLiteEnum.SELECT_DATA.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = MsgSqlEnum.SELECT_DATA.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
@@ -127,7 +131,7 @@ public class MessageSqLiteServiceImpl implements IMessageService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return message;
         } catch (SQLException e) {
             e.printStackTrace();

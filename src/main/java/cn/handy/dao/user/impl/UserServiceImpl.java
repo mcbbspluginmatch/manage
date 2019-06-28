@@ -1,10 +1,10 @@
 package cn.handy.dao.user.impl;
 
-import cn.handy.constants.Beans;
-import cn.handy.constants.sqlite.UserSqLiteEnum;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.sql.UserSqlEnum;
 import cn.handy.dao.user.IUserService;
 import cn.handy.entity.User;
-import cn.handy.utils.sql.SqLiteManagerUtil;
+import cn.handy.utils.Beans;
 import lombok.val;
 
 import java.sql.Connection;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
  * @Description: {}
  * @date 2019/6/13 14:09
  */
-public class UserSqLiteServiceImpl implements IUserService {
+public class UserServiceImpl implements IUserService {
 
     /**
      * 如果不存在表则创建表
@@ -27,12 +27,15 @@ public class UserSqLiteServiceImpl implements IUserService {
     @Override
     public Boolean create() {
         try {
-            String userCmd = UserSqLiteEnum.CREATE_USER.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String userCmd = UserSqlEnum.CREATE_SQ_LITE_USER.getCommand();
+            if (BaseConfigCache.isUseMySql) {
+                userCmd = UserSqlEnum.CREATE_MYSQL_USER.getCommand();
+            }
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(userCmd);
             val rst = ps.executeUpdate();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,8 +53,8 @@ public class UserSqLiteServiceImpl implements IUserService {
     public Boolean findByUserName(String userName) {
         Long count = 0L;
         try {
-            String selectStr = UserSqLiteEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = UserSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName.toLowerCase());
             val rst = ps.executeQuery();
@@ -60,7 +63,7 @@ public class UserSqLiteServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return count > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,8 +84,8 @@ public class UserSqLiteServiceImpl implements IUserService {
     public User login(String userName, String passWord) {
         User user = new User();
         try {
-            String selectStr = UserSqLiteEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, passWord);
@@ -99,7 +102,7 @@ public class UserSqLiteServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,8 +121,8 @@ public class UserSqLiteServiceImpl implements IUserService {
     @Override
     public Boolean register(User user) {
         try {
-            String selectStr = UserSqLiteEnum.ADD_DATA.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = UserSqlEnum.ADD_DATA.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getRealName());
@@ -130,7 +133,7 @@ public class UserSqLiteServiceImpl implements IUserService {
             ps.setDate(7, new Date(user.getRegDate().getTime()));
             val rst = ps.executeUpdate();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -151,8 +154,8 @@ public class UserSqLiteServiceImpl implements IUserService {
     public User findByUserNameAndLoginIp(String userName, String loginIp) {
         User user = new User();
         try {
-            String selectStr = UserSqLiteEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             ps.setString(2, loginIp);
@@ -169,7 +172,7 @@ public class UserSqLiteServiceImpl implements IUserService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -188,15 +191,15 @@ public class UserSqLiteServiceImpl implements IUserService {
     @Override
     public Boolean update(User user) {
         try {
-            String selectStr = UserSqLiteEnum.UPDATE.getCommand();
-            Connection conn = Beans.getBeans().getSqLiteManagerUtil().getConnFromPool();
+            String selectStr = UserSqlEnum.UPDATE.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, user.getLoginIp());
             ps.setDate(2, new Date(user.getLoginDate().getTime()));
             ps.setLong(3, user.getId());
             val rst = ps.executeUpdate();
             ps.close();
-            Beans.getBeans().getSqLiteManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();

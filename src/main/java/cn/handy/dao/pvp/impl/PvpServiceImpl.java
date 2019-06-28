@@ -1,10 +1,11 @@
 package cn.handy.dao.pvp.impl;
 
-import cn.handy.constants.Beans;
-import cn.handy.constants.mysql.PvpMySqlEnum;
+import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.sql.MsgSqlEnum;
+import cn.handy.utils.Beans;
+import cn.handy.constants.sql.PvpSqlEnum;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
-import cn.handy.utils.sql.MysqlManagerUtil;
 import lombok.val;
 
 import java.sql.Connection;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
  * @Description: {}
  * @date 2019/6/24 10:48
  */
-public class PvpMySqlServiceImpl implements IPvpService {
+public class PvpServiceImpl implements IPvpService {
 
     /**
      * 创建表
@@ -26,12 +27,15 @@ public class PvpMySqlServiceImpl implements IPvpService {
     @Override
     public Boolean create() {
         try {
-            String pvpCmd = PvpMySqlEnum.CREATE_PVP.getCommand();
-            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            String pvpCmd = PvpSqlEnum.CREATE_SQ_LITE_PVP.getCommand();
+            if (BaseConfigCache.isUseMySql) {
+                pvpCmd = PvpSqlEnum.CREATE_MYSQL_PVP.getCommand();
+            }
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(pvpCmd);
             val rst = ps.executeUpdate();
             ps.close();
-            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,25 +53,25 @@ public class PvpMySqlServiceImpl implements IPvpService {
     public Boolean set(Pvp pvp) {
         try {
             val rst = findCountByUserName(pvp.getUserName());
-            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             if (rst) {
-                String addSql = PvpMySqlEnum.UPDATE_PVP_STATUS.getCommand();
+                String addSql = PvpSqlEnum.UPDATE_PVP_STATUS.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setBoolean(1, pvp.getPvpStatus());
                 ps.setString(2, pvp.getUserName());
                 val count = ps.executeUpdate();
                 ps.close();
-                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
+                Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
                 return count > 0;
             } else {
-                String addSql = PvpMySqlEnum.ADD_DATA.getCommand();
+                String addSql = PvpSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addSql);
                 ps.setString(1, pvp.getUserName());
                 ps.setBoolean(2, pvp.getPvpStatus());
                 ps.setBoolean(3, pvp.getParticle());
                 val count = ps.executeUpdate();
                 ps.close();
-                Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
+                Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
                 return count > 0;
             }
         } catch (SQLException e) {
@@ -86,8 +90,8 @@ public class PvpMySqlServiceImpl implements IPvpService {
     public Boolean findCountByUserName(String userName) {
         int count = 0;
         try {
-            String pvpCmd = PvpMySqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
-            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            String pvpCmd = PvpSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(pvpCmd);
             ps.setString(1,userName);
             val rst = ps.executeQuery();
@@ -96,7 +100,7 @@ public class PvpMySqlServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -113,8 +117,8 @@ public class PvpMySqlServiceImpl implements IPvpService {
     public Pvp findByUserName(String userName) {
         Pvp pvp = new Pvp();
         try {
-            String selectStr = PvpMySqlEnum.SELECT_BY_USERNAME.getCommand();
-            Connection conn = Beans.getBeans().getMysqlManagerUtil().getConnFromPool();
+            String selectStr = PvpSqlEnum.SELECT_BY_USERNAME.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(selectStr);
             ps.setString(1, userName);
             val rst = ps.executeQuery();
@@ -125,7 +129,7 @@ public class PvpMySqlServiceImpl implements IPvpService {
             }
             rst.close();
             ps.close();
-            Beans.getBeans().getMysqlManagerUtil().releaseConnection(conn);
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (NumberFormatException e) {

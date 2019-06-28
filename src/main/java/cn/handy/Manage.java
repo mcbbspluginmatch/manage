@@ -1,8 +1,7 @@
 package cn.handy;
 
 import cn.handy.command.EnableCommand;
-import cn.handy.constants.BaseConfigCache;
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
 import org.bukkit.plugin.Plugin;
@@ -29,11 +28,7 @@ public class Manage extends JavaPlugin {
         // 注册命令
         EnableCommand.regCommand();
         // 创建表和获取数据库链接
-        if (BaseConfigCache.isUseMySql) {
-            Beans.getBeans().getMysqlManagerUtil().enableMySQL();
-        } else {
-            Beans.getBeans().getSqLiteManagerUtil().enableSqLite();
-        }
+        Beans.getBeans().getSqlManagerUtil().enableSql();
         this.getLogger().info("manage插件启动成功");
     }
 
@@ -43,11 +38,7 @@ public class Manage extends JavaPlugin {
     @Override
     public void onDisable() {
         // 断开数据库连接
-        if (BaseConfigCache.isUseMySql) {
-            Beans.getBeans().getMysqlManagerUtil().shutdown();
-        } else {
-            Beans.getBeans().getSqLiteManagerUtil().shutdown();
-        }
+        Beans.getBeans().getSqlManagerUtil().shutdown();
         this.getLogger().info("manage插件关闭");
     }
 }

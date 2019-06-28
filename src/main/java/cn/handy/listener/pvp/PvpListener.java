@@ -2,7 +2,7 @@ package cn.handy.listener.pvp;
 
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.particleeffect.ParticleEffectUtil;

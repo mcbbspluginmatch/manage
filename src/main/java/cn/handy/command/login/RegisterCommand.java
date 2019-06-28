@@ -1,7 +1,7 @@
 package cn.handy.command.login;
 
 import cn.handy.constants.BaseConstants;
-import cn.handy.constants.Beans;
+import cn.handy.utils.Beans;
 import cn.handy.entity.User;
 import lombok.val;
 import org.bukkit.command.Command;
