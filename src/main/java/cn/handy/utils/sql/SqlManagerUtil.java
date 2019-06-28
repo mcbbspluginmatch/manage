@@ -30,7 +30,7 @@ public class SqlManagerUtil {
     private static String userName;
     private static String userPassword;
     private static int port;
-    private static String mysqlDriver = "com.sql.jdbc.Driver";
+    private static String mysqlDriver = "com.mysql.jdbc.Driver";
     private static String sqLiteDriver = "org.sqlite.JDBC";
     private int initSize = ConfigUtil.LangConfig.getInt("initSize");
     private int maxActive = ConfigUtil.LangConfig.getInt("maxActive");
@@ -41,11 +41,11 @@ public class SqlManagerUtil {
         try {
             if (BaseConfigCache.isUseMySql) {
                 Class.forName(mysqlDriver);
-                ip = ConfigUtil.config.getString("sql.ip");
-                databaseName = ConfigUtil.config.getString("sql.databasename");
-                userName = ConfigUtil.config.getString("sql.username");
-                userPassword = ConfigUtil.config.getString("sql.password");
-                port = ConfigUtil.config.getInt("sql.port");
+                ip = ConfigUtil.config.getString("mysql.ip");
+                databaseName = ConfigUtil.config.getString("mysql.databasename");
+                userName = ConfigUtil.config.getString("mysql.username");
+                userPassword = ConfigUtil.config.getString("mysql.password");
+                port = ConfigUtil.config.getInt("mysql.port");
             } else {
                 Class.forName(sqLiteDriver);
             }
@@ -105,7 +105,7 @@ public class SqlManagerUtil {
         Connection conn = null;
         try {
             if (BaseConfigCache.isUseMySql) {
-                conn = DriverManager.getConnection("jdbc:sql://" + ip + ":" + port + "/" + databaseName + "?useSSL=false", userName, userPassword);
+                conn = DriverManager.getConnection("jdbc:mysql://" + ip + ":" + port + "/" + databaseName + "?useSSL=false", userName, userPassword);
             } else {
                 conn = DriverManager.getConnection("jdbc:sqlite:" + Manage.plugin.getDataFolder().getAbsolutePath() + "/manage.db");
             }
