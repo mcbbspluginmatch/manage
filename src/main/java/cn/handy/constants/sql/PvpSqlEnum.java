@@ -31,8 +31,7 @@ public enum PvpSqlEnum {
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`pvpStatus` bit(1) NOT NULL," +
-                    "`particle` bit(1) NOT NULL," +
-                    "PRIMARY KEY (`id`)" +
+                    "`particle` bit(1) NOT NULL" +
                     ");"
     ),
     /**
@@ -41,7 +40,7 @@ public enum PvpSqlEnum {
     ADD_DATA(
             "INSERT INTO `mg_pvp`" +
                     "(`id`, `userName`, `pvpStatus`,`particle`)" +
-                    " VALUES (0, ?, ?, ?);"
+                    " VALUES (null, ?, ?, ?);"
     ),
     /**
      * 根据帐号查询

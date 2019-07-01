@@ -32,14 +32,13 @@ public enum MsgSqlEnum {
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`joinMessage` varchar(255)," +
-                    "`quitMessage` varchar(255)," +
-                    "PRIMARY KEY (`id`)" +
+                    "`quitMessage` varchar(255)" +
                     ");"
     ),
     ADD_DATA(
             "INSERT INTO `mg_message`" +
                     "(`id`, `userName`, `joinMessage`, `quitMessage`)" +
-                    " VALUES (0, ?, ?, ?);"
+                    " VALUES (null, ?, ?, ?);"
     ),
     UPDATE_DATA(
             "UPDATE `mg_message` SET joinMessage = ?,quitMessage = ? WHERE userName = ?"

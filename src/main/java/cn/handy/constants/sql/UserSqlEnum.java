@@ -36,8 +36,7 @@ public enum UserSqlEnum {
                     "`loginIp` varchar(40)," +
                     "`loginDate` datetime," +
                     "`regIp` varchar(40)," +
-                    "`regDate` datetime," +
-                    "PRIMARY KEY (`id`)" +
+                    "`regDate` datetime" +
                     ");"
     ),
     /**
@@ -46,7 +45,7 @@ public enum UserSqlEnum {
     ADD_DATA(
             "INSERT INTO `mg_user`" +
                     "(`id`, `userName`, `realName`, `passWord`, `loginIp`, `loginDate`, `regIp`, `regDate`)" +
-                    " VALUES (0, ?, ?, ?, ?, ?, ?, ?);"
+                    " VALUES (null, ?, ?, ?, ?, ?, ?, ?);"
     ),
     /**
      * 根据帐号密码查询来进行登录
