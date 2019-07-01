@@ -28,7 +28,7 @@ public enum PvpSqlEnum {
      */
     CREATE_SQ_LITE_PVP(
             "CREATE TABLE IF NOT EXISTS `mg_pvp` (" +
-                    "`id` int(11) NOT NULL," +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`pvpStatus` bit(1) NOT NULL," +
                     "`particle` bit(1) NOT NULL," +

@@ -29,7 +29,7 @@ public enum MsgSqlEnum {
      */
     CREATE_SQ_LITE_MESSAGE(
             "CREATE TABLE IF NOT EXISTS `mg_message` (" +
-                    "`id` int(11) NOT NULL," +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`joinMessage` varchar(255)," +
                     "`quitMessage` varchar(255)," +

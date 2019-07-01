@@ -29,7 +29,7 @@ public enum UserSqlEnum {
     ),
     CREATE_SQ_LITE_USER(
             "CREATE TABLE IF NOT EXISTS `mg_user` (" +
-                    "`id` int(11) NOT NULL," +
+                    "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`realName` varchar(16) NOT NULL," +
                     "`passWord` varchar(32) NOT NULL," +
