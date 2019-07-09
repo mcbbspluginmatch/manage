@@ -51,7 +51,7 @@ public enum HomeSqlEnum {
                     " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);"
     ),
     UPDATE_DATA(
-            "UPDATE `mg_home` SET x = ?, y = ?, z = ?, yaw = ?, pitch = ?, world = ? WHERE userName = ?"
+            "UPDATE `mg_home` SET x = ?, y = ?, z = ?, yaw = ?, pitch = ?, world = ? WHERE userName = ? AND homeName= ?"
     ),
     DELETE_DATA(
             "DELETE FROM `mg_home` WHERE userName= ? AND homeName= ?"

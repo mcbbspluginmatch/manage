@@ -80,6 +80,7 @@ public class HomeServiceImpl implements IHomeService {
                 ps.setFloat(5, home.getPitch());
                 ps.setString(6, home.getWorld());
                 ps.setString(7, home.getUserName());
+                ps.setString(8, home.getHomeName());
                 val rst = ps.executeUpdate();
                 ps.close();
                 Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
