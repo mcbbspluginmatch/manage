@@ -95,7 +95,8 @@ public abstract class BaseConstants {
                     "§e/secret give [玩家] [功法序号]     " + "§f给玩家对应序号的功法\n" +
                     "§e/secret giveHelp [玩家]     " + "§f给玩家武林风云帮助书\n" +
                     "§e/secret giveKnowBook [玩家]   " + "§f给玩家知识之书(合成配方书)\n" +
-                    "§e/secret giveNoCharBook [玩家]   " + "§f给玩家随机事件的无字天书";
+                    "§e/secret giveNoCharBook [玩家]   " + "§f给玩家随机事件的无字天书\n" +
+                    "§e/secret see   " + "§f查询手上无字天书的解锁事件";
 
     public final static String HOME_MSG =
             "§e§m一一一一一一一§f[§e临江仙§f]§e§m一一一一一一一\n" +

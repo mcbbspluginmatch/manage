@@ -12,7 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -74,25 +74,19 @@ public class SecretSetListener implements Listener {
     }
 
     /**
-     * 玩家丢出物品事件.
+     * 当漏斗/漏斗矿车收起掉落的物品时触发本事件.
      *
      * @param event
      */
     @EventHandler
-    public void onPlayerDropItemEvent(PlayerDropItemEvent event) {
-        // 扔出去的物品
-        ItemStack itemStack = event.getItemDrop().getItemStack();
-        // 判断是否有无字天书
+    public void onInventoryPickupItemEvent(InventoryPickupItemEvent event) {
+        ItemStack itemStack = event.getItem().getItemStack();
+        // 判断是否为无字天书
         if (SecretUtil.equalsInSet(itemStack, SecretUtil.getItemStack(0), SecretEqualsInfoEnum.ABOUT_NAME)) {
-            Player player = event.getPlayer();
             // 判断事件是否相等
-            if (SecretListenerEnum.DROP_ITEM.getId() == SecretUtil.getEvenId(itemStack)) {
+            if (SecretListenerEnum.PICKUP_ITEM.getId() == SecretUtil.getEvenId(itemStack)) {
                 // 替换为随机秘籍
-                event.getItemDrop().setItemStack(SecretUtil.ranItemStack());
-                player.sendMessage(ChatColor.AQUA + "天生我材必有用,千金散尽还复来,你领悟到无字天书的真意");
-            } else {
-                event.getItemDrop().remove();
-                player.sendMessage(ChatColor.AQUA + "天书有灵,自行消散于世间~");
+                event.getItem().setItemStack(SecretUtil.ranItemStack());
             }
         }
     }

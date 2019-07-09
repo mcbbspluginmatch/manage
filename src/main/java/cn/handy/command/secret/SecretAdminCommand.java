@@ -1,12 +1,16 @@
 package cn.handy.command.secret;
 
 import cn.handy.constants.BaseConstants;
+import cn.handy.constants.secret.SecretListenerEnum;
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
 /**
@@ -46,6 +50,22 @@ public class SecretAdminCommand extends Command {
                 val player = Bukkit.getServer().getPlayer(args[1]);
                 PlayerInventory inventory = player.getInventory();
                 inventory.addItem(SecretUtil.getItemStack(SecretUtil.getRandom()));
+            } else if (args[0].equalsIgnoreCase("see")) {
+                val rst = BaseUtil.isPlayer(sender);
+                if (rst) {
+                    Player sendPlayer = (Player) sender;
+                    PlayerInventory inv = sendPlayer.getInventory();
+                    // 获取主手的物品
+                    ItemStack itemStack = inv.getItemInMainHand();
+                    val secretListenerEnum = SecretListenerEnum.getEnum(SecretUtil.getEvenId(itemStack));
+                    if (secretListenerEnum != null) {
+                        sender.sendMessage("该秘籍解锁事件为:" + secretListenerEnum.getName());
+                    } else {
+                        sender.sendMessage("未查询到对应的解锁事件");
+                    }
+                } else {
+                    sender.sendMessage(ChatColor.RED + "控制台不能使用该子命令");
+                }
             } else {
                 sender.sendMessage(BaseConstants.SECRET_MSG);
             }
