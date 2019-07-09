@@ -1,6 +1,6 @@
 name: manage
 main: cn.handy.Manage
-version: 4.1.4
+version: 5.0.0
 author: handy
 api-version: 1.13
 permissions:
@@ -12,9 +12,15 @@ permissions:
         default: op
     handy.msgadmin:
         default: op
+    handy.secretadmin:
+        default: op
     handy.msg:
         default: true
     handy.hat:
         default: true
     handy.pvp:
+        default: true
+    handy.secret:
+        default: true
+    handy.home:
         default: true

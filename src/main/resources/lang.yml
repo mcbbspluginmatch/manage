@@ -6,3 +6,10 @@ quitMessage: ${player} 离开了服务器
 tpaDelayTime: 3
 # tpa传送等待时间(单位秒)(isTp启用时候生效)
 tpaWaitTime: 30
+
+# home数量
+homeCount: 3
+# home传送延迟时间(单位秒)(isHome启用时候生效)
+homeDelayTime: 3
+# home传送等待时间(单位秒)(isHome启用时候生效)
+homeWaitTime: 30

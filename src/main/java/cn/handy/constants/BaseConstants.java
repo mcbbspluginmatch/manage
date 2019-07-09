@@ -1,11 +1,9 @@
 package cn.handy.constants;
 
 import cn.handy.entity.User;
+import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -21,6 +19,11 @@ public abstract class BaseConstants {
     public static Map<String, Long> tpaWaitTime = new HashMap();
 
     /**
+     * home指令传送cdMap
+     */
+    public static Map<String, Long> homeWaitTime = new HashMap();
+
+    /**
      * tpa传送map
      */
     public static Map<String, String> currentRequest = new HashMap();
@@ -34,6 +37,26 @@ public abstract class BaseConstants {
      * 用户PVP缓存信息
      */
     public static Map<String, Boolean> PvpMap = new HashMap();
+
+    /**
+     * 自定义的物品缓存信息
+     */
+    public static List<ItemStack> itemStackList = new ArrayList<>();
+
+    /**
+     * 自定义的物品缓存概率信息
+     */
+    public static List<Double> probabilityList = new ArrayList<>();
+
+    /**
+     * 死亡重生保存的武林秘籍缓存信息
+     */
+    public static Map<String, List<ItemStack>> dropMap = new HashMap<>();
+
+    /**
+     * help文本缓存信息
+     */
+    public static List<String> helpList = new ArrayList<>();
 
     /**
      * msgAdmin帮助语句
@@ -59,23 +82,32 @@ public abstract class BaseConstants {
     public final static String MANAGE_MSG =
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
-                    "§e/manage reload lang     " + "§f重载本插件的lang文本";
-
+                    "§e/manage reload lang     " + "§f重载本插件的lang文本" +
+                    "§e/manage reload secret   " + "§f重载本插件的secret文本";
 
     public final static String PVP_HELP =
             "§e§m一一一一一一一§f[§ePVP管理§f]§e§m一一一一一一一\n" +
                     "§e/pvp on     " + "§f设置自己PVP为开启状态\n" +
                     "§e/pvp off     " + "§f设置自己PVP为关闭状态";
 
+    public final static String SECRET_MSG =
+            "§e§m一一一一一一一§f[§e武林风云§f]§e§m一一一一一一一\n" +
+                    "§e/secret give [玩家] [功法序号]     " + "§f给玩家对应序号的功法\n" +
+                    "§e/secret giveHelp [玩家]     " + "§f给玩家武林风云帮助书\n" +
+                    "§e/secret giveKnowBook [玩家]   " + "§f给玩家知识之书(合成配方书)\n" +
+                    "§e/secret giveNoCharBook [玩家]   " + "§f给玩家随机事件的无字天书";
+
+    public final static String HOME_MSG =
+            "§e§m一一一一一一一§f[§e临江仙§f]§e§m一一一一一一一\n" +
+                    "§e/home [家名]     " + "§f回到对应的家中\n" +
+                    "§e/sethome [家名]     " + "§f设置家";
     /**
      * 命令白名单正则
      */
     public final static Pattern[] COMMAND_WHITE_LISTS = new Pattern[]{Pattern.compile("/l(ogin)?(\\z| .*)"), Pattern.compile("/reg?(\\z| .*)")};
 
-
     /**
      * 数字正则
      */
-    public final static Pattern NUMERIC = Pattern.compile("[0-9]*");
-
+    public final static Pattern NUMERIC = Pattern.compile("^-?\\d+(\\.\\d+)?$");
 }

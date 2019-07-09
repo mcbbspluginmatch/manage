@@ -67,8 +67,6 @@ public class UserServiceImpl implements IUserService {
             return count > 0;
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return count > 0;
     }
@@ -106,8 +104,6 @@ public class UserServiceImpl implements IUserService {
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return user;
     }
@@ -136,8 +132,6 @@ public class UserServiceImpl implements IUserService {
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return false;
@@ -176,8 +170,6 @@ public class UserServiceImpl implements IUserService {
             return user;
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return user;
     }
@@ -202,8 +194,6 @@ public class UserServiceImpl implements IUserService {
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return false;

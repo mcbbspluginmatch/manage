@@ -1,9 +1,11 @@
 package cn.handy.listener.user;
 
+import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import cn.handy.utils.Beans;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.Beans;
+import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,6 +58,10 @@ public class UserListener implements Listener {
                 player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
             }
         } else {
+            if (BaseConfigCache.isSecret) {
+                // 第一次进入游戏赠送一本武林风云说明
+                player.getInventory().addItem(SecretUtil.getSecretHelp());
+            }
             player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
         }
     }

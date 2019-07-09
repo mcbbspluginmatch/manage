@@ -34,7 +34,7 @@ public class TpacceptCommand extends Command {
                 final Player receivePlayer = Bukkit.getServer().getPlayer(receiveName);
                 if (receivePlayer != null) {
                     // 传送延迟
-                    val tpaDelayTime = ConfigUtil.LangConfig.getLong("tpaDelayTime");
+                    val tpaDelayTime = ConfigUtil.langConfig.getLong("tpaDelayTime");
                     sender.sendMessage("已接受" + receiveName + "的传送请求.");
                     receivePlayer.sendMessage(ChatColor.GRAY + "" + tpaDelayTime + "秒后开始传送...");
                     new BukkitRunnable() {

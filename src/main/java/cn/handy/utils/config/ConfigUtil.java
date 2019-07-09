@@ -2,11 +2,16 @@ package cn.handy.utils.config;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import lombok.val;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.List;
 
 /**
  * @author hanshuai
@@ -14,7 +19,7 @@ import java.io.File;
  * @date 2019/6/21 9:54
  */
 public class ConfigUtil {
-    public static FileConfiguration config, HelpConfig, LangConfig, pvpConfig;
+    public static FileConfiguration config, helpConfig, langConfig, secretConfig;
 
     /**
      * 初始化加载文件
@@ -32,10 +37,18 @@ public class ConfigUtil {
         config = Manage.plugin.getConfig();
         // 保存cache
         saveConfigCache();
-        // 加载help
-        getHelpConfig();
+
         // 加载lang
         getLangConfig();
+
+        // 加载help
+        if (BaseConfigCache.isHelp) {
+            getHelpConfig();
+        }
+        // 加载Secret
+        if (BaseConfigCache.isSecret) {
+            getSecretConfig();
+        }
     }
 
     /**
@@ -48,7 +61,18 @@ public class ConfigUtil {
             if (!(helpFile.exists())) {
                 Manage.plugin.saveResource("help.yml", false);
             }
-            HelpConfig = YamlConfiguration.loadConfiguration(helpFile);
+            helpConfig = YamlConfiguration.loadConfiguration(helpFile);
+        }
+
+        //加载 help缓存
+        String jsonArray = ConfigUtil.helpConfig.getString("helps");
+        Gson gson = new Gson();
+        try {
+            BaseConstants.helpList = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
+            }.getType());
+        } catch (Exception e) {
+            BaseConstants.helpList.add(ChatColor.RED + "help文本加载错误,请联系腐竹修改");
+            Manage.plugin.getLogger().info("help文本加载错误,请修改后输入/manage reload help重新加载");
         }
     }
 
@@ -60,7 +84,18 @@ public class ConfigUtil {
         if (!(langFile.exists())) {
             Manage.plugin.saveResource("lang.yml", false);
         }
-        LangConfig = YamlConfiguration.loadConfiguration(langFile);
+        langConfig = YamlConfiguration.loadConfiguration(langFile);
+    }
+
+    /**
+     * 加载secret文件
+     */
+    public static void getSecretConfig() {
+        File secretFile = new File(Manage.plugin.getDataFolder(), "secret.yml");
+        if (!(secretFile.exists())) {
+            Manage.plugin.saveResource("secret.yml", false);
+        }
+        secretConfig = YamlConfiguration.loadConfiguration(secretFile);
     }
 
     /**
@@ -76,6 +111,8 @@ public class ConfigUtil {
         val isGift = ConfigUtil.config.getBoolean("isGift");
         val isPvp = ConfigUtil.config.getBoolean("isPvp");
         val isPvpParticle = ConfigUtil.config.getBoolean("isPvpParticle");
+        val isSecret = ConfigUtil.config.getBoolean("isSecret");
+        val isHome = ConfigUtil.config.getBoolean("isHome");
 
         BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
@@ -86,5 +123,7 @@ public class ConfigUtil {
         BaseConfigCache.isGift = isGift;
         BaseConfigCache.isPvp = isPvp;
         BaseConfigCache.isPvpParticle = isPvpParticle;
+        BaseConfigCache.isSecret = isSecret;
+        BaseConfigCache.isHome = isHome;
     }
 }

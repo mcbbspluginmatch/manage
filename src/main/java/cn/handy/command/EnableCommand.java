@@ -4,17 +4,22 @@ import cn.handy.Manage;
 import cn.handy.command.gift.GiftCommand;
 import cn.handy.command.hat.HatCommand;
 import cn.handy.command.help.HelpCommand;
+import cn.handy.command.home.HomeCommand;
+import cn.handy.command.home.SetHomeCommand;
 import cn.handy.command.login.LoginCommand;
 import cn.handy.command.login.RegisterCommand;
+import cn.handy.command.manage.ManageCommand;
 import cn.handy.command.msg.MsgAdminCommand;
 import cn.handy.command.msg.MsgCommand;
-import cn.handy.command.manage.ManageCommand;
 import cn.handy.command.pvp.PvpCommand;
+import cn.handy.command.secret.SecretAdminCommand;
+import cn.handy.command.secret.SecretCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
 import cn.handy.command.tp.TpdenyCommand;
 import cn.handy.constants.BaseConfigCache;
+import cn.handy.constants.BaseConstants;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 
@@ -75,6 +80,14 @@ public class EnableCommand {
         }
         if (BaseConfigCache.isPvp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new PvpCommand());
+        }
+        if (BaseConfigCache.isSecret) {
+            commandMap.register(Manage.plugin.getDescription().getName(), new SecretAdminCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new SecretCommand());
+        }
+        if (BaseConfigCache.isHome){
+            commandMap.register(Manage.plugin.getDescription().getName(), new HomeCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new SetHomeCommand());
         }
     }
 }

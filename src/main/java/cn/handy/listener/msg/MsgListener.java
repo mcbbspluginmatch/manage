@@ -26,7 +26,7 @@ public class MsgListener implements Listener {
         String userName = event.getPlayer().getName().toLowerCase();
         val messageService = Beans.getBeans().getMessageService();
         val message = messageService.findByUserName(userName);
-        String joinMessage = ConfigUtil.LangConfig.getString("joinMessage");
+        String joinMessage = ConfigUtil.langConfig.getString("joinMessage");
         if (message.getId() != null) {
             joinMessage = message.getJoinMessage();
         }
@@ -44,7 +44,7 @@ public class MsgListener implements Listener {
         String userName = event.getPlayer().getName().toLowerCase();
         val messageService = Beans.getBeans().getMessageService();
         val message = messageService.findByUserName(userName);
-        String quitMessage = ConfigUtil.LangConfig.getString("quitMessage");
+        String quitMessage = ConfigUtil.langConfig.getString("quitMessage");
         if (message.getId() != null) {
             quitMessage = message.getQuitMessage();
         }

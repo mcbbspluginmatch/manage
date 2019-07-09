@@ -1,9 +1,15 @@
 package cn.handy.utils;
 
+import cn.handy.dao.home.IHomeService;
+import cn.handy.dao.home.impl.HomeServiceImpl;
 import cn.handy.dao.message.IMessageService;
 import cn.handy.dao.message.impl.MessageServiceImpl;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.dao.pvp.impl.PvpServiceImpl;
+import cn.handy.dao.secret.ISecretService;
+import cn.handy.dao.secret.IUserSecretService;
+import cn.handy.dao.secret.impl.SecretServiceImpl;
+import cn.handy.dao.secret.impl.UserSecretServiceImpl;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.utils.sql.SqlManagerUtil;
@@ -17,6 +23,9 @@ public class Beans {
     private static IUserService userService = null;
     private static IMessageService messageService = null;
     private static IPvpService pvpService = null;
+    private static ISecretService secretService = null;
+    private static IUserSecretService userSecretService = null;
+    private static IHomeService homeService = null;
     private static SqlManagerUtil sqlManagerUtil = null;
 
     private Beans() {
@@ -57,5 +66,26 @@ public class Beans {
             sqlManagerUtil = new SqlManagerUtil();
         }
         return sqlManagerUtil;
+    }
+
+    public ISecretService getSecretService() {
+        if (secretService == null) {
+            secretService = new SecretServiceImpl();
+        }
+        return secretService;
+    }
+
+    public IUserSecretService getUserSecretService() {
+        if (userSecretService == null) {
+            userSecretService = new UserSecretServiceImpl();
+        }
+        return userSecretService;
+    }
+
+    public IHomeService getHomeService() {
+        if (homeService == null) {
+            homeService = new HomeServiceImpl();
+        }
+        return homeService;
     }
 }

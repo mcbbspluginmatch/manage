@@ -1,10 +1,8 @@
 package cn.handy.command.help;
 
+import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.ListPageUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.val;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -12,7 +10,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,15 +26,6 @@ public class HelpCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        String jsonArray = ConfigUtil.HelpConfig.getString("helps");
-        Gson gson = new Gson();
-        List<String> help = new ArrayList<String>();
-        try {
-            help = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
-            }.getType());
-        } catch (Exception e) {
-            sender.sendMessage("您配置的help.yml有误,请检查json格式");
-        }
         int pageNum = 1;
         if (args != null && args.length == 1) {
             String arg = args[0];
@@ -47,7 +35,7 @@ public class HelpCommand extends Command {
             }
         }
         // 对list进行分页
-        ListPageUtil listPageUtil = new ListPageUtil(help, pageNum, 10);
+        ListPageUtil listPageUtil = new ListPageUtil(BaseConstants.helpList, pageNum, 10);
 
         // 总页数
         int totalPage = listPageUtil.getTotalPage();

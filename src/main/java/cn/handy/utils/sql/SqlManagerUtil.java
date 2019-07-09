@@ -2,12 +2,6 @@ package cn.handy.utils.sql;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.dao.message.IMessageService;
-import cn.handy.dao.message.impl.MessageServiceImpl;
-import cn.handy.dao.pvp.IPvpService;
-import cn.handy.dao.pvp.impl.PvpServiceImpl;
-import cn.handy.dao.user.IUserService;
-import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
@@ -32,8 +26,8 @@ public class SqlManagerUtil {
     private static int port;
     private static String mysqlDriver = "com.mysql.jdbc.Driver";
     private static String sqLiteDriver = "org.sqlite.JDBC";
-    private int initSize = ConfigUtil.LangConfig.getInt("initSize");
-    private int maxActive = ConfigUtil.LangConfig.getInt("maxActive");
+    private int initSize = ConfigUtil.langConfig.getInt("initSize");
+    private int maxActive = ConfigUtil.langConfig.getInt("maxActive");
     private LinkedList<Connection> connList = new LinkedList<Connection>();
 
     //声明对象时自动注册驱动
@@ -62,18 +56,24 @@ public class SqlManagerUtil {
         }
         // 创建消息表
         if (BaseConfigCache.isMessage) {
-            IMessageService messageService = new MessageServiceImpl();
-            messageService.create();
+            Beans.getBeans().getMessageService().create();
         }
         // 创建用户表
         if (BaseConfigCache.isUser) {
-            IUserService userService = new UserServiceImpl();
-            userService.create();
+            Beans.getBeans().getUserService().create();
         }
         // 创建pvp表
         if (BaseConfigCache.isPvp) {
-            IPvpService pvpService = new PvpServiceImpl();
-            pvpService.create();
+            Beans.getBeans().getPvpService().create();
+        }
+        // 创建功法表
+        if (BaseConfigCache.isSecret) {
+            Beans.getBeans().getSecretService().create();
+            Beans.getBeans().getUserSecretService().create();
+        }
+        // 创建home表
+        if (BaseConfigCache.isHome) {
+            Beans.getBeans().getHomeService().create();
         }
         if (BaseConfigCache.isUseMySql) {
             // 创建一个每小时执行的心跳包

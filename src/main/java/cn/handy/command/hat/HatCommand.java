@@ -2,17 +2,13 @@ package cn.handy.command.hat;
 
 import cn.handy.utils.BaseUtil;
 import lombok.val;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-
-import java.util.Arrays;
 
 /**
  * @author hanshuai
@@ -30,7 +26,7 @@ public class HatCommand extends Command {
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        if (!sender.hasPermission("handy.hat")){
+        if (!sender.hasPermission("handy.hat")) {
             sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }
@@ -50,7 +46,7 @@ public class HatCommand extends Command {
                 // 设置手上的物品
                 inv.setItemInMainHand(helm);
                 player.updateInventory();
-                sender.sendMessage(ChatColor.AQUA+"帽子设置成功,快去看看吧~");
+                sender.sendMessage(ChatColor.AQUA + "帽子设置成功,快去看看吧~");
             }
         } else {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");

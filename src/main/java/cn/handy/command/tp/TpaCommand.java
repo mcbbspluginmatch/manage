@@ -29,7 +29,7 @@ public class TpaCommand extends Command {
             val sendPlayer = (Player) sender;
             // 判断是否冷却
             Long keepAlive;
-            val tpaWaitTime = ConfigUtil.LangConfig.getLong("tpaWaitTime");
+            val tpaWaitTime = ConfigUtil.langConfig.getLong("tpaWaitTime");
             if (BaseConstants.tpaWaitTime.containsKey(sendPlayer.getName())) {
                 keepAlive = (System.currentTimeMillis() - BaseConstants.tpaWaitTime.get(sendPlayer.getName())) / 1000L;
                 if (keepAlive < tpaWaitTime) {

@@ -1,11 +1,10 @@
 package cn.handy.dao.pvp.impl;
 
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.constants.sql.MsgSqlEnum;
-import cn.handy.utils.Beans;
 import cn.handy.constants.sql.PvpSqlEnum;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
+import cn.handy.utils.Beans;
 import lombok.val;
 
 import java.sql.Connection;
@@ -93,7 +92,7 @@ public class PvpServiceImpl implements IPvpService {
             String pvpCmd = PvpSqlEnum.SELECT_COUNT_BY_USERNAME.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
             PreparedStatement ps = conn.prepareStatement(pvpCmd);
-            ps.setString(1,userName);
+            ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
                 count = rst.getInt(1);
@@ -131,8 +130,6 @@ public class PvpServiceImpl implements IPvpService {
             ps.close();
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return pvp;

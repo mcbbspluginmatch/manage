@@ -77,8 +77,6 @@ public class MessageServiceImpl implements IMessageService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return false;
     }
@@ -101,8 +99,6 @@ public class MessageServiceImpl implements IMessageService {
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return rst > 0;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return false;
@@ -134,8 +130,6 @@ public class MessageServiceImpl implements IMessageService {
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
             return message;
         } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (NumberFormatException e) {
             e.printStackTrace();
         }
         return message;

@@ -2,6 +2,7 @@ package cn.handy.command.manage;
 
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.config.ConfigUtil;
+import cn.handy.utils.secret.SecretUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -33,6 +34,10 @@ public class ManageCommand extends Command {
             } else if (args[0].equals("reload") && args[1].equals("lang")) {
                 ConfigUtil.getLangConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载lang.yml成功!");
+            } else if (args[0].equals("reload") && args[1].equals("secret")) {
+                ConfigUtil.getSecretConfig();
+                SecretUtil.getSecretConfig();
+                sender.sendMessage(ChatColor.AQUA + "manage重载secret.yml成功!");
             } else {
                 sender.sendMessage(BaseConstants.MANAGE_MSG);
             }
