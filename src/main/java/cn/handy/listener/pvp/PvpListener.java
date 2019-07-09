@@ -41,16 +41,16 @@ public class PvpListener implements Listener {
         Boolean rst = true;
         if (pvp.getId() != null) {
             rst = pvp.getPvpStatus();
-        }
-        BaseConstants.PvpMap.put(userName, rst);
-        // 粒子效果
-        if (pvp.getParticle()) {
-            if (rst) {
-                ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
-            } else {
-                ParticleEffectUtil.particleEffect(event.getPlayer(), Color.WHITE);
+            // 粒子效果
+            if (pvp.getParticle()) {
+                if (rst) {
+                    ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
+                } else {
+                    ParticleEffectUtil.particleEffect(event.getPlayer(), Color.WHITE);
+                }
             }
         }
+        BaseConstants.PvpMap.put(userName, rst);
     }
 
     /**

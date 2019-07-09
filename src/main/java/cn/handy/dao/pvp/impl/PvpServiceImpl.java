@@ -125,6 +125,7 @@ public class PvpServiceImpl implements IPvpService {
                 pvp.setId(rst.getInt(1));
                 pvp.setUserName(rst.getString(2));
                 pvp.setPvpStatus(rst.getBoolean(3));
+                pvp.setParticle(rst.getBoolean(4));
             }
             rst.close();
             ps.close();
@@ -150,7 +151,6 @@ public class PvpServiceImpl implements IPvpService {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setBoolean(1, particle);
             ps.setString(2, userName);
-            ps.close();
             val count = ps.executeUpdate();
             ps.close();
             Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);

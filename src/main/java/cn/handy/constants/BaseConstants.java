@@ -101,7 +101,7 @@ public abstract class BaseConstants {
                     "§e/pvp on     " + "§f设置自己PVP为开启状态\n" +
                     "§e/pvp off     " + "§f设置自己PVP为关闭状态\n" +
                     "§e/pvp lizi on     " + "§f设置自己PVP粒子效果为开启状态\n" +
-                    "§e/pvp lizi off     " + "§设置自己PVP粒子效果为关闭状态";
+                    "§e/pvp lizi off     " + "§f设置自己PVP粒子效果为关闭状态";
 
     public final static String SECRET_MSG =
             "§e§m一一一一一一一§f[§e武林风云§f]§e§m一一一一一一一\n" +

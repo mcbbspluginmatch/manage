@@ -41,7 +41,7 @@ public class SetHomeCommand extends Command {
                         Player player = (Player) sender;
                         Integer count = Beans.getBeans().getHomeService().findByCount(player.getName());
                         val homeCount = ConfigUtil.langConfig.getInt("homeCount");
-                        if (count < homeCount) {
+                        if (count <= homeCount) {
                             Home home = new Home();
                             home.setUserName(player.getName());
                             home.setHomeName(args[0]);

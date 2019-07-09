@@ -7,7 +7,7 @@ helps: '[
 "§e/pvp on   §f设置自己PVP为开启状态",
 "§e/pvp off   §f设置自己PVP为关闭状态",
 "§e/pvp lizi on   §f设置自己PVP粒子效果为开启状态",
-"§e/pvp lizi off   §设置自己PVP粒子效果为关闭状态",
+"§e/pvp lizi off   §f设置自己PVP粒子效果为关闭状态",
 "§e/secret   §f查询自己的门派和功法情况",
 "§e/home [家名]  §f传送回对应的家",
 "§e/sethome [家名]   §f设置家",
