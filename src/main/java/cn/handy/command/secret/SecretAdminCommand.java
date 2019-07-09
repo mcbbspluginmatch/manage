@@ -33,7 +33,7 @@ public class SecretAdminCommand extends Command {
             sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }
-        if (args != null && args.length > 1) {
+        if (args != null && args.length > 0) {
             if (args[0].equalsIgnoreCase("give")) {
                 val player = Bukkit.getServer().getPlayer(args[1]);
                 PlayerInventory inventory = player.getInventory();
