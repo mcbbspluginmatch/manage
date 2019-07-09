@@ -18,8 +18,10 @@ public abstract class BaseConfigCache {
     public static Boolean isTp = false;
     public static Boolean isGift = false;
     public static Boolean isPvp = false;
-    public static Boolean isPvpParticle = false;
     public static Boolean isSecret = false;
     public static Boolean isHome = false;
+    public static Boolean isBack = false;
+    public static Boolean isSignChange = false;
+
 }
 

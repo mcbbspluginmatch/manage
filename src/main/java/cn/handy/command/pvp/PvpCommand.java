@@ -2,10 +2,10 @@ package cn.handy.command.pvp;
 
 import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
-import cn.handy.utils.Beans;
 import cn.handy.dao.pvp.IPvpService;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.Beans;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -38,33 +38,57 @@ public class PvpCommand extends Command {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
             return true;
         }
-        if (label.equalsIgnoreCase("pvp")) {
-            if (args != null && args.length == 1) {
-                final Player sendPlayer = (Player) sender;
-                final IPvpService pvpService = Beans.getBeans().getPvpService();
-                final Pvp pvp = new Pvp();
-                pvp.setUserName(sendPlayer.getName());
-                pvp.setParticle(true);
-                if (args[0].equalsIgnoreCase("on")) {
-                    pvp.setPvpStatus(true);
-                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
-                } else if (args[0].equalsIgnoreCase("off")) {
-                    pvp.setPvpStatus(false);
-                    BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
+        if (args != null && args.length == 1) {
+            final Player sendPlayer = (Player) sender;
+            final IPvpService pvpService = Beans.getBeans().getPvpService();
+            final Pvp pvp = new Pvp();
+            pvp.setUserName(sendPlayer.getName());
+            pvp.setParticle(true);
+            if (args[0].equalsIgnoreCase("on")) {
+                pvp.setPvpStatus(true);
+                BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
+            } else if (args[0].equalsIgnoreCase("off")) {
+                pvp.setPvpStatus(false);
+                BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
+            }
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    val rst = pvpService.set(pvp);
+                    if (rst) {
+                        sendPlayer.sendMessage("设置成功");
+                    } else {
+                        sendPlayer.sendMessage("设置失败");
+                    }
                 }
+            }.runTaskAsynchronously(Manage.plugin);
+        } else if (args != null && args.length == 2) {
+            final Player sendPlayer = (Player) sender;
+            final IPvpService pvpService = Beans.getBeans().getPvpService();
+            if (args[0].equalsIgnoreCase("lizi") && args[1].equalsIgnoreCase("on")) {
                 new BukkitRunnable() {
                     @Override
                     public void run() {
-                        val rst = pvpService.set(pvp);
+                        val rst = pvpService.setParticle(sendPlayer.getName(), true);
                         if (rst) {
-                            sendPlayer.sendMessage("设置成功");
+                            sendPlayer.sendMessage("开启粒子效果设置成功");
                         } else {
-                            sendPlayer.sendMessage("设置失败");
+                            sendPlayer.sendMessage("开启粒子效果设置失败");
                         }
                     }
                 }.runTaskAsynchronously(Manage.plugin);
-            } else {
-                sender.sendMessage(BaseConstants.PVP_HELP);
+            } else if (args[0].equalsIgnoreCase("lizi") && args[1].equalsIgnoreCase("off")) {
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        val rst = pvpService.setParticle(sendPlayer.getName(), false);
+                        if (rst) {
+                            sendPlayer.sendMessage("关闭粒子效果设置成功");
+                        } else {
+                            sendPlayer.sendMessage("关闭粒子效果设置失败");
+                        }
+                    }
+                }.runTaskAsynchronously(Manage.plugin);
             }
         } else {
             sender.sendMessage(BaseConstants.PVP_HELP);

@@ -1,10 +1,9 @@
 package cn.handy.listener.pvp;
 
-import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import cn.handy.utils.Beans;
 import cn.handy.entity.Pvp;
 import cn.handy.utils.BaseUtil;
+import cn.handy.utils.Beans;
 import cn.handy.utils.particleeffect.ParticleEffectUtil;
 import lombok.val;
 import org.bukkit.Color;
@@ -45,7 +44,7 @@ public class PvpListener implements Listener {
         }
         BaseConstants.PvpMap.put(userName, rst);
         // 粒子效果
-        if (BaseConfigCache.isPvpParticle) {
+        if (pvp.getParticle()) {
             if (rst) {
                 ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
             } else {

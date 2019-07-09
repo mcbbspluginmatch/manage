@@ -6,12 +6,12 @@ helps: '[
 "§e/hat   §f将手上的物品带在头上",
 "§e/pvp on   §f设置自己PVP为开启状态",
 "§e/pvp off   §f设置自己PVP为关闭状态",
+"§e/pvp lizi on   §f设置自己PVP粒子效果为开启状态",
+"§e/pvp lizi off   §设置自己PVP粒子效果为关闭状态",
 "§e/secret   §f查询自己的门派和功法情况",
 "§e/home [家名]  §f传送回对应的家",
 "§e/sethome [家名]   §f设置家",
 "§e/tpa [名字]   §f请求传送到一个玩家的位置",
 "§e/tpaccept   §f接受玩家传送",
-"§e/tpdeny   §f拒绝玩家传送",
-"§e/tp  §f传送到一个玩家的位置",
-"§e/gift   §f给玩家送礼物"
+"§e/tpdeny   §f拒绝玩家传送"
 ]'

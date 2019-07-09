@@ -1,6 +1,7 @@
 package cn.handy.constants;
 
 import cn.handy.entity.User;
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -19,14 +20,24 @@ public abstract class BaseConstants {
     public static Map<String, Long> tpaWaitTime = new HashMap();
 
     /**
+     * tpa传送map
+     */
+    public static Map<String, String> currentRequest = new HashMap();
+
+    /**
      * home指令传送cdMap
      */
     public static Map<String, Long> homeWaitTime = new HashMap();
 
     /**
-     * tpa传送map
+     * back传送map
      */
-    public static Map<String, String> currentRequest = new HashMap();
+    public static Map<String, Location> backMap = new HashMap();
+
+    /**
+     * back指令传送cdMap
+     */
+    public static Map<String, Long> backWaitTime = new HashMap();
 
     /**
      * 用户登录缓存信息
@@ -88,7 +99,9 @@ public abstract class BaseConstants {
     public final static String PVP_HELP =
             "§e§m一一一一一一一§f[§ePVP管理§f]§e§m一一一一一一一\n" +
                     "§e/pvp on     " + "§f设置自己PVP为开启状态\n" +
-                    "§e/pvp off     " + "§f设置自己PVP为关闭状态";
+                    "§e/pvp off     " + "§f设置自己PVP为关闭状态\n" +
+                    "§e/pvp lizi on     " + "§f设置自己PVP粒子效果为开启状态\n" +
+                    "§e/pvp lizi off     " + "§设置自己PVP粒子效果为关闭状态";
 
     public final static String SECRET_MSG =
             "§e§m一一一一一一一§f[§e武林风云§f]§e§m一一一一一一一\n" +

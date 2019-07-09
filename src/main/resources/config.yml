@@ -24,11 +24,14 @@ isHelp: true
 isTp: true
 # 是否启用送礼物系统
 isGift: true
-# 是否启用pvp管理和对应的粒子特效
+# 是否启用pvp管理
 isPvp: true
-isPvpParticle: false
 # 是否开启武林秘籍系统
 isSecret: true
 # 是否开启home
 isHome: true
+# 是否开启back
+isBack: true
+# 木牌支持彩色字
+isSignChange: true
 #需要开启的功能end--------------------------

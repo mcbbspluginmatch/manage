@@ -1,15 +1,21 @@
+# tpa传送延迟时间(单位秒)(isTp启用时候生效)
+tpaDelayTime: 0
+# tpa传送等待时间(单位秒)(isTp启用时候生效)
+tpaWaitTime: 60
+# home数量
+homeCount: 3
+# home传送延迟时间(单位秒)(isHome启用时候生效)
+homeDelayTime: 0
+# home传送等待时间(单位秒)(isHome启用时候生效)
+homeWaitTime: 60
+# back传送等待时间(单位秒)(isHome启用时候生效)
+backWaitTime: 60
+
+
 # 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
 # 默认全部玩家离开游戏欢迎语句(isMessage启用时候生效)
 quitMessage: ${player} 离开了服务器
-# tpa传送延迟时间(单位秒)(isTp启用时候生效)
-tpaDelayTime: 3
-# tpa传送等待时间(单位秒)(isTp启用时候生效)
-tpaWaitTime: 30
 
-# home数量
-homeCount: 3
-# home传送延迟时间(单位秒)(isHome启用时候生效)
-homeDelayTime: 3
-# home传送等待时间(单位秒)(isHome启用时候生效)
-homeWaitTime: 30
+
+

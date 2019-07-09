@@ -40,5 +40,14 @@ public interface IPvpService {
      * @return
      */
     Pvp findByUserName(String userName);
+
+    /**
+     * 设置粒子效果开关
+     *
+     * @param userName
+     * @param particle
+     * @return
+     */
+    Boolean setParticle(String userName, Boolean particle);
 }
 

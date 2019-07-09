@@ -110,9 +110,10 @@ public class ConfigUtil {
         val isTp = ConfigUtil.config.getBoolean("isTp");
         val isGift = ConfigUtil.config.getBoolean("isGift");
         val isPvp = ConfigUtil.config.getBoolean("isPvp");
-        val isPvpParticle = ConfigUtil.config.getBoolean("isPvpParticle");
         val isSecret = ConfigUtil.config.getBoolean("isSecret");
         val isHome = ConfigUtil.config.getBoolean("isHome");
+        val isBack = ConfigUtil.config.getBoolean("isBack");
+        val isSignChange = ConfigUtil.config.getBoolean("isSignChange");
 
         BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
@@ -122,8 +123,9 @@ public class ConfigUtil {
         BaseConfigCache.isTp = isTp;
         BaseConfigCache.isGift = isGift;
         BaseConfigCache.isPvp = isPvp;
-        BaseConfigCache.isPvpParticle = isPvpParticle;
         BaseConfigCache.isSecret = isSecret;
         BaseConfigCache.isHome = isHome;
+        BaseConfigCache.isBack = isBack;
+        BaseConfigCache.isSignChange = isSignChange;
     }
 }

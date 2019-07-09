@@ -24,3 +24,5 @@ permissions:
         default: true
     handy.home:
         default: true
+    handy.back:
+        default: true

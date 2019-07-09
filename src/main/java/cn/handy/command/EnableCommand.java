@@ -1,6 +1,7 @@
 package cn.handy.command;
 
 import cn.handy.Manage;
+import cn.handy.command.back.BackCommand;
 import cn.handy.command.gift.GiftCommand;
 import cn.handy.command.hat.HatCommand;
 import cn.handy.command.help.HelpCommand;
@@ -88,6 +89,9 @@ public class EnableCommand {
         if (BaseConfigCache.isHome){
             commandMap.register(Manage.plugin.getDescription().getName(), new HomeCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SetHomeCommand());
+        }
+        if (BaseConfigCache.isBack){
+            commandMap.register(Manage.plugin.getDescription().getName(), new BackCommand());
         }
     }
 }

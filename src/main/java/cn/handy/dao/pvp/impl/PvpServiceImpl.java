@@ -134,4 +134,30 @@ public class PvpServiceImpl implements IPvpService {
         }
         return pvp;
     }
+
+    /**
+     * 设置粒子特效开关
+     *
+     * @param userName
+     * @param particle
+     * @return
+     */
+    @Override
+    public Boolean setParticle(String userName, Boolean particle) {
+        try {
+            String sql = PvpSqlEnum.UPDATE_PARTICLE.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(1, particle);
+            ps.setString(2, userName);
+            ps.close();
+            val count = ps.executeUpdate();
+            ps.close();
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
+            return count > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
