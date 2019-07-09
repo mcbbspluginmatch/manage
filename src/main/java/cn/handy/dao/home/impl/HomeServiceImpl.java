@@ -79,8 +79,7 @@ public class HomeServiceImpl implements IHomeService {
                 ps.setFloat(4, home.getYaw());
                 ps.setFloat(5, home.getPitch());
                 ps.setString(6, home.getWorld());
-                ps.setString(7, home.getUserName());
-                ps.setString(8, home.getHomeName());
+                ps.setInt(7, home1.getId());
                 val rst = ps.executeUpdate();
                 ps.close();
                 Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
