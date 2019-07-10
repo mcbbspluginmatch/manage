@@ -26,9 +26,9 @@ public class ParticleEffectUtil {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline() || !BaseConstants.PvpParticleMap.get(player.getName())) {
+                if (!player.isOnline()) {
                     this.cancel();
-                } else if (!player.isDead()) {
+                } else if (!player.isDead() && BaseConstants.PvpParticleMap.get(player.getName())) {
                     Color color = Color.RED;
                     if (!BaseConstants.PvpMap.get(player.getName())) {
                         color = Color.WHITE;
@@ -37,7 +37,7 @@ public class ParticleEffectUtil {
                     Particle.DustOptions dustOptions = new Particle.DustOptions(color, 1);
                     Location location = player.getLocation();
 
-                    for (int i = 0; i < 20; i++) {
+                    for (int i = 0; i < 25; i++) {
                         double x = (radius * Math.sin(angle));
                         double z = (radius * Math.cos(angle));
                         angle += 0.251;
