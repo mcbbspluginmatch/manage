@@ -1,14 +1,20 @@
 package cn.handy.command.secret;
 
 import cn.handy.Manage;
+import cn.handy.entity.Secret;
 import cn.handy.entity.UserSecret;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
+import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -62,5 +68,12 @@ public class SecretCommand extends Command {
             return str.toString();
         }
         return "未查询到数据";
+    }
+
+    private static Inventory getInventory(Player player){
+        Inventory inv = Bukkit.createInventory(null,54,"§f[§e武林风云§f]");
+        inv.setItem(0, SecretUtil.ranItemStack());
+        player.openInventory(inv);
+        return null;
     }
 }

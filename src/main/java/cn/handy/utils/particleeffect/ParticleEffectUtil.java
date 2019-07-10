@@ -1,6 +1,7 @@
 package cn.handy.utils.particleeffect;
 
 import cn.handy.Manage;
+import cn.handy.constants.BaseConstants;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -20,20 +21,23 @@ public class ParticleEffectUtil {
      * 粒子效果
      *
      * @param player
-     * @param color
      */
-    public static void particleEffect(final Player player, final Color color) {
+    public static void particleEffect(Player player) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline()) {
+                if (!player.isOnline() || !BaseConstants.PvpParticleMap.get(player.getName())) {
                     this.cancel();
                 } else if (!player.isDead()) {
+                    Color color = Color.RED;
+                    if (!BaseConstants.PvpMap.get(player.getName())) {
+                        color = Color.WHITE;
+                    }
                     double angle = 0;
                     Particle.DustOptions dustOptions = new Particle.DustOptions(color, 1);
                     Location location = player.getLocation();
 
-                    for (int i = 0; i < 25; i++) {
+                    for (int i = 0; i < 20; i++) {
                         double x = (radius * Math.sin(angle));
                         double z = (radius * Math.cos(angle));
                         angle += 0.251;

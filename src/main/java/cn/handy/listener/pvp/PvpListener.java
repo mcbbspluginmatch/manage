@@ -6,7 +6,6 @@ import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import cn.handy.utils.particleeffect.ParticleEffectUtil;
 import lombok.val;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -35,22 +34,19 @@ public class PvpListener implements Listener {
      */
     @EventHandler
     public void onPlayerJoinGame(PlayerJoinEvent event) {
-        String userName = event.getPlayer().getName().toLowerCase();
+        String userName = event.getPlayer().getName();
         val pvpService = Beans.getBeans().getPvpService();
         Pvp pvp = pvpService.findByUserName(userName);
         Boolean rst = true;
+        Boolean particle = true;
         if (pvp.getId() != null) {
             rst = pvp.getPvpStatus();
-            // 粒子效果
-            if (pvp.getParticle()) {
-                if (rst) {
-                    ParticleEffectUtil.particleEffect(event.getPlayer(), Color.RED);
-                } else {
-                    ParticleEffectUtil.particleEffect(event.getPlayer(), Color.WHITE);
-                }
-            }
+            particle = pvp.getParticle();
         }
         BaseConstants.PvpMap.put(userName, rst);
+        BaseConstants.PvpParticleMap.put(userName, particle);
+        // 生成粒子效果
+        ParticleEffectUtil.particleEffect(event.getPlayer());
     }
 
     /**

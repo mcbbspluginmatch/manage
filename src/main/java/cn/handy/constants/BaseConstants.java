@@ -50,6 +50,11 @@ public abstract class BaseConstants {
     public static Map<String, Boolean> PvpMap = new HashMap();
 
     /**
+     * 用户PVP粒子开启状态缓存信息
+     */
+    public static Map<String, Boolean> PvpParticleMap = new HashMap();
+
+    /**
      * 自定义的物品缓存信息
      */
     public static List<ItemStack> itemStackList = new ArrayList<>();

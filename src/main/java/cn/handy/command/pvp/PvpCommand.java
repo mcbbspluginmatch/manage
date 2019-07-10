@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
- * @Description: {}
+ * @Description: {pvp管理}
  * @date 2019/6/21 13:51
  */
 public class PvpCommand extends Command {
@@ -46,10 +46,10 @@ public class PvpCommand extends Command {
             pvp.setParticle(true);
             if (args[0].equalsIgnoreCase("on")) {
                 pvp.setPvpStatus(true);
-                BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), true);
+                BaseConstants.PvpMap.put(sendPlayer.getName(), true);
             } else if (args[0].equalsIgnoreCase("off")) {
                 pvp.setPvpStatus(false);
-                BaseConstants.PvpMap.put(sendPlayer.getName().toLowerCase(), false);
+                BaseConstants.PvpMap.put(sendPlayer.getName(), false);
             }
             new BukkitRunnable() {
                 @Override
@@ -71,6 +71,7 @@ public class PvpCommand extends Command {
                     public void run() {
                         val rst = pvpService.setParticle(sendPlayer.getName(), true);
                         if (rst) {
+                            BaseConstants.PvpParticleMap.put(sendPlayer.getName(), true);
                             sendPlayer.sendMessage("开启粒子效果设置成功");
                         } else {
                             sendPlayer.sendMessage("开启粒子效果设置失败");
@@ -83,6 +84,7 @@ public class PvpCommand extends Command {
                     public void run() {
                         val rst = pvpService.setParticle(sendPlayer.getName(), false);
                         if (rst) {
+                            BaseConstants.PvpParticleMap.put(sendPlayer.getName(), false);
                             sendPlayer.sendMessage("关闭粒子效果设置成功");
                         } else {
                             sendPlayer.sendMessage("关闭粒子效果设置失败");
