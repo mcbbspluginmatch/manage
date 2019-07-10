@@ -55,6 +55,9 @@ public enum UserSecretSqlEnum {
     ),
     SELECT_BY_USER_NAME(
             "SELECT mg_user_secret.id, mg_user_secret.userName, mg_user_secret.sectsName, mg_user_secret.secretGarde, mg_secret.name, mg_secret.buffId, mg_secret.buffName FROM mg_user_secret INNER JOIN mg_secret ON mg_user_secret.secretId = mg_secret.id WHERE mg_user_secret.userName = ?"
+    ),
+    SELECT_SECTS_NAME_BY_USER_NAME(
+            "SELECT sectsName FROM mg_user_secret WHERE userName = ?"
     );
     private String command;
 }

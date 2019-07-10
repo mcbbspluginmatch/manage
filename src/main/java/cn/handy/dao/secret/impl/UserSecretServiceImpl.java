@@ -156,4 +156,32 @@ public class UserSecretServiceImpl implements IUserSecretService {
         }
         return userSecretList;
     }
+
+    /**
+     * 查询门派
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public String findSectsNameByUserName(String userName) {
+        String sectsName = "无";
+        try {
+            String selectStr = UserSecretSqlEnum.SELECT_SECTS_NAME_BY_USER_NAME.getCommand();
+            Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
+            PreparedStatement ps = conn.prepareStatement(selectStr);
+            ps.setString(1, userName);
+            val rst = ps.executeQuery();
+            while (rst.next()) {
+                sectsName = rst.getString(1);
+            }
+            rst.close();
+            ps.close();
+            Beans.getBeans().getSqlManagerUtil().releaseConnection(conn);
+            return sectsName;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sectsName;
+    }
 }

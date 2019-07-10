@@ -1,20 +1,17 @@
 package cn.handy.command.secret;
 
 import cn.handy.Manage;
-import cn.handy.entity.Secret;
+import cn.handy.constants.BaseConstants;
 import cn.handy.entity.UserSecret;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
-import cn.handy.utils.secret.SecretUtil;
+import cn.handy.utils.gui.SecretGuiUtil;
 import lombok.val;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -41,13 +38,9 @@ public class SecretCommand extends Command {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player player = (Player) sender;
-            new BukkitRunnable() {
-                @Override
-                public void run() {
-                    String str = getStr(Beans.getBeans().getUserSecretService().findByUserName(player.getName()));
-                    player.sendMessage(str);
-                }
-            }.runTaskAsynchronously(Manage.plugin);
+            Inventory inv = SecretGuiUtil.getInventory(player);
+            BaseConstants.InventoryMap.put(player.getName(),inv);
+            player.openInventory(inv);
         } else {
             if (args != null && args.length > 0) {
                 String str = getStr(Beans.getBeans().getUserSecretService().findByUserName(args[0]));
@@ -70,10 +63,4 @@ public class SecretCommand extends Command {
         return "未查询到数据";
     }
 
-    private static Inventory getInventory(Player player){
-        Inventory inv = Bukkit.createInventory(null,54,"§f[§e武林风云§f]");
-        inv.setItem(0, SecretUtil.ranItemStack());
-        player.openInventory(inv);
-        return null;
-    }
 }

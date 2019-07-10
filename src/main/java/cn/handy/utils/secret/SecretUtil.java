@@ -105,7 +105,6 @@ public class SecretUtil {
                 Arrays.asList("§0事件:" + random,
                         ChatColor.AQUA + "鬼谷子的师傅升仙而去时",
                         ChatColor.AQUA + "曾留下这卷竹简"));
-        identifyItem.setPageList(Arrays.asList(" "));
         return getItemStack(identifyItem);
     }
 
@@ -120,7 +119,11 @@ public class SecretUtil {
         BookMeta meta = (BookMeta) item.getItemMeta();
         meta.setAuthor(identifyItem.getAuthor());
         meta.setTitle(identifyItem.getTitle());
-        meta.setPages(identifyItem.getPageList());
+        if (identifyItem.getPageList() != null && identifyItem.getPageList().size() > 0) {
+            meta.setPages(identifyItem.getPageList());
+        } else {
+            meta.setPages(Arrays.asList(""));
+        }
         meta.setGeneration(BookMeta.Generation.ORIGINAL);
         meta.setDisplayName(identifyItem.getName());
         meta.setLore(identifyItem.getLoreList());

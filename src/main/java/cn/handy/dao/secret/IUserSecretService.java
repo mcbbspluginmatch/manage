@@ -41,4 +41,12 @@ public interface IUserSecretService {
      * @return
      */
     List<UserSecret> findByUserName(String userName);
+
+    /**
+     * 查询门派
+     *
+     * @param userName
+     * @return
+     */
+    String findSectsNameByUserName(String userName);
 }

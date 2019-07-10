@@ -2,6 +2,7 @@ package cn.handy.constants;
 
 import cn.handy.entity.User;
 import org.bukkit.Location;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.*;
@@ -73,6 +74,11 @@ public abstract class BaseConstants {
      * help文本缓存信息
      */
     public static List<String> helpList = new ArrayList<>();
+
+    /**
+     * 用户功法箱子缓存信息
+     */
+    public static Map<String, Inventory> InventoryMap = new HashMap<>();
 
     /**
      * msgAdmin帮助语句

@@ -83,16 +83,6 @@ public class UserListener implements Listener {
     }
 
     /**
-     * 登录游戏事件
-     *
-     * @param event
-     */
-    @EventHandler
-    public void onPlayerLogin(AsyncPlayerPreLoginEvent event) {
-        //TODO 暂时不处理
-    }
-
-    /**
      * 这个事件是,当一个玩家执行一个命令的时候将会被触发(也就是在聊天框里面输入信息以/开头的时候，算作命令，就会触发此事件)。
      *
      * @param event
