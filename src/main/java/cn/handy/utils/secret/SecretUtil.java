@@ -197,6 +197,9 @@ public class SecretUtil {
      * @return
      */
     public static Boolean equalsInSet(ItemStack one, ItemStack other, SecretEqualsInfoEnum... set) {
+        if (one == null || other == null) {
+            return false;
+        }
         if (!one.hasItemMeta()) {
             return false;
         }

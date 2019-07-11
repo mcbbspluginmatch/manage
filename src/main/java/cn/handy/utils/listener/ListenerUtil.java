@@ -5,10 +5,7 @@ import cn.handy.constants.BaseConfigCache;
 import cn.handy.listener.back.BackListener;
 import cn.handy.listener.msg.MsgListener;
 import cn.handy.listener.pvp.PvpListener;
-import cn.handy.listener.secret.SecretBuffListener;
-import cn.handy.listener.secret.SecretGetListener;
-import cn.handy.listener.secret.SecretSetListener;
-import cn.handy.listener.secret.SecretUseListener;
+import cn.handy.listener.secret.*;
 import cn.handy.listener.signchange.SignChangeListener;
 import cn.handy.listener.user.UserListener;
 import org.bukkit.Bukkit;
@@ -38,6 +35,7 @@ public class ListenerUtil {
             Bukkit.getPluginManager().registerEvents(new SecretGetListener(), Manage.plugin);
             Bukkit.getPluginManager().registerEvents(new SecretUseListener(), Manage.plugin);
             Bukkit.getPluginManager().registerEvents(new SecretBuffListener(), Manage.plugin);
+            Bukkit.getPluginManager().registerEvents(new SecretGuiListener(), Manage.plugin);
         }
         if (BaseConfigCache.isSignChange) {
             Bukkit.getPluginManager().registerEvents(new SignChangeListener(), Manage.plugin);
