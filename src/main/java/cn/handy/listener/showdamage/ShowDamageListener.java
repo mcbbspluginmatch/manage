@@ -3,6 +3,7 @@ package cn.handy.listener.showdamage;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.msg.SendMessage;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,7 +47,19 @@ public class ShowDamageListener implements Listener {
         }
         if (damagePlayer != null && entity instanceof LivingEntity) {
             LivingEntity livingEntity = (LivingEntity) entity;
-            SendMessage.sendActionBar(damagePlayer, ChatColor.GREEN + livingEntity.getName() + "     " + ChatColor.WHITE + (livingEntity.getHealth() - event.getFinalDamage() + " / " + livingEntity.getHealth()));
+            int finalDamage = (int) (livingEntity.getHealth() - event.getFinalDamage());
+            if (finalDamage < 0) {
+                finalDamage = 0;
+            }
+            String name = "";
+            if (livingEntity.getCustomName() != null) {
+                name = livingEntity.getCustomName() + ":";
+            } else {
+                name = livingEntity.getName() + ":";
+            }
+            double maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
+            SendMessage.sendActionBar(damagePlayer,
+                    ChatColor.GREEN + name + ChatColor.WHITE + finalDamage + " / " + maxHealth);
         }
     }
 }

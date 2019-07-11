@@ -58,4 +58,15 @@ public class BaseUtil {
     public static String replaceName(String msg, String name) {
         return msg.replace("${player}", name);
     }
+
+    /**
+     * 颜色代码和名字代码替换
+     *
+     * @param msg
+     * @param name
+     * @return
+     */
+    public static String replaceChatColorAndName(String msg, String name) {
+        return ChatColor.translateAlternateColorCodes('&', msg).replace("${player}", name);
+    }
 }
