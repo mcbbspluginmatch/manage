@@ -6,6 +6,7 @@ import cn.handy.constants.secret.SecretListenerEnum;
 import cn.handy.utils.secret.SecretUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -174,16 +175,32 @@ public class SecretSetListener implements Listener {
     @EventHandler
     public void onPlayerFishEvent(PlayerFishEvent event) {
         Player player = event.getPlayer();
-        PlayerInventory inventory = player.getInventory();
-        for (ItemStack stack : inventory) {
-            // 判断是否有无字天书
-            if (SecretUtil.equalsInSet(stack, SecretUtil.getItemStack(0), SecretEqualsInfoEnum.ABOUT_NAME)) {
-                // 判断事件是否相等
-                if (SecretListenerEnum.PLAYER_FISH.getId() == SecretUtil.getEvenId(stack)) {
-                    // 新增随机秘籍
-                    stack.setAmount(0);
-                    inventory.addItem(SecretUtil.ranItemStack());
-                    player.sendMessage(ChatColor.AQUA + "姜太公钓鱼 —— 愿者上钩,你领悟到无字天书的真意");
+        Entity caught = event.getCaught();
+        if (caught == null) {
+            return;
+        }
+        EntityType entityType = caught.getType();
+        Boolean rst = false;
+        switch (entityType) {
+            // 河豚
+            case PUFFERFISH:
+                rst = true;
+                break;
+            default:
+                break;
+        }
+        if (rst) {
+            PlayerInventory inventory = player.getInventory();
+            for (ItemStack stack : inventory) {
+                // 判断是否有无字天书
+                if (SecretUtil.equalsInSet(stack, SecretUtil.getItemStack(0), SecretEqualsInfoEnum.ABOUT_NAME)) {
+                    // 判断事件是否相等
+                    if (SecretListenerEnum.PLAYER_FISH.getId() == SecretUtil.getEvenId(stack)) {
+                        // 新增随机秘籍
+                        stack.setAmount(0);
+                        inventory.addItem(SecretUtil.ranItemStack());
+                        player.sendMessage(ChatColor.AQUA + "姜太公钓鱼 —— 愿者上钩,你领悟到无字天书的真意");
+                    }
                 }
             }
         }

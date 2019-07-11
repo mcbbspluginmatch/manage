@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 
 /**
  * @author hanshuai
@@ -25,6 +26,7 @@ public class SecretGuiListener implements Listener {
     public void onInventoryClickEvent(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Inventory inventory = event.getInventory();
+
         if (inventory.equals(BaseConstants.InventoryMap.get(player.getName()))) {
             event.setCancelled(true);
         }

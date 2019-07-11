@@ -17,7 +17,7 @@ public class BaseUtil {
     /**
      * 判断是否为玩家
      *
-     * @param sender
+     * @param sender 发送者
      * @return true是
      */
     public static Boolean isPlayer(CommandSender sender) {
@@ -27,7 +27,7 @@ public class BaseUtil {
     /**
      * 利用正则表达式判断字符串是否是数字
      *
-     * @param str
+     * @param str 字符串
      * @return
      */
     public static Boolean isNumeric(String str) {
@@ -41,10 +41,21 @@ public class BaseUtil {
     /**
      * 颜色代码转换
      *
-     * @param string
+     * @param msg 消息
      * @return
      */
-    public static String replaceChatColor(String string) {
-        return ChatColor.translateAlternateColorCodes('&', string);
+    public static String replaceChatColor(String msg) {
+        return ChatColor.translateAlternateColorCodes('&', msg);
+    }
+
+    /**
+     * 名字代码替换
+     *
+     * @param msg  消息
+     * @param name 名称
+     * @return
+     */
+    public static String replaceName(String msg, String name) {
+        return msg.replace("${player}", name);
     }
 }

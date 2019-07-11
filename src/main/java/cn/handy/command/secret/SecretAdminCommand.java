@@ -36,18 +36,34 @@ public class SecretAdminCommand extends Command {
         if (args != null && args.length > 0) {
             if (args[0].equalsIgnoreCase("give")) {
                 val player = Bukkit.getServer().getPlayer(args[1]);
+                if (player == null) {
+                    sender.sendMessage(ChatColor.RED + "未查询到该玩家");
+                    return true;
+                }
                 PlayerInventory inventory = player.getInventory();
                 inventory.addItem(BaseConstants.itemStackList.get(Integer.parseInt(args[2])));
             } else if (args[0].equalsIgnoreCase("giveHelp")) {
                 val player = Bukkit.getServer().getPlayer(args[1]);
+                if (player == null) {
+                    sender.sendMessage(ChatColor.RED + "未查询到该玩家");
+                    return true;
+                }
                 PlayerInventory inventory = player.getInventory();
                 inventory.addItem(SecretUtil.getSecretHelp());
             } else if (args[0].equalsIgnoreCase("giveKnowBook")) {
                 val player = Bukkit.getServer().getPlayer(args[1]);
+                if (player == null) {
+                    sender.sendMessage(ChatColor.RED + "未查询到该玩家");
+                    return true;
+                }
                 PlayerInventory inventory = player.getInventory();
                 inventory.addItem(SecretUtil.getKnowledgeBook());
             } else if (args[0].equalsIgnoreCase("giveNoCharBook")) {
                 val player = Bukkit.getServer().getPlayer(args[1]);
+                if (player == null) {
+                    sender.sendMessage(ChatColor.RED + "未查询到该玩家");
+                    return true;
+                }
                 PlayerInventory inventory = player.getInventory();
                 inventory.addItem(SecretUtil.getItemStack(SecretUtil.getRandom()));
             } else if (args[0].equalsIgnoreCase("see")) {

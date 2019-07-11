@@ -6,6 +6,7 @@ import cn.handy.listener.back.BackListener;
 import cn.handy.listener.msg.MsgListener;
 import cn.handy.listener.pvp.PvpListener;
 import cn.handy.listener.secret.*;
+import cn.handy.listener.showdamage.ShowDamageListener;
 import cn.handy.listener.signchange.SignChangeListener;
 import cn.handy.listener.user.UserListener;
 import org.bukkit.Bukkit;
@@ -42,6 +43,9 @@ public class ListenerUtil {
         }
         if (BaseConfigCache.isBack) {
             Bukkit.getPluginManager().registerEvents(new BackListener(), Manage.plugin);
+        }
+        if (BaseConfigCache.idShowDamage) {
+            Bukkit.getPluginManager().registerEvents(new ShowDamageListener(), Manage.plugin);
         }
     }
 }

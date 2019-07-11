@@ -114,6 +114,7 @@ public class ConfigUtil {
         val isHome = ConfigUtil.config.getBoolean("isHome");
         val isBack = ConfigUtil.config.getBoolean("isBack");
         val isSignChange = ConfigUtil.config.getBoolean("isSignChange");
+        val idShowDamage = ConfigUtil.config.getBoolean("idShowDamage");
 
         BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
@@ -127,5 +128,6 @@ public class ConfigUtil {
         BaseConfigCache.isHome = isHome;
         BaseConfigCache.isBack = isBack;
         BaseConfigCache.isSignChange = isSignChange;
+        BaseConfigCache.idShowDamage = idShowDamage;
     }
 }

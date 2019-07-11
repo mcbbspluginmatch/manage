@@ -34,4 +34,6 @@ isHome: true
 isBack: true
 # 木牌支持彩色字
 isSignChange: true
+# 物品栏上方伤害显示
+idShowDamage: false
 #需要开启的功能end--------------------------

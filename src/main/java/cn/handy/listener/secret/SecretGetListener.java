@@ -3,11 +3,13 @@ package cn.handy.listener.secret;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.secret.SecretUtil;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.PlayerInventory;
@@ -133,6 +135,67 @@ public class SecretGetListener implements Listener {
             // 设置手上的物品
             inventory.addItem(SecretUtil.getKnowledgeBook());
             player.sendMessage(ChatColor.AQUA + "意外之喜,您发现一本知识之书");
+        }
+    }
+
+    /**
+     * 当一个方块被玩家破坏的时候，调用本事件.
+     *
+     * @param event
+     */
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent event) {
+        Material material = event.getBlock().getType();
+        int ranDom = -1;
+        switch (material) {
+            // 钻石矿
+            case DIAMOND_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("DIAMOND_ORE"));
+                break;
+            // 金矿
+            case GOLD_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("GOLD_ORE"));
+                break;
+            // 铁矿
+            case IRON_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("IRON_ORE"));
+                break;
+            // 煤矿
+            case COAL_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("COAL_ORE"));
+                break;
+            // 绿宝石
+            case EMERALD_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("EMERALD_ORE"));
+                break;
+            // 石英
+            case NETHER_QUARTZ_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("NETHER_QUARTZ_ORE"));
+                break;
+            // 红石
+            case REDSTONE_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("REDSTONE_ORE"));
+                break;
+            // 青金石
+            case LAPIS_ORE:
+                ranDom = new Random().nextInt(ConfigUtil.secretConfig.getInt("LAPIS_ORE"));
+                break;
+            default:
+                break;
+        }
+
+        // 如果抽中随机数字就掉落物多一个无字天书
+        if (ranDom == 0) {
+            // 背包新增物品
+            PlayerInventory inventory = event.getPlayer().getInventory();
+            inventory.addItem(SecretUtil.getItemStack(SecretUtil.getRandom()));
+            event.getPlayer().sendMessage(ChatColor.AQUA + "意外之喜,您发现一本无字天书");
+        }
+        if (ranDom == 1) {
+            // 背包新增物品
+            PlayerInventory inventory = event.getPlayer().getInventory();
+            inventory.addItem(SecretUtil.getKnowledgeBook());
+            event.getPlayer().sendMessage(ChatColor.AQUA + "意外之喜,您发现一本知识之书");
         }
     }
 }
