@@ -5,11 +5,8 @@ import cn.handy.constants.BaseConfigCache;
 import org.bukkit.Server;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
 
 /**
@@ -34,10 +31,8 @@ public class ReportUtil {
                 @Override
                 public void run() {
                     try {
-                        InetAddress address = InetAddress.getLocalHost();
                         Server server = Manage.plugin.getServer();
                         StringBuffer stringBuffer = new StringBuffer();
-                        stringBuffer.append("ip=" + address.getHostAddress());
                         stringBuffer.append("&port=" + server.getPort());
                         stringBuffer.append("&maxPlayers=" + server.getMaxPlayers());
                         stringBuffer.append("&motd=" + server.getMotd());
@@ -74,12 +69,6 @@ public class ReportUtil {
         PrintStream ps = new PrintStream(conn.getOutputStream());
         ps.print(param);
         ps.close();
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        String line, resultStr = "";
-        while (null != (line = bReader.readLine())) {
-            resultStr += line;
-        }
-        bReader.close();
     }
 
 }
