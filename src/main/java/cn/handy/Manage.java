@@ -2,6 +2,7 @@ package cn.handy;
 
 import cn.handy.command.EnableCommand;
 import cn.handy.utils.Beans;
+import cn.handy.utils.ReportUtil;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
 import cn.handy.utils.secret.SecretUtil;
@@ -32,6 +33,8 @@ public class Manage extends JavaPlugin {
         SecretUtil.noCharBook();
         // 创建表和获取数据库链接
         Beans.getBeans().getSqlManagerUtil().enableSql();
+        // 统计插件使用情况
+        ReportUtil.report();
         this.getLogger().info("manage插件启动成功");
     }
 

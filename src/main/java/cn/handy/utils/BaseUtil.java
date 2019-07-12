@@ -69,4 +69,5 @@ public class BaseUtil {
     public static String replaceChatColorAndName(String msg, String name) {
         return ChatColor.translateAlternateColorCodes('&', msg).replace("${player}", name);
     }
+
 }

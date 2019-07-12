@@ -11,7 +11,6 @@ mysql:
 initSize: 8
 maxActive: 10
 
-#需要开启的功能start------------------------
 # 是否启用登录系统
 isUser: true
 # 是否启用每个玩家加入/退出游戏消息提醒
@@ -35,5 +34,7 @@ isBack: true
 # 木牌支持彩色字
 isSignChange: true
 # 物品栏上方伤害显示
-idShowDamage: true
-#需要开启的功能end--------------------------
+isShowDamage: true
+
+# 是否进行插件使用统计(true的话会每俩小时发送一个插件使用信息到统计网站)
+isReport: true
