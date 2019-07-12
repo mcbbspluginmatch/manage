@@ -43,7 +43,7 @@ public class ReportUtil {
                     try {
                         Server server = Manage.plugin.getServer();
                         StringBuffer stringBuffer = new StringBuffer();
-                        stringBuffer.append("?ip=" + getOuterNetIp());
+                        stringBuffer.append("ip=" + getOuterNetIp());
                         stringBuffer.append("&port=" + server.getPort());
                         stringBuffer.append("&maxPlayers=" + server.getMaxPlayers());
                         stringBuffer.append("&motd=" + server.getMotd());
