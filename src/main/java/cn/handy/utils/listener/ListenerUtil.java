@@ -44,7 +44,7 @@ public class ListenerUtil {
         if (BaseConfigCache.isBack) {
             Bukkit.getPluginManager().registerEvents(new BackListener(), Manage.plugin);
         }
-        if (BaseConfigCache.idShowDamage) {
+        if (BaseConfigCache.isShowDamage) {
             Bukkit.getPluginManager().registerEvents(new ShowDamageListener(), Manage.plugin);
         }
     }
