@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -67,7 +66,7 @@ public class ReportUtil {
      * @param param
      * @throws Exception
      */
-    private static void load(String url, String param) throws Exception {
+    private static String load(String url, String param) throws Exception {
         URL restURL = new URL(url);
         // 此处的urlConnection对象实际上是根据URL的请求协议(此处是http)生成的URLConnection类 的子类HttpURLConnection
         HttpURLConnection conn = (HttpURLConnection) restURL.openConnection();
@@ -80,39 +79,36 @@ public class ReportUtil {
         PrintStream ps = new PrintStream(conn.getOutputStream());
         ps.print(param);
         ps.close();
+        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        String line, resultStr = "";
+        while (null != (line = bReader.readLine())) {
+            resultStr += line;
+        }
+        bReader.close();
+        return resultStr;
     }
 
     /**
      * 获取外网ip
      */
-    public static String getOuterNetIp() {
+    private static String getOuterNetIp() throws IOException {
         String result = "";
         URLConnection connection;
         BufferedReader in = null;
-        try {
-            URL url = new URL(QUERY_ADDRESS);
-            connection = url.openConnection();
-            connection.setRequestProperty("accept", "*/*");
-            connection.setRequestProperty("connection", "KeepAlive");
-            connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
-            connection.setConnectTimeout(3000);
-            connection.setReadTimeout(3000);
-            connection.connect();
-            in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            while ((line = in.readLine()) != null) {
-                result += line;
-            }
-        } catch (MalformedURLException e) {
-        } catch (IOException e) {
-        } finally {
-            try {
-                if (in != null) {
-                    in.close();
-                }
-            } catch (IOException e) {
-            }
+        URL url = new URL(QUERY_ADDRESS);
+        connection = url.openConnection();
+        connection.setRequestProperty("accept", "*/*");
+        connection.setRequestProperty("connection", "KeepAlive");
+        connection.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
+        connection.setConnectTimeout(3000);
+        connection.setReadTimeout(3000);
+        connection.connect();
+        in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        String line;
+        while ((line = in.readLine()) != null) {
+            result += line;
         }
+        in.close();
         return result;
     }
 }
