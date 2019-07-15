@@ -21,7 +21,7 @@ public class PluginVersions {
     /**
      * 插件版本
      */
-    private Double versions;
+    private String versions;
 
     /**
      * 下载地址
@@ -57,12 +57,12 @@ public class PluginVersions {
         this.password = password == null ? null : password.trim();
     }
 
-    public Double getVersions() {
+    public String getVersions() {
         return versions;
     }
 
-    public void setVersions(Double versions) {
-        this.versions = versions;
+    public void setVersions(String versions) {
+        this.versions = versions == null ? null : versions.trim();
     }
 
     public String getDownloadUrl() {
@@ -80,4 +80,5 @@ public class PluginVersions {
     public void setUpdateNote(String updateNote) {
         this.updateNote = updateNote == null ? null : updateNote.trim();
     }
+
 }
