@@ -43,7 +43,7 @@ public class Manage extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
-                PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123");
+                PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123", "");
                 if (pluginVersion != null) {
                     // 判断版本号是否相等
                     if (PLUGIN_VERSION.equals(pluginVersion.getVersions())) {

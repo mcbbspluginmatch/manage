@@ -24,7 +24,7 @@ public class PluginVersionUtil {
         //TODO  以下的内容写到onEnable里
         // 插件版本号-保持跟目前插件版本相同
         String version = "1.0.0";
-        PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123456");
+        PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123456", "");
         if (pluginVersion != null) {
             // 判断版本号是否相等
             if (version.equals(pluginVersion.getVersions())) {
@@ -40,16 +40,18 @@ public class PluginVersionUtil {
     /**
      * 获取版本信息
      *
-     * @param pluginName
-     * @param passWord
+     * @param pluginName    插件名称
+     * @param queryPassWord 插件查询密码
+     * @param mcVersions    mc版本号(选填)
      * @return
      */
-    public static PluginVersions getPluginVersion(String pluginName, String passWord) {
+    public static PluginVersions getPluginVersion(String pluginName, String queryPassWord, String mcVersions) {
         PluginVersions pluginVersions = null;
         try {
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append("plugin=" + pluginName);
-            stringBuffer.append("&password=" + passWord);
+            stringBuffer.append("&queryPassWord=" + queryPassWord);
+            stringBuffer.append("&mcVersions=" + mcVersions);
             String pluginVersion = load(URL_STR, stringBuffer.toString());
             if (pluginVersion != null && !"".equals(pluginVersion)) {
                 Gson gson = new Gson();
