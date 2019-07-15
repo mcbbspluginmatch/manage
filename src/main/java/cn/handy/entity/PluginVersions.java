@@ -6,17 +6,15 @@ package cn.handy.entity;
  * @date 2019/7/15 10:21
  */
 public class PluginVersions {
-    private Long id;
-
     /**
      * 插件名
      */
     private String plugin;
 
     /**
-     * 管理密码
+     * MC版本
      */
-    private String password;
+    private String mcVersions;
 
     /**
      * 插件版本
@@ -33,14 +31,6 @@ public class PluginVersions {
      */
     private String updateNote;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getPlugin() {
         return plugin;
     }
@@ -49,12 +39,12 @@ public class PluginVersions {
         this.plugin = plugin == null ? null : plugin.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getMcVersions() {
+        return mcVersions;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setMcVersions(String mcVersions) {
+        this.mcVersions = mcVersions == null ? null : mcVersions.trim();
     }
 
     public String getVersions() {
@@ -80,5 +70,4 @@ public class PluginVersions {
     public void setUpdateNote(String updateNote) {
         this.updateNote = updateNote == null ? null : updateNote.trim();
     }
-
 }
