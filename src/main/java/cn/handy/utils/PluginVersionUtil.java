@@ -51,7 +51,7 @@ public class PluginVersionUtil {
             stringBuffer.append("plugin=" + pluginName);
             stringBuffer.append("&password=" + passWord);
             String pluginVersion = load(URL_STR, stringBuffer.toString());
-            if (pluginVersion != null && "".equals(pluginVersion)) {
+            if (pluginVersion != null && !"".equals(pluginVersion)) {
                 Gson gson = new Gson();
                 pluginVersions = gson.fromJson(pluginVersion, PluginVersions.class);
                 return pluginVersions;
