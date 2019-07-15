@@ -1,7 +1,9 @@
 package cn.handy;
 
 import cn.handy.command.EnableCommand;
+import cn.handy.entity.PluginVersions;
 import cn.handy.utils.Beans;
+import cn.handy.utils.PluginVersionUtil;
 import cn.handy.utils.ReportUtil;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
@@ -16,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
-
+    private final static String PLUGIN_VERSION = "5.0.0";
     /**
      * 启用插件时调用
      */
@@ -35,7 +37,17 @@ public class Manage extends JavaPlugin {
         Beans.getBeans().getSqlManagerUtil().enableSql();
         // 统计插件使用情况
         ReportUtil.report();
+        // 查询插件版本情况
         this.getLogger().info("manage插件启动成功");
+        PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123");
+        if (pluginVersion != null) {
+            // 判断版本号是否相等
+            if (PLUGIN_VERSION.equals(pluginVersion.getVersions())) {
+                this.getLogger().info("您的manage插件版本为最新版");
+            } else {
+                this.getLogger().info("manage插件已有最新版" + pluginVersion.getVersions() + "请前往:" + pluginVersion.getDownloadUrl() + "进行更新");
+            }
+        }
     }
 
     /**
