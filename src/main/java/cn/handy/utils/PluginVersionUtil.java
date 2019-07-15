@@ -10,7 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * @author hanshuai
+ * @author hs
  * @Description: {插件版本管理Util}
  * @date 2019/7/15 9:51
  */
@@ -82,7 +82,7 @@ public class PluginVersionUtil {
         PrintStream ps = new PrintStream(conn.getOutputStream());
         ps.print(param);
         ps.close();
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
         String line, resultStr = "";
         while (null != (line = bReader.readLine())) {
             resultStr += line;

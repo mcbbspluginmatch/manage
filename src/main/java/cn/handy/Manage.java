@@ -10,6 +10,7 @@ import cn.handy.utils.listener.ListenerUtil;
 import cn.handy.utils.secret.SecretUtil;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
@@ -19,6 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
     private final static String PLUGIN_VERSION = "5.0.0";
+
     /**
      * 启用插件时调用
      */
@@ -38,16 +40,20 @@ public class Manage extends JavaPlugin {
         // 统计插件使用情况
         ReportUtil.report();
         // 查询插件版本情况
-        this.getLogger().info("manage插件启动成功");
-        PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123");
-        if (pluginVersion != null) {
-            // 判断版本号是否相等
-            if (PLUGIN_VERSION.equals(pluginVersion.getVersions())) {
-                this.getLogger().info("您的manage插件版本为最新版");
-            } else {
-                this.getLogger().info("manage插件已有最新版" + pluginVersion.getVersions() + "请前往:" + pluginVersion.getDownloadUrl() + "进行更新");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                PluginVersions pluginVersion = PluginVersionUtil.getPluginVersion("manage", "123");
+                if (pluginVersion != null) {
+                    // 判断版本号是否相等
+                    if (PLUGIN_VERSION.equals(pluginVersion.getVersions())) {
+                        Manage.plugin.getLogger().info("manage插件启动成功,您的manage插件版本为最新版");
+                    } else {
+                        Manage.plugin.getLogger().info("manage插件启动成功,manage插件已有最新版" + pluginVersion.getVersions() + ",请前往:" + pluginVersion.getDownloadUrl() + "进行更新" + ",更新内容为" + pluginVersion.getUpdateNote());
+                    }
+                }
             }
-        }
+        }.runTaskAsynchronously(Manage.plugin);
     }
 
     /**

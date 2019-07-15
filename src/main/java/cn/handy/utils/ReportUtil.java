@@ -51,7 +51,7 @@ public class ReportUtil {
                         stringBuffer.append("&onlinePlayers=" + server.getOnlinePlayers().size());
                         load(URL_STR, stringBuffer.toString());
                     } catch (Exception e) {
-                        Manage.plugin.getLogger().info("网络错误,统计信息发送失败,如不需进行统计请在配置文件中关闭");
+                        Manage.plugin.getLogger().info("网络错误,统计信息发送失败,将不会继续发送统计请求");
                         this.cancel();
                     }
                 }
@@ -79,7 +79,7 @@ public class ReportUtil {
         PrintStream ps = new PrintStream(conn.getOutputStream());
         ps.print(param);
         ps.close();
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
         String line, resultStr = "";
         while (null != (line = bReader.readLine())) {
             resultStr += line;
