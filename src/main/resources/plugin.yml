@@ -3,26 +3,3 @@ main: cn.handy.Manage
 version: 5.0.0
 author: handy
 api-version: 1.13
-permissions:
-    handy.manage:
-        default: op
-    handy.tp:
-        default: op
-    handy.gift:
-        default: op
-    handy.msgadmin:
-        default: op
-    handy.secretadmin:
-        default: op
-    handy.msg:
-        default: true
-    handy.hat:
-        default: true
-    handy.pvp:
-        default: true
-    handy.secret:
-        default: true
-    handy.home:
-        default: true
-    handy.back:
-        default: true
