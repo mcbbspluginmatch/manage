@@ -56,7 +56,7 @@ public class HomeCommand extends Command {
                     @Override
                     public void run() {
                         Home home = Beans.getBeans().getHomeService().findByUserNameAndHomeName(player.getName(), args[0]);
-                        if (home.getId() > 0) {
+                        if (home != null && home.getId() > 0) {
                             player.teleport(getHomeLocation(home));
                             player.sendMessage("回家成功");
                             BaseConstants.homeWaitTime.put(player.getName(), System.currentTimeMillis());
