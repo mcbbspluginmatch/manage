@@ -134,7 +134,7 @@ public class ConfigUtil {
         val isSecret = ConfigUtil.config.getBoolean("isSecret");
         val isHome = ConfigUtil.config.getBoolean("isHome");
         val isBack = ConfigUtil.config.getBoolean("isBack");
-        val isSignChange = ConfigUtil.config.getBoolean("isSignChange");
+        val isColor = ConfigUtil.config.getBoolean("isColor");
         val isShowDamage = ConfigUtil.config.getBoolean("isShowDamage");
         val isReport = ConfigUtil.config.getBoolean("isReport");
         val isSpawn = ConfigUtil.config.getBoolean("isSpawn");
@@ -150,7 +150,7 @@ public class ConfigUtil {
         BaseConfigCache.isSecret = isSecret;
         BaseConfigCache.isHome = isHome;
         BaseConfigCache.isBack = isBack;
-        BaseConfigCache.isSignChange = isSignChange;
+        BaseConfigCache.isColor = isColor;
         BaseConfigCache.isShowDamage = isShowDamage;
         BaseConfigCache.isReport = isReport;
         BaseConfigCache.isSpawn = isSpawn;

@@ -39,7 +39,7 @@ public class ListenerUtil {
             Bukkit.getPluginManager().registerEvents(new SecretBuffListener(), Manage.plugin);
             Bukkit.getPluginManager().registerEvents(new SecretGuiListener(), Manage.plugin);
         }
-        if (BaseConfigCache.isSignChange) {
+        if (BaseConfigCache.isColor) {
             Bukkit.getPluginManager().registerEvents(new SignChangeListener(), Manage.plugin);
         }
         if (BaseConfigCache.isBack) {

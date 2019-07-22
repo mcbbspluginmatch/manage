@@ -31,8 +31,8 @@ isSecret: true
 isHome: true
 # 是否开启back
 isBack: true
-# 木牌支持彩色字
-isSignChange: true
+# 木牌/聊天支持颜色代码&
+isColor: true
 # 物品栏上方伤害显示
 isShowDamage: true
 # 是否启用spawn
