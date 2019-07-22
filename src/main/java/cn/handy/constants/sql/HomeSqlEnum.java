@@ -37,11 +37,11 @@ public enum HomeSqlEnum {
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16) NOT NULL," +
                     "`homeName` varchar(16)," +
-                    "`x` double(16)" +
-                    "`y` double(16)" +
-                    "`z` double(16)" +
-                    "`yaw` float(16)" +
-                    "`pitch` float(16)" +
+                    "`x` double(16)," +
+                    "`y` double(16)," +
+                    "`z` double(16)," +
+                    "`yaw` float(16)," +
+                    "`pitch` float(16)," +
                     "`world` varchar(16)" +
                     ");"
     ),
