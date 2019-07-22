@@ -116,6 +116,7 @@ public class ConfigUtil {
         val isSignChange = ConfigUtil.config.getBoolean("isSignChange");
         val isShowDamage = ConfigUtil.config.getBoolean("isShowDamage");
         val isReport = ConfigUtil.config.getBoolean("isReport");
+        val isSpawn = ConfigUtil.config.getBoolean("isSpawn.isUse");
 
         BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
@@ -131,5 +132,6 @@ public class ConfigUtil {
         BaseConfigCache.isSignChange = isSignChange;
         BaseConfigCache.isShowDamage = isShowDamage;
         BaseConfigCache.isReport = isReport;
+        BaseConfigCache.isSpawn = isSpawn;
     }
 }

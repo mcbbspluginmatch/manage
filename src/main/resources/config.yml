@@ -1,11 +1,11 @@
 # 请选择是否要使用mysql,不使用的话默认使用sqLite来储存信息
-isUseMySql: false
+isUseMySql: true
 # 用于mysql数据库链接
 mysql:
-  ip: 127.0.0.1
+  ip: 106.12.156.212
   port: 3306
-  username: root
-  password: 123456
+  username: hanshuai
+  password: abc956812056
   databasename: minecraft
 # 数据库连接池初始大小和最大连接数(不懂就别动下面这俩个)
 initSize: 8
@@ -35,6 +35,8 @@ isBack: true
 isSignChange: true
 # 物品栏上方伤害显示
 isShowDamage: true
+# 是否启用spawn
+isSpawn: true
 
 # 是否进行插件使用统计(true的话会每俩小时发送一个插件使用信息到统计网站,异步运行不影响服务器)
 isReport: true

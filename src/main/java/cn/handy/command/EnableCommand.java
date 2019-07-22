@@ -24,6 +24,7 @@ import cn.handy.constants.BaseConstants;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.util.permissions.CommandPermissions;
 import org.bukkit.util.permissions.DefaultPermissions;
 
 import java.lang.reflect.InvocationTargetException;

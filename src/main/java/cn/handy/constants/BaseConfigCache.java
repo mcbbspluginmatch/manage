@@ -24,6 +24,7 @@ public abstract class BaseConfigCache {
     public static Boolean isSignChange = false;
     public static Boolean isShowDamage = false;
     public static Boolean isReport = false;
+    public static Boolean isSpawn = false;
 
 }
 

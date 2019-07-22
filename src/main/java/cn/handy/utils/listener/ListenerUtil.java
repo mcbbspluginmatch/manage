@@ -8,6 +8,7 @@ import cn.handy.listener.pvp.PvpListener;
 import cn.handy.listener.secret.*;
 import cn.handy.listener.showdamage.ShowDamageListener;
 import cn.handy.listener.signchange.SignChangeListener;
+import cn.handy.listener.spawn.SpawnListener;
 import cn.handy.listener.user.UserListener;
 import org.bukkit.Bukkit;
 
@@ -46,6 +47,9 @@ public class ListenerUtil {
         }
         if (BaseConfigCache.isShowDamage) {
             Bukkit.getPluginManager().registerEvents(new ShowDamageListener(), Manage.plugin);
+        }
+        if (BaseConfigCache.isSpawn) {
+            Bukkit.getPluginManager().registerEvents(new SpawnListener(), Manage.plugin);
         }
     }
 }

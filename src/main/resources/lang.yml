@@ -10,7 +10,12 @@ homeDelayTime: 0
 homeWaitTime: 60
 # back传送等待时间(单位秒)(isHome启用时候生效)
 backWaitTime: 60
-
+# spawn位置设置(isSpawn启用时候生效)
+spawn:
+  world: world
+  x: 0
+  y: 0
+  z: 0
 
 # 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
