@@ -15,6 +15,8 @@ import cn.handy.command.msg.MsgCommand;
 import cn.handy.command.pvp.PvpCommand;
 import cn.handy.command.secret.SecretAdminCommand;
 import cn.handy.command.secret.SecretCommand;
+import cn.handy.command.spawn.SetSpawnCommand;
+import cn.handy.command.spawn.SpawnCommand;
 import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
@@ -106,6 +108,12 @@ public class EnableCommand {
         if (BaseConfigCache.isBack){
             commandMap.register(Manage.plugin.getDescription().getName(), new BackCommand());
             DefaultPermissions.registerPermission("handy.back",null, PermissionDefault.TRUE);
+        }
+        if (BaseConfigCache.isHome){
+            commandMap.register(Manage.plugin.getDescription().getName(), new SetSpawnCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new SpawnCommand());
+            DefaultPermissions.registerPermission("handy.setSpawn",null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.spawn",null, PermissionDefault.TRUE);
         }
     }
 }

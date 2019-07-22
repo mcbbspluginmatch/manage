@@ -14,7 +14,7 @@ backWaitTime: 60
 spawn:
   world: world
   x: 0
-  y: 0
+  y: 72
   z: 0
 
 # 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
