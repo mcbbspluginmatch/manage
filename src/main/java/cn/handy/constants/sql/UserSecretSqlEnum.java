@@ -34,8 +34,8 @@ public enum UserSecretSqlEnum {
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`userName` varchar(16)," +
                     "`sectsId` int(11)," +
-                    "`sectsName` varchar(16)" +
-                    "`secretId` int(11)" +
+                    "`sectsName` varchar(16)," +
+                    "`secretId` int(11)," +
                     "`secretGarde` int(11)" +
                     ");"
     ),

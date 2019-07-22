@@ -26,15 +26,15 @@ isGift: true
 # 是否启用pvp管理
 isPvp: true
 # 是否开启武林秘籍系统
-isSecret: false
+isSecret: true
 # 是否开启home
 isHome: true
 # 是否开启back
-isBack: false
+isBack: true
 # 木牌支持彩色字
-isSignChange: false
+isSignChange: true
 # 物品栏上方伤害显示
-isShowDamage: false
+isShowDamage: true
 # 是否启用spawn
 isSpawn: true
 

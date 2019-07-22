@@ -34,9 +34,9 @@ public enum SecretSqlEnum {
                     "`id` INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "`sectsId` int(11)," +
                     "`sectsName` varchar(16)," +
-                    "`name` varchar(255)" +
-                    "`lore` varchar(1000)" +
-                    "`buffId` int(11)" +
+                    "`name` varchar(255)," +
+                    "`lore` varchar(1000)," +
+                    "`buffId` int(11)," +
                     "`buffName` varchar(255)" +
                     ");"
     ),

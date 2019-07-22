@@ -5,8 +5,11 @@ import cn.handy.constants.BaseConstants;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
+import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -62,8 +65,31 @@ public class UserListener implements Listener {
                 // 第一次进入游戏赠送一本武林风云说明
                 player.getInventory().addItem(SecretUtil.getSecretHelp());
             }
+            if (BaseConfigCache.isSpawn) {
+                // 第一次注册登录位置为spawn
+                String world = ConfigUtil.langConfig.getString("spawn.world");
+                Double x = ConfigUtil.langConfig.getDouble("spawn.x");
+                Double y = ConfigUtil.langConfig.getDouble("spawn.y");
+                Double z = ConfigUtil.langConfig.getDouble("spawn.z");
+                player.teleport(getSpawnLocation(world, x, y, z));
+            }
             player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
         }
+    }
+
+    /**
+     * 获取地点
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    private Location getSpawnLocation(String world, Double x, Double y, Double z) {
+        return new Location(
+                Bukkit.getWorld(world), x, y, z
+        );
     }
 
     /**
