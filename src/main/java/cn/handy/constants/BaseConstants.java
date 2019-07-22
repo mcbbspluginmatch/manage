@@ -1,5 +1,6 @@
 package cn.handy.constants;
 
+import cn.handy.entity.Spawn;
 import cn.handy.entity.User;
 import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
@@ -81,6 +82,11 @@ public abstract class BaseConstants {
     public static Map<String, Inventory> InventoryMap = new HashMap<>();
 
     /**
+     * spawn缓存信息
+     */
+    public static List<Spawn> spawnList = new ArrayList<>();
+
+    /**
      * msgAdmin帮助语句
      */
     public final static String MSG_ADMIN_HELP =
@@ -104,8 +110,9 @@ public abstract class BaseConstants {
     public final static String MANAGE_MSG =
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
-                    "§e/manage reload lang     " + "§f重载本插件的lang文本" +
-                    "§e/manage reload secret   " + "§f重载本插件的secret文本";
+                    "§e/manage reload lang     " + "§f重载本插件的lang文本\n" +
+                    "§e/manage reload secret   " + "§f重载本插件的secret文本\n"+
+                    "§e/manage reload spawn   " + "§f重载本插件的spawn文本";
 
     public final static String PVP_HELP =
             "§e§m一一一一一一一§f[§ePVP管理§f]§e§m一一一一一一一\n" +

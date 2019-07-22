@@ -2,6 +2,7 @@ package cn.handy.listener.user;
 
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
+import cn.handy.entity.Spawn;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
@@ -67,11 +68,20 @@ public class UserListener implements Listener {
             }
             if (BaseConfigCache.isSpawn) {
                 // 第一次注册登录位置为spawn
-                String world = ConfigUtil.langConfig.getString("spawn.world");
-                Double x = ConfigUtil.langConfig.getDouble("spawn.x");
-                Double y = ConfigUtil.langConfig.getDouble("spawn.y");
-                Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-                player.teleport(getSpawnLocation(world, x, y, z));
+                Boolean b = false;
+                for (Spawn spawn : BaseConstants.spawnList) {
+                    if (event.getPlayer().hasPermission(spawn.getPermission())) {
+                        b = true;
+                        player.teleport(getSpawnLocation(spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ()));
+                    }
+                }
+                if (!b) {
+                    String world = ConfigUtil.langConfig.getString("spawn.world");
+                    Double x = ConfigUtil.langConfig.getDouble("spawn.x");
+                    Double y = ConfigUtil.langConfig.getDouble("spawn.y");
+                    Double z = ConfigUtil.langConfig.getDouble("spawn.z");
+                    player.teleport(getSpawnLocation(world, x, y, z));
+                }
             }
             player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
         }
