@@ -23,6 +23,11 @@ public class SpawnListener implements Listener {
      */
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+        // 如果有复活床的权限就复活到床
+        if (event.getPlayer().hasPermission("handy.spawn.bed")) {
+            return;
+        }
+        // 检查是否有spawn自定义权限
         Boolean rst = false;
         for (Spawn spawn : BaseConstants.spawnList) {
             if (event.getPlayer().hasPermission(spawn.getPermission())) {
@@ -30,6 +35,7 @@ public class SpawnListener implements Listener {
                 event.setRespawnLocation(getSpawnLocation(spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ()));
             }
         }
+        // 传送到默认spawn地址
         if (!rst) {
             String world = ConfigUtil.langConfig.getString("spawn.world");
             Double x = ConfigUtil.langConfig.getDouble("spawn.x");

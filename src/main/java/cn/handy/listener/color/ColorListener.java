@@ -1,4 +1,4 @@
-package cn.handy.listener.signchange;
+package cn.handy.listener.color;
 
 import cn.handy.utils.BaseUtil;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
  * @Description: {支持彩色字}
  * @date 2019/7/9 16:30
  */
-public class SignChangeListener implements Listener {
+public class ColorListener implements Listener {
 
     /**
      * 在玩家设置牌子上的内容子时触发.

@@ -7,7 +7,7 @@ import cn.handy.listener.msg.MsgListener;
 import cn.handy.listener.pvp.PvpListener;
 import cn.handy.listener.secret.*;
 import cn.handy.listener.showdamage.ShowDamageListener;
-import cn.handy.listener.signchange.SignChangeListener;
+import cn.handy.listener.color.ColorListener;
 import cn.handy.listener.spawn.SpawnListener;
 import cn.handy.listener.user.UserListener;
 import org.bukkit.Bukkit;
@@ -40,7 +40,7 @@ public class ListenerUtil {
             Bukkit.getPluginManager().registerEvents(new SecretGuiListener(), Manage.plugin);
         }
         if (BaseConfigCache.isColor) {
-            Bukkit.getPluginManager().registerEvents(new SignChangeListener(), Manage.plugin);
+            Bukkit.getPluginManager().registerEvents(new ColorListener(), Manage.plugin);
         }
         if (BaseConfigCache.isBack) {
             Bukkit.getPluginManager().registerEvents(new BackListener(), Manage.plugin);
