@@ -27,9 +27,8 @@ public class DeathPenaltyListener implements Listener {
         // 获取自定义的命令
         String jsonArray = ConfigUtil.langConfig.getString("eeathPenalty");
         Gson gson = new Gson();
-        List<String> list = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
-        }.getType());
-        for (String str : list) {
+        String[] strings = gson.fromJson(jsonArray, String[].class);
+        for (String str : strings) {
             Bukkit.dispatchCommand(event.getPlayer(), str);
         }
     }

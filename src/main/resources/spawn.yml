@@ -1,4 +1,5 @@
 # 请严格按照json格式来扩充,不懂json是什么的请自觉百度,可以无限扩充
+# http://www.bejson.com/在线json格式验证
 # world世界名 xyz坐标 permission权限 -如果玩家没有这里的权限会默认去lang.yml的spawn位置
 spawns: '[
         	{

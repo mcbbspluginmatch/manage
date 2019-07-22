@@ -17,7 +17,8 @@ spawn:
   y: 72
   z: 0
 # 死亡惩罚自定义命令,不带/,json格式,可多个命令(isDeathPenalty启用时候生效)
-eeathPenalty: {spawn,help}
+# http://www.bejson.com/在线json格式验证
+eeathPenalty: ["spawn", "home"]
 
 # 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
