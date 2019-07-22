@@ -25,6 +25,7 @@ public abstract class BaseConfigCache {
     public static Boolean isShowDamage = false;
     public static Boolean isReport = false;
     public static Boolean isSpawn = false;
+    public static Boolean isDeathPenalty = false;
 
 }
 

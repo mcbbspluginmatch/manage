@@ -3,6 +3,7 @@ package cn.handy.utils.listener;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.listener.back.BackListener;
+import cn.handy.listener.deathpenalty.DeathPenaltyListener;
 import cn.handy.listener.msg.MsgListener;
 import cn.handy.listener.pvp.PvpListener;
 import cn.handy.listener.secret.*;
@@ -50,6 +51,9 @@ public class ListenerUtil {
         }
         if (BaseConfigCache.isSpawn) {
             Bukkit.getPluginManager().registerEvents(new SpawnListener(), Manage.plugin);
+        }
+        if (BaseConfigCache.isDeathPenalty){
+            Bukkit.getPluginManager().registerEvents(new DeathPenaltyListener(), Manage.plugin);
         }
     }
 }

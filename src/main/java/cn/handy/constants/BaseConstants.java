@@ -87,6 +87,11 @@ public abstract class BaseConstants {
     public static List<Spawn> spawnList = new ArrayList<>();
 
     /**
+     * 用户登录位置缓存
+     */
+    public static Map<String, Location> userLoginLocationMap = new HashMap<>();
+
+    /**
      * msgAdmin帮助语句
      */
     public final static String MSG_ADMIN_HELP =
@@ -111,7 +116,7 @@ public abstract class BaseConstants {
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
                     "§e/manage reload lang     " + "§f重载本插件的lang文本\n" +
-                    "§e/manage reload secret   " + "§f重载本插件的secret文本\n"+
+                    "§e/manage reload secret   " + "§f重载本插件的secret文本\n" +
                     "§e/manage reload spawn   " + "§f重载本插件的spawn文本";
 
     public final static String PVP_HELP =

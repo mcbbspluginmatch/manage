@@ -2,6 +2,7 @@ package cn.handy.listener.user;
 
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
+import cn.handy.entity.Home;
 import cn.handy.entity.Spawn;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
@@ -59,6 +60,25 @@ public class UserListener implements Listener {
                 player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
                 BaseConstants.userSet.add(user);
             } else {
+                // 如果开启了spawn,登录的时候回到spawn,登录成功后回到当前位置
+                if (BaseConfigCache.isSpawn){
+                    // 保存当前位置
+                    Home home = new Home();
+                    home.setX(player.getLocation().getX());
+                    home.setY(player.getLocation().getY());
+                    home.setZ(player.getLocation().getZ());
+                    home.setYaw(player.getLocation().getYaw());
+                    home.setPitch(player.getLocation().getPitch());
+                    home.setWorld(player.getLocation().getWorld().getName());
+                    Location location = getHomeLocation(home);
+                    BaseConstants.userLoginLocationMap.put(player.getName(),location);
+                    // 传送到spawn
+                    String world = ConfigUtil.langConfig.getString("spawn.world");
+                    Double x = ConfigUtil.langConfig.getDouble("spawn.x");
+                    Double y = ConfigUtil.langConfig.getDouble("spawn.y");
+                    Double z = ConfigUtil.langConfig.getDouble("spawn.z");
+                    player.teleport(getSpawnLocation(world, x, y, z));
+                }
                 player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
             }
         } else {
@@ -87,6 +107,11 @@ public class UserListener implements Listener {
         }
     }
 
+    private Location getHomeLocation(Home home) {
+        return new Location(
+                Bukkit.getWorld(home.getWorld()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch()
+        );
+    }
     /**
      * 获取地点
      *

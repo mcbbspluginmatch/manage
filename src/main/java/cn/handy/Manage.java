@@ -8,6 +8,7 @@ import cn.handy.utils.ReportUtil;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
 import cn.handy.utils.secret.SecretUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -19,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
-    private final static String PLUGIN_VERSION = "5.0.0";
+    private final static String PLUGIN_VERSION = "5.0.3";
 
     /**
      * 启用插件时调用

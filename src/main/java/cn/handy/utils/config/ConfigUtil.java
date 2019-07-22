@@ -138,6 +138,7 @@ public class ConfigUtil {
         val isShowDamage = ConfigUtil.config.getBoolean("isShowDamage");
         val isReport = ConfigUtil.config.getBoolean("isReport");
         val isSpawn = ConfigUtil.config.getBoolean("isSpawn");
+        val isDeathPenalty = ConfigUtil.config.getBoolean("isDeathPenalty");
 
         BaseConfigCache.isUseMySql = isUseMySql;
         BaseConfigCache.isMessage = isMessage;
@@ -154,5 +155,6 @@ public class ConfigUtil {
         BaseConfigCache.isShowDamage = isShowDamage;
         BaseConfigCache.isReport = isReport;
         BaseConfigCache.isSpawn = isSpawn;
+        BaseConfigCache.isDeathPenalty = isDeathPenalty;
     }
 }
