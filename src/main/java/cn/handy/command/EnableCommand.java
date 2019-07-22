@@ -109,11 +109,11 @@ public class EnableCommand {
             commandMap.register(Manage.plugin.getDescription().getName(), new BackCommand());
             DefaultPermissions.registerPermission("handy.back",null, PermissionDefault.TRUE);
         }
-        if (BaseConfigCache.isHome){
+        if (BaseConfigCache.isSpawn){
             commandMap.register(Manage.plugin.getDescription().getName(), new SetSpawnCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SpawnCommand());
             DefaultPermissions.registerPermission("handy.setSpawn",null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.spawn",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.spawn",null, PermissionDefault.OP);
         }
     }
 }
