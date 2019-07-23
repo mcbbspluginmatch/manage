@@ -6,6 +6,7 @@ import cn.handy.utils.Beans;
 import cn.handy.entity.User;
 import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -25,10 +26,16 @@ public class RegisterCommand extends Command {
         super("register");
         // 别名
         this.setAliases(Arrays.asList("reg"));
+        // 权限
+        this.setPermission("handy.register");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.register")) {
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
+            return true;
+        }
         val sendPlayer = (Player) sender;
         if (args != null && args.length == 2) {
             if (args[0].equals(args[1])) {

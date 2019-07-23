@@ -96,9 +96,9 @@ public abstract class BaseConstants {
      */
     public final static String MSG_ADMIN_HELP =
             "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一\n" +
-                    "§e/msgadmin set [玩家] [进入提醒] [退出提醒]     " + "§f设置玩家进/退消息\n" +
-                    "§e/msgadmin del [玩家]     " + "§f删除玩家进/出消息\n" +
-                    "§e/msgadmin see [玩家]     " + "§f查询玩家进/出消息\n" +
+                    "§e/msgAdmin set [玩家] [进入提醒] [退出提醒]     " + "§f设置玩家进/退消息\n" +
+                    "§e/msgAdmin del [玩家]     " + "§f删除玩家进/出消息\n" +
+                    "§e/msgAdmin see [玩家]     " + "§f查询玩家进/出消息\n" +
                     "§f[进入/退出提醒]中可使用${player}来代替你的名字\n" +
                     "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
     /**
@@ -136,7 +136,7 @@ public abstract class BaseConstants {
     public final static String HOME_MSG =
             "§e§m一一一一一一一§f[§e临江仙§f]§e§m一一一一一一一\n" +
                     "§e/home [家名]     " + "§f回到对应的家中\n" +
-                    "§e/sethome [家名]     " + "§f设置家";
+                    "§e/setHome [家名]     " + "§f设置家";
     /**
      * 命令白名单正则
      */

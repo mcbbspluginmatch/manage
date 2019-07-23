@@ -22,14 +22,14 @@ public class SecretAdminCommand extends Command {
 
     public SecretAdminCommand() {
         // 命令
-        super("secretadmin");
+        super("secretAdmin");
         // 权限
-        this.setPermission("handy.secretadmin");
+        this.setPermission("handy.secretAdmin");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        if (!sender.hasPermission("handy.secretadmin")) {
+        if (!sender.hasPermission("handy.secretAdmin")) {
             sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }

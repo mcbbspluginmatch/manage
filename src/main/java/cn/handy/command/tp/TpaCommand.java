@@ -20,10 +20,16 @@ public class TpaCommand extends Command {
     public TpaCommand() {
         // 命令
         super("tpa");
+        // 权限
+        this.setPermission("handy.tpa");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label,  String[] args) {
+        if (!sender.hasPermission("handy.tpa")) {
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
+            return true;
+        }
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             val sendPlayer = (Player) sender;

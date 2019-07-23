@@ -89,38 +89,52 @@ public class ConfigUtil {
      * 保存各个独立模块开启状态
      */
     private static void saveConfigCache() {
-        val isUseMySql = ConfigUtil.config.getBoolean("isUseMySql");
-        val isMessage = ConfigUtil.config.getBoolean("isMessage");
-        val isUser = ConfigUtil.config.getBoolean("isUser");
-        val isHat = ConfigUtil.config.getBoolean("isHat");
-        val isHelp = ConfigUtil.config.getBoolean("isHelp");
-        val isTp = ConfigUtil.config.getBoolean("isTp");
-        val isGift = ConfigUtil.config.getBoolean("isGift");
-        val isPvp = ConfigUtil.config.getBoolean("isPvp");
-        val isSecret = ConfigUtil.config.getBoolean("isSecret");
-        val isHome = ConfigUtil.config.getBoolean("isHome");
-        val isBack = ConfigUtil.config.getBoolean("isBack");
-        val isColor = ConfigUtil.config.getBoolean("isColor");
-        val isShowDamage = ConfigUtil.config.getBoolean("isShowDamage");
-        val isReport = ConfigUtil.config.getBoolean("isReport");
-        val isSpawn = ConfigUtil.config.getBoolean("isSpawn");
-        val isDeathPenalty = ConfigUtil.config.getBoolean("isDeathPenalty");
+        BaseConfigCache.isUseMySql = ConfigUtil.config.getBoolean("isUseMySql");
+        BaseConfigCache.isReport = ConfigUtil.config.getBoolean("isReport");
 
-        BaseConfigCache.isUseMySql = isUseMySql;
-        BaseConfigCache.isMessage = isMessage;
-        BaseConfigCache.isUser = isUser;
-        BaseConfigCache.isHat = isHat;
-        BaseConfigCache.isHelp = isHelp;
-        BaseConfigCache.isTp = isTp;
-        BaseConfigCache.isGift = isGift;
-        BaseConfigCache.isPvp = isPvp;
-        BaseConfigCache.isSecret = isSecret;
-        BaseConfigCache.isHome = isHome;
-        BaseConfigCache.isBack = isBack;
-        BaseConfigCache.isColor = isColor;
-        BaseConfigCache.isShowDamage = isShowDamage;
-        BaseConfigCache.isReport = isReport;
-        BaseConfigCache.isSpawn = isSpawn;
-        BaseConfigCache.isDeathPenalty = isDeathPenalty;
+        BaseConfigCache.isMessage = ConfigUtil.config.getBoolean("isMessage.isUse");
+        BaseConfigCache.isMessage_msg = ConfigUtil.config.getBoolean("isMessage.permission.msg");;
+        BaseConfigCache.isMessage_msgAdmin = ConfigUtil.config.getBoolean("isMessage.permission.msgAdmin");;
+
+        BaseConfigCache.isUser = ConfigUtil.config.getBoolean("isUser.isUse");
+        BaseConfigCache.isUser_login = ConfigUtil.config.getBoolean("isUser.permission.login");
+        BaseConfigCache.isUser_register = ConfigUtil.config.getBoolean("isUser.permission.register");
+
+        BaseConfigCache.isHat = ConfigUtil.config.getBoolean("isHat.isUse");
+        BaseConfigCache.isHat_hat = ConfigUtil.config.getBoolean("isHat.permission.hat");
+
+        BaseConfigCache.isHelp = ConfigUtil.config.getBoolean("isHelp.isUse");
+        BaseConfigCache.isHelp_help = ConfigUtil.config.getBoolean("isHelp.permission.help");
+
+        BaseConfigCache.isTp = ConfigUtil.config.getBoolean("isTp.isUse");
+        BaseConfigCache.isTp_tp = ConfigUtil.config.getBoolean("isTp.permission.tp");
+        BaseConfigCache.isTp_tpa = ConfigUtil.config.getBoolean("isTp.permission.tpa");
+
+        BaseConfigCache.isGift =  ConfigUtil.config.getBoolean("isGift.isUse");
+        BaseConfigCache.isGift_gift =  ConfigUtil.config.getBoolean("isGift.permission.gift");
+
+        BaseConfigCache.isPvp = ConfigUtil.config.getBoolean("isPvp.isUse");
+        BaseConfigCache.isPvp_pvp = ConfigUtil.config.getBoolean("isPvp.permission.pvp");
+
+        BaseConfigCache.isSecret = ConfigUtil.config.getBoolean("isSecret.isUse");
+        BaseConfigCache.isSecret_secret = ConfigUtil.config.getBoolean("isSecret.permission.secret");
+        BaseConfigCache.isSecret_secretAdmin = ConfigUtil.config.getBoolean("isSecret.permission.secretAdmin");
+
+        BaseConfigCache.isHome = ConfigUtil.config.getBoolean("isHome.isUse");
+        BaseConfigCache.isHome_home = ConfigUtil.config.getBoolean("isHome.permission.home");
+        BaseConfigCache.isHome_setHome = ConfigUtil.config.getBoolean("isHome.permission.setHome");
+
+        BaseConfigCache.isBack = ConfigUtil.config.getBoolean("isBack.isUse");
+        BaseConfigCache.isBack_back = ConfigUtil.config.getBoolean("isBack.permission.back");
+
+        BaseConfigCache.isSpawn = ConfigUtil.config.getBoolean("isSpawn.isUse");
+        BaseConfigCache.isSpawn_setSpawn = ConfigUtil.config.getBoolean("isSpawn.permission.setSpawn");
+        BaseConfigCache.isSpawn_spawn = ConfigUtil.config.getBoolean("isSpawn.permission.spawn");
+
+        BaseConfigCache.isColor = ConfigUtil.config.getBoolean("isColor.isUse");
+
+        BaseConfigCache.isShowDamage = ConfigUtil.config.getBoolean("isShowDamage.isUse");
+
+        BaseConfigCache.isDeathPenalty = ConfigUtil.config.getBoolean("isDeathPenalty.isUse");
     }
 }

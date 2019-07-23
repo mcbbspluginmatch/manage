@@ -17,14 +17,14 @@ public class MsgAdminCommand extends Command {
 
     public MsgAdminCommand() {
         // 命令
-        super("msgadmin");
+        super("msgAdmin");
         // 权限
-        this.setPermission("handy.msgadmin");
+        this.setPermission("handy.msgAdmin");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        if (!sender.hasPermission("handy.msgadmin")) {
+        if (!sender.hasPermission("handy.msgAdmin")) {
             sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }

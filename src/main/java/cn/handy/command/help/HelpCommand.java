@@ -22,10 +22,16 @@ public class HelpCommand extends Command {
     public HelpCommand() {
         // 命令
         super("help");
+        // 权限
+        this.setPermission("handy.help");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.help")) {
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
+            return true;
+        }
         int pageNum = 1;
         if (args != null && args.length == 1) {
             String arg = args[0];

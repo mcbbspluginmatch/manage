@@ -60,58 +60,132 @@ public class EnableCommand {
         // 注册命令
         commandMap.register(Manage.plugin.getDescription().getName(), new ManageCommand());
         DefaultPermissions.registerPermission("handy.manage", null, PermissionDefault.OP);
+
         if (BaseConfigCache.isHat) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HatCommand());
-            DefaultPermissions.registerPermission("handy.hat", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isHat_hat) {
+                DefaultPermissions.registerPermission("handy.hat", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.hat", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isHelp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HelpCommand());
+            if (BaseConfigCache.isHelp_help) {
+                DefaultPermissions.registerPermission("handy.help", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.help", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isUser) {
             commandMap.register(Manage.plugin.getDescription().getName(), new LoginCommand());
+            if (BaseConfigCache.isUser_login) {
+                DefaultPermissions.registerPermission("handy.login", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.login", null, PermissionDefault.OP);
+            }
             commandMap.register(Manage.plugin.getDescription().getName(), new RegisterCommand());
+            if (BaseConfigCache.isUser_register) {
+                DefaultPermissions.registerPermission("handy.register", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.register", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isMessage) {
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgAdminCommand());
+            if (BaseConfigCache.isMessage_msgAdmin) {
+                DefaultPermissions.registerPermission("handy.msgAdmin", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.msgAdmin", null, PermissionDefault.OP);
+            }
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgCommand());
-            DefaultPermissions.registerPermission("handy.msgadmin", null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.msg", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isMessage_msg) {
+                DefaultPermissions.registerPermission("handy.msg", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.msg", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isTp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new TpCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpaCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpacceptCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpdenyCommand());
-            DefaultPermissions.registerPermission("handy.tp", null, PermissionDefault.OP);
+            if (BaseConfigCache.isTp_tp) {
+                DefaultPermissions.registerPermission("handy.tp", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.tp", null, PermissionDefault.OP);
+            }
+            if (BaseConfigCache.isTp_tpa) {
+                DefaultPermissions.registerPermission("handy.tpa", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.tpa", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isGift) {
             commandMap.register(Manage.plugin.getDescription().getName(), new GiftCommand());
-            DefaultPermissions.registerPermission("handy.gift", null, PermissionDefault.OP);
+            if (BaseConfigCache.isGift_gift) {
+                DefaultPermissions.registerPermission("handy.gift", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.gift", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isPvp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new PvpCommand());
-            DefaultPermissions.registerPermission("handy.pvp", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isPvp_pvp) {
+                DefaultPermissions.registerPermission("handy.pvp", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.pvp", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isSecret) {
             commandMap.register(Manage.plugin.getDescription().getName(), new SecretAdminCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SecretCommand());
-            DefaultPermissions.registerPermission("handy.secretadmin", null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.secret", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isSecret_secret) {
+                DefaultPermissions.registerPermission("handy.secret", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.secret", null, PermissionDefault.OP);
+            }
+            if (BaseConfigCache.isSecret_secretAdmin) {
+                DefaultPermissions.registerPermission("handy.secretAdmin", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.secretAdmin", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isHome) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HomeCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SetHomeCommand());
-            DefaultPermissions.registerPermission("handy.home", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isHome_setHome) {
+                DefaultPermissions.registerPermission("handy.setHome", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.setHome", null, PermissionDefault.OP);
+            }
+            if (BaseConfigCache.isHome_home) {
+                DefaultPermissions.registerPermission("handy.home", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.home", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isBack) {
             commandMap.register(Manage.plugin.getDescription().getName(), new BackCommand());
-            DefaultPermissions.registerPermission("handy.back", null, PermissionDefault.TRUE);
+            if (BaseConfigCache.isBack_back) {
+                DefaultPermissions.registerPermission("handy.back", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.back", null, PermissionDefault.OP);
+            }
         }
         if (BaseConfigCache.isSpawn) {
             commandMap.register(Manage.plugin.getDescription().getName(), new SetSpawnCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SpawnCommand());
-            DefaultPermissions.registerPermission("handy.setSpawn", null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.spawn", null, PermissionDefault.OP);
+            if (BaseConfigCache.isSpawn_spawn) {
+                DefaultPermissions.registerPermission("handy.spawn", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.spawn", null, PermissionDefault.OP);
+            }
+            if (BaseConfigCache.isSpawn_setSpawn) {
+                DefaultPermissions.registerPermission("handy.setSpawn", null, PermissionDefault.TRUE);
+            } else {
+                DefaultPermissions.registerPermission("handy.setSpawn", null, PermissionDefault.OP);
+            }
         }
     }
 }

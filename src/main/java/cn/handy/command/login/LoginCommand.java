@@ -6,6 +6,7 @@ import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -26,10 +27,16 @@ public class LoginCommand extends Command {
         super("login");
         // 别名
         this.setAliases(Arrays.asList("l"));
+        // 权限
+        this.setPermission("handy.login");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
+        if (!sender.hasPermission("handy.login")) {
+            sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
+            return true;
+        }
         val sendPlayer = (Player) sender;
         if (args != null && args.length == 1) {
             val userService = Beans.getBeans().getUserService();

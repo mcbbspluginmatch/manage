@@ -23,12 +23,12 @@ public class SetHomeCommand extends Command {
         // 命令
         super("setHome");
         // 权限
-        this.setPermission("handy.home");
+        this.setPermission("handy.setHome");
     }
 
     @Override
     public boolean execute(CommandSender sender, String label, final String[] args) {
-        if (!sender.hasPermission("handy.home")) {
+        if (!sender.hasPermission("handy.setHome")) {
             sender.sendMessage(ChatColor.RED + "你没有该命令的权限!");
             return true;
         }

@@ -12,33 +12,75 @@ initSize: 8
 maxActive: 10
 
 # 是否启用登录系统
-isUser: true
+isUser:
+  isUse: true
+  permission:
+    login: true
+    register: true
 # 是否启用每个玩家加入/退出游戏消息提醒
-isMessage: true
+isMessage:
+  isUse: true
+  permission:
+    msg: true
+    msgAdmin: false
 # 是否启用hat命令
-isHat: true
+isHat:
+  isUse: true
+  permission:
+    hat: true
 # 是否启用help帮助
-isHelp: true
+isHelp:
+  isUse: true
+  permission:
+    help: true
 # 是否启用tp系统
-isTp: true
+isTp:
+  isUse: true
+  permission:
+    tp: false
+    tpa: true
 # 是否启用送礼物系统
-isGift: true
+isGift:
+  isUse: true
+  permission:
+    gift: false
 # 是否启用pvp管理
-isPvp: true
+isPvp:
+  isUse: true
+  permission:
+    pvp: true
 # 是否开启武林秘籍系统
-isSecret: true
+isSecret:
+  isUse: true
+  permission:
+    secret: true
+    secretAdmin: false
 # 是否开启home
-isHome: true
+isHome:
+  isUse: true
+  permission:
+    setHome: true
+    home: true
 # 是否开启back
-isBack: true
-# 木牌/聊天支持颜色代码&
-isColor: true
-# 物品栏上方伤害显示
-isShowDamage: true
+isBack:
+  isUse: true
+  permission:
+    back: true
 # 是否启用spawn
-isSpawn: true
+isSpawn:
+  isUse: true
+  permission:
+    setSpawn: false
+    spawn: true
+# 木牌/聊天支持颜色代码&
+isColor:
+  isUse: true
+# 物品栏上方伤害显示
+isShowDamage:
+  isUse: true
 # 是否启用死亡惩罚
-isDeathPenalty: true
+isDeathPenalty:
+  isUse: true
 
 # 是否进行插件使用统计(true的话会每俩小时发送一个插件使用信息到统计网站,异步运行不影响服务器)
 isReport: true
