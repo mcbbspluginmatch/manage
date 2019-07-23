@@ -11,6 +11,7 @@ mysql:
 initSize: 8
 maxActive: 10
 
+# isUse是否开启该功能,permission权限设置:true给玩家该指令权限,false不给玩家该指令权限
 # 是否启用登录系统
 isUser:
   isUse: true
