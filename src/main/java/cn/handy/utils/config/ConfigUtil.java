@@ -7,7 +7,6 @@ import cn.handy.entity.Spawn;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.val;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -68,17 +67,8 @@ public class ConfigUtil {
             }
             helpConfig = YamlConfiguration.loadConfiguration(helpFile);
         }
-
         //加载 help缓存
-        String jsonArray = ConfigUtil.helpConfig.getString("helps");
-        Gson gson = new Gson();
-        try {
-            BaseConstants.helpList = gson.fromJson(jsonArray, new TypeToken<List<String>>() {
-            }.getType());
-        } catch (Exception e) {
-            BaseConstants.helpList.add(ChatColor.RED + "help文本加载错误,请联系腐竹修改");
-            Manage.plugin.getLogger().info("help文本加载错误,请修改后输入/manage reload help重新加载");
-        }
+        BaseConstants.helpList = ConfigUtil.helpConfig.getStringList("helps");
     }
 
     /**
