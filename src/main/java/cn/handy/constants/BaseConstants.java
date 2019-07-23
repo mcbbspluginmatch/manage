@@ -82,11 +82,6 @@ public abstract class BaseConstants {
     public static Map<String, Inventory> InventoryMap = new HashMap<>();
 
     /**
-     * spawn缓存信息
-     */
-    public static List<Spawn> spawnList = new ArrayList<>();
-
-    /**
      * 用户登录位置缓存
      */
     public static Map<String, Location> userLoginLocationMap = new HashMap<>();

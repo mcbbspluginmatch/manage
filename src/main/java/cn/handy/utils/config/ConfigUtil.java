@@ -3,15 +3,11 @@ package cn.handy.utils.config;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import cn.handy.entity.Spawn;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import lombok.val;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
-import java.util.List;
 
 /**
  * @author hanshuai
@@ -19,7 +15,7 @@ import java.util.List;
  * @date 2019/6/21 9:54
  */
 public class ConfigUtil {
-    public static FileConfiguration config, helpConfig, langConfig, secretConfig, spawnConfig;
+    public static FileConfiguration config, helpConfig, langConfig, secretConfig;
 
     /**
      * 初始化加载文件
@@ -48,10 +44,6 @@ public class ConfigUtil {
         // 加载Secret
         if (BaseConfigCache.isSecret) {
             getSecretConfig();
-        }
-        // 加载Spawn
-        if (BaseConfigCache.isSpawn) {
-            getSpawnConfig();
         }
     }
 
@@ -91,22 +83,6 @@ public class ConfigUtil {
             Manage.plugin.saveResource("secret.yml", false);
         }
         secretConfig = YamlConfiguration.loadConfiguration(secretFile);
-    }
-
-    /**
-     * 加载Spawn文件
-     */
-    public static void getSpawnConfig() {
-        File secretFile = new File(Manage.plugin.getDataFolder(), "spawn.yml");
-        if (!(secretFile.exists())) {
-            Manage.plugin.saveResource("spawn.yml", false);
-        }
-        spawnConfig = YamlConfiguration.loadConfiguration(secretFile);
-        // 保存spawn集合到缓存
-        String jsonArray = spawnConfig.getString("spawns");
-        Gson gson = new Gson();
-        BaseConstants.spawnList = gson.fromJson(jsonArray, new TypeToken<List<Spawn>>() {
-        }.getType());
     }
 
     /**
