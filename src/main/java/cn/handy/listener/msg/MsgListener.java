@@ -30,7 +30,7 @@ public class MsgListener implements Listener {
         if (message.getId() != null) {
             joinMessage = message.getJoinMessage();
         }
-        joinMessage = BaseUtil.replaceName(joinMessage, userName);
+        joinMessage = BaseUtil.replaceChatColorAndName(joinMessage, userName);
         event.setJoinMessage(BaseUtil.replaceChatColor(joinMessage));
     }
 
@@ -48,7 +48,7 @@ public class MsgListener implements Listener {
         if (message.getId() != null) {
             quitMessage = message.getQuitMessage();
         }
-        quitMessage = BaseUtil.replaceName(quitMessage, userName);
+        quitMessage = BaseUtil.replaceChatColorAndName(quitMessage, userName);
         event.setQuitMessage(BaseUtil.replaceChatColor(quitMessage));
     }
 }

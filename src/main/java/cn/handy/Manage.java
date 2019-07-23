@@ -20,7 +20,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
-    private final static String PLUGIN_VERSION = "5.0.3";
+    private final static String PLUGIN_VERSION = "5.0.5";
 
     /**
      * 启用插件时调用

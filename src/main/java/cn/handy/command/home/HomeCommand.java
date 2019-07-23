@@ -7,9 +7,7 @@ import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -51,13 +49,15 @@ public class HomeCommand extends Command {
                 }
                 // 传送延迟
                 val homeDelayTime = ConfigUtil.langConfig.getLong("homeDelayTime");
-                player.sendMessage(ChatColor.GRAY + "" + homeDelayTime + "秒后开始传送...");
+                if (homeDelayTime > 0) {
+                    player.sendMessage(ChatColor.GRAY + "" + homeDelayTime + "秒后开始传送...");
+                }
                 new BukkitRunnable() {
                     @Override
                     public void run() {
                         Home home = Beans.getBeans().getHomeService().findByUserNameAndHomeName(player.getName(), args[0]);
                         if (home != null && home.getId() > 0) {
-                            player.teleport(getHomeLocation(home));
+                            player.teleport(BaseUtil.getLocation(home));
                             player.sendMessage("回家成功");
                             BaseConstants.homeWaitTime.put(player.getName(), System.currentTimeMillis());
                         } else {
@@ -74,9 +74,4 @@ public class HomeCommand extends Command {
         return true;
     }
 
-    private Location getHomeLocation(Home home) {
-        return new Location(
-                Bukkit.getWorld(home.getWorld()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch()
-        );
-    }
 }

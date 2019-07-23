@@ -1,8 +1,10 @@
 package cn.handy.command.login;
 
 import cn.handy.constants.BaseConstants;
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import cn.handy.entity.User;
+import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -41,7 +43,8 @@ public class RegisterCommand extends Command {
                 user.setLoginDate(new Date());
                 val rst = userService.register(user);
                 if (rst) {
-                    sender.sendMessage("注册成功");
+                    String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
+                    sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage,sendPlayer.getName()));
                     BaseConstants.userSet.add(user);
                 } else {
                     sender.sendMessage("注册失败");

@@ -22,11 +22,9 @@ import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
 import cn.handy.command.tp.TpdenyCommand;
 import cn.handy.constants.BaseConfigCache;
-import cn.handy.constants.BaseConstants;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.permissions.PermissionDefault;
-import org.bukkit.util.permissions.CommandPermissions;
 import org.bukkit.util.permissions.DefaultPermissions;
 
 import java.lang.reflect.InvocationTargetException;
@@ -61,10 +59,10 @@ public class EnableCommand {
         getCommandMap();
         // 注册命令
         commandMap.register(Manage.plugin.getDescription().getName(), new ManageCommand());
-        DefaultPermissions.registerPermission("handy.manage",null, PermissionDefault.OP);
+        DefaultPermissions.registerPermission("handy.manage", null, PermissionDefault.OP);
         if (BaseConfigCache.isHat) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HatCommand());
-            DefaultPermissions.registerPermission("handy.hat",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.hat", null, PermissionDefault.TRUE);
         }
         if (BaseConfigCache.isHelp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HelpCommand());
@@ -76,44 +74,44 @@ public class EnableCommand {
         if (BaseConfigCache.isMessage) {
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgAdminCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgCommand());
-            DefaultPermissions.registerPermission("handy.msgadmin",null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.msg",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.msgadmin", null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.msg", null, PermissionDefault.TRUE);
         }
         if (BaseConfigCache.isTp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new TpCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpaCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpacceptCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new TpdenyCommand());
-            DefaultPermissions.registerPermission("handy.tp",null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.tp", null, PermissionDefault.OP);
         }
         if (BaseConfigCache.isGift) {
             commandMap.register(Manage.plugin.getDescription().getName(), new GiftCommand());
-            DefaultPermissions.registerPermission("handy.gift",null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.gift", null, PermissionDefault.OP);
         }
         if (BaseConfigCache.isPvp) {
             commandMap.register(Manage.plugin.getDescription().getName(), new PvpCommand());
-            DefaultPermissions.registerPermission("handy.pvp",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.pvp", null, PermissionDefault.TRUE);
         }
         if (BaseConfigCache.isSecret) {
             commandMap.register(Manage.plugin.getDescription().getName(), new SecretAdminCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SecretCommand());
-            DefaultPermissions.registerPermission("handy.secretadmin",null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.secret",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.secretadmin", null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.secret", null, PermissionDefault.TRUE);
         }
-        if (BaseConfigCache.isHome){
+        if (BaseConfigCache.isHome) {
             commandMap.register(Manage.plugin.getDescription().getName(), new HomeCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SetHomeCommand());
-            DefaultPermissions.registerPermission("handy.home",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.home", null, PermissionDefault.TRUE);
         }
-        if (BaseConfigCache.isBack){
+        if (BaseConfigCache.isBack) {
             commandMap.register(Manage.plugin.getDescription().getName(), new BackCommand());
-            DefaultPermissions.registerPermission("handy.back",null, PermissionDefault.TRUE);
+            DefaultPermissions.registerPermission("handy.back", null, PermissionDefault.TRUE);
         }
-        if (BaseConfigCache.isSpawn){
+        if (BaseConfigCache.isSpawn) {
             commandMap.register(Manage.plugin.getDescription().getName(), new SetSpawnCommand());
             commandMap.register(Manage.plugin.getDescription().getName(), new SpawnCommand());
-            DefaultPermissions.registerPermission("handy.setSpawn",null, PermissionDefault.OP);
-            DefaultPermissions.registerPermission("handy.spawn",null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.setSpawn", null, PermissionDefault.OP);
+            DefaultPermissions.registerPermission("handy.spawn", null, PermissionDefault.OP);
         }
     }
 }

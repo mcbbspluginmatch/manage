@@ -92,6 +92,11 @@ public abstract class BaseConstants {
     public static Map<String, Location> userLoginLocationMap = new HashMap<>();
 
     /**
+     * 用户登录状态
+     */
+    public static Map<String, Boolean> userLoginLocationStatus = new HashMap<>();
+
+    /**
      * msgAdmin帮助语句
      */
     public final static String MSG_ADMIN_HELP =

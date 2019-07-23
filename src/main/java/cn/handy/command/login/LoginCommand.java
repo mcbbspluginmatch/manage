@@ -2,7 +2,9 @@ package cn.handy.command.login;
 
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
+import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -39,7 +41,8 @@ public class LoginCommand extends Command {
                     sendPlayer.teleport(location);
                     BaseConstants.userLoginLocationMap.remove(sendPlayer.getName());
                 }
-                sendPlayer.sendMessage("登录成功");
+                String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
+                sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage,sendPlayer.getName()));
                 BaseConstants.userSet.add(user);
                 // 保存本次登录ip和时间
                 user.setLoginDate(new Date());

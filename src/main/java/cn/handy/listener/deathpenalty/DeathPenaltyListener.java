@@ -1,12 +1,11 @@
 package cn.handy.listener.deathpenalty;
 
+import cn.handy.utils.BaseUtil;
 import cn.handy.utils.config.ConfigUtil;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 
 import java.util.List;
 
@@ -18,18 +17,16 @@ import java.util.List;
 public class DeathPenaltyListener implements Listener {
 
     /**
-     * 玩家重生事件
+     * 当一个玩家死亡时触发本事件
      *
      * @param event
      */
     @EventHandler
-    public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+    public void onPlayerRespawnEvent(PlayerDeathEvent event) {
         // 获取自定义的命令
-        String jsonArray = ConfigUtil.langConfig.getString("eeathPenalty");
-        Gson gson = new Gson();
-        String[] strings = gson.fromJson(jsonArray, String[].class);
-        for (String str : strings) {
-            Bukkit.dispatchCommand(event.getPlayer(), str);
+        List<String> stringList = ConfigUtil.langConfig.getStringList("deathPenaltyCommand");
+        for (String command : stringList) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), BaseUtil.replaceChatColorAndName(command, event.getEntity().getName()));
         }
     }
 

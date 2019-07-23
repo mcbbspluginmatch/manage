@@ -36,7 +36,9 @@ public class TpacceptCommand extends Command {
                     // 传送延迟
                     val tpaDelayTime = ConfigUtil.langConfig.getLong("tpaDelayTime");
                     sender.sendMessage("已接受" + receiveName + "的传送请求.");
-                    receivePlayer.sendMessage(ChatColor.GRAY + "" + tpaDelayTime + "秒后开始传送...");
+                    if (tpaDelayTime > 0){
+                        receivePlayer.sendMessage(ChatColor.GRAY + "" + tpaDelayTime + "秒后开始传送...");
+                    }
                     new BukkitRunnable() {
                         @Override
                         public void run() {

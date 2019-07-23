@@ -1,7 +1,10 @@
 package cn.handy.utils;
 
 import cn.handy.constants.BaseConstants;
+import cn.handy.entity.Home;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -70,4 +73,30 @@ public class BaseUtil {
         return ChatColor.translateAlternateColorCodes('&', msg).replace("${player}", name);
     }
 
+    /**
+     * 获取位置
+     *
+     * @param home
+     * @return
+     */
+    public static Location getLocation(Home home) {
+        return new Location(
+                Bukkit.getWorld(home.getWorld()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch()
+        );
+    }
+
+    /**
+     * 获取位置
+     *
+     * @param world
+     * @param x
+     * @param y
+     * @param z
+     * @return
+     */
+    public static Location getLocation(String world, Double x, Double y, Double z) {
+        return new Location(
+                Bukkit.getWorld(world), x, y, z
+        );
+    }
 }

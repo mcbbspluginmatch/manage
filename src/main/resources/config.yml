@@ -1,11 +1,11 @@
 # 请选择是否要使用mysql,不使用的话默认使用sqLite来储存信息
-isUseMySql: true
+isUseMySql: false
 # 用于mysql数据库链接
 mysql:
-  ip: 106.12.156.212
+  ip: 127.0.0.1
   port: 3306
-  username: hanshuai
-  password: abc956812056
+  username: root
+  password: 123456
   databasename: minecraft
 # 数据库连接池初始大小和最大连接数(不懂就别动下面这俩个)
 initSize: 8

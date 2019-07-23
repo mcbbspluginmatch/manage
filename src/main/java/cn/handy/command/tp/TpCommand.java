@@ -34,7 +34,7 @@ public class TpCommand extends Command {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             Player sendPlayer = (Player) sender;
-            if (args != null && args.length > 0) {
+            if (args != null && args.length == 1) {
                 Player receivePlayer = Bukkit.getServer().getPlayer(args[0]);
                 if (receivePlayer != null) {
                     if (sendPlayer.getName().equalsIgnoreCase(receivePlayer.getName())) {
@@ -47,8 +47,12 @@ public class TpCommand extends Command {
                 } else {
                     sendPlayer.sendMessage(ChatColor.AQUA + "你只能向在线玩家发送传送请求!");
                 }
+            }else if(args != null && args.length == 3){
+                val location = BaseUtil.getLocation(sendPlayer.getLocation().getWorld().getName(), Double.valueOf(args[0]), Double.valueOf(args[1]), Double.valueOf(args[2]));
+                sendPlayer.teleport(location);
+                sendPlayer.sendMessage(ChatColor.GOLD + "传送成功");
             } else {
-                return false;
+                sendPlayer.sendMessage(ChatColor.GOLD + "命令格式错误,请重试");
             }
         } else {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");

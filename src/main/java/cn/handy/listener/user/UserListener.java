@@ -10,8 +10,6 @@ import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -54,14 +52,16 @@ public class UserListener implements Listener {
         String userName = player.getName().toLowerCase();
         val rst = userService.findByUserName(userName);
         if (rst) {
-            // 判断是否免密码登陆
+            // 判断是否免密码使用ip登陆
+            val ipLogin = ConfigUtil.langConfig.getBoolean("ipLogin");
             val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
-            if (user.getId() != null) {
+            if (ipLogin && user.getId() != null) {
                 player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
                 BaseConstants.userSet.add(user);
             } else {
                 // 如果开启了spawn,登录的时候回到spawn,登录成功后回到当前位置
-                if (BaseConfigCache.isSpawn){
+                if (BaseConfigCache.isSpawn) {
+                    BaseConstants.userLoginLocationStatus.put(player.getName(), true);
                     // 保存当前位置
                     Home home = new Home();
                     home.setX(player.getLocation().getX());
@@ -70,14 +70,14 @@ public class UserListener implements Listener {
                     home.setYaw(player.getLocation().getYaw());
                     home.setPitch(player.getLocation().getPitch());
                     home.setWorld(player.getLocation().getWorld().getName());
-                    Location location = getHomeLocation(home);
-                    BaseConstants.userLoginLocationMap.put(player.getName(),location);
+                    val location = BaseUtil.getLocation(home);
+                    BaseConstants.userLoginLocationMap.put(player.getName(), location);
                     // 传送到spawn
                     String world = ConfigUtil.langConfig.getString("spawn.world");
                     Double x = ConfigUtil.langConfig.getDouble("spawn.x");
                     Double y = ConfigUtil.langConfig.getDouble("spawn.y");
                     Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-                    player.teleport(getSpawnLocation(world, x, y, z));
+                    player.teleport(BaseUtil.getLocation(world, x, y, z));
                 }
                 player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
             }
@@ -87,12 +87,13 @@ public class UserListener implements Listener {
                 player.getInventory().addItem(SecretUtil.getSecretHelp());
             }
             if (BaseConfigCache.isSpawn) {
+                BaseConstants.userLoginLocationStatus.put(player.getName(), true);
                 // 第一次注册登录位置为spawn
                 Boolean b = false;
                 for (Spawn spawn : BaseConstants.spawnList) {
                     if (event.getPlayer().hasPermission(spawn.getPermission())) {
                         b = true;
-                        player.teleport(getSpawnLocation(spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ()));
+                        player.teleport(BaseUtil.getLocation(spawn.getWorld(), spawn.getX(), spawn.getY(), spawn.getZ()));
                     }
                 }
                 if (!b) {
@@ -100,31 +101,11 @@ public class UserListener implements Listener {
                     Double x = ConfigUtil.langConfig.getDouble("spawn.x");
                     Double y = ConfigUtil.langConfig.getDouble("spawn.y");
                     Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-                    player.teleport(getSpawnLocation(world, x, y, z));
+                    player.teleport(BaseUtil.getLocation(world, x, y, z));
                 }
             }
             player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
         }
-    }
-
-    private Location getHomeLocation(Home home) {
-        return new Location(
-                Bukkit.getWorld(home.getWorld()), home.getX(), home.getY(), home.getZ(), home.getYaw(), home.getPitch()
-        );
-    }
-    /**
-     * 获取地点
-     *
-     * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    private Location getSpawnLocation(String world, Double x, Double y, Double z) {
-        return new Location(
-                Bukkit.getWorld(world), x, y, z
-        );
     }
 
     /**
@@ -237,6 +218,12 @@ public class UserListener implements Listener {
      */
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
+        // 如果登录传送状态
+        if (BaseConstants.userLoginLocationStatus.get(event.getPlayer().getName())) {
+            BaseConstants.userLoginLocationStatus.remove(event.getPlayer().getName());
+            return;
+        }
+        // 判断是否登录
         if (isLogin(event.getPlayer().getName())) {
             return;
         }

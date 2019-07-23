@@ -16,13 +16,18 @@ spawn:
   x: 0
   y: 72
   z: 0
-# 死亡惩罚自定义命令,不带/,json格式,可多个命令(isDeathPenalty启用时候生效)
-# http://www.bejson.com/在线json格式验证
-eeathPenalty: ["spawn", "home"]
+# 死亡惩罚自定义命令(${player}表示自己)
+deathPenaltyCommand:
+- "say lol"
+- "say ${player}死了"
+# 同ip免密码登录
+ipLogin: true
+# 登录成功提醒消息,可使用颜色代码
+loginMessage: ${player},你登录成功啦!
 
-# 默认全部玩家加入游戏欢迎语句(isMessage启用时候生效)
+# 默认全部玩家加入游戏欢迎语句,可使用颜色代码(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
-# 默认全部玩家离开游戏欢迎语句(isMessage启用时候生效)
+# 默认全部玩家离开游戏欢迎语句,可使用颜色代码(isMessage启用时候生效)
 quitMessage: ${player} 离开了服务器
 
 
