@@ -116,8 +116,7 @@ public abstract class BaseConstants {
             "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
                     "§e/manage reload lang     " + "§f重载本插件的lang文本\n" +
-                    "§e/manage reload secret   " + "§f重载本插件的secret文本\n" +
-                    "§e/manage reload spawn   " + "§f重载本插件的spawn文本";
+                    "§e/manage reload secret   " + "§f重载本插件的secret文本";
 
     public final static String PVP_HELP =
             "§e§m一一一一一一一§f[§ePVP管理§f]§e§m一一一一一一一\n" +

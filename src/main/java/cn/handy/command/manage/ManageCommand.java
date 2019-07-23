@@ -38,9 +38,6 @@ public class ManageCommand extends Command {
                 ConfigUtil.getSecretConfig();
                 SecretUtil.getSecretConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载secret.yml成功!");
-            }  else if (args[0].equals("reload") && args[1].equals("spawn")) {
-                ConfigUtil.getSpawnConfig();
-                sender.sendMessage(ChatColor.AQUA + "manage重载spawn.yml成功!");
             }else {
                 sender.sendMessage(BaseConstants.MANAGE_MSG);
             }
