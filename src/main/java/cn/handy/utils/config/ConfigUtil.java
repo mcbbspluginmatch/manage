@@ -97,8 +97,6 @@ public class ConfigUtil {
         BaseConfigCache.isMessage_msgAdmin = ConfigUtil.config.getBoolean("isMessage.permission.msgAdmin");;
 
         BaseConfigCache.isUser = ConfigUtil.config.getBoolean("isUser.isUse");
-        BaseConfigCache.isUser_login = ConfigUtil.config.getBoolean("isUser.permission.login");
-        BaseConfigCache.isUser_register = ConfigUtil.config.getBoolean("isUser.permission.register");
 
         BaseConfigCache.isHat = ConfigUtil.config.getBoolean("isHat.isUse");
         BaseConfigCache.isHat_hat = ConfigUtil.config.getBoolean("isHat.permission.hat");

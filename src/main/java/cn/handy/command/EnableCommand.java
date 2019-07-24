@@ -79,17 +79,7 @@ public class EnableCommand {
         }
         if (BaseConfigCache.isUser) {
             commandMap.register(Manage.plugin.getDescription().getName(), new LoginCommand());
-            if (BaseConfigCache.isUser_login) {
-                DefaultPermissions.registerPermission("handy.login", null, PermissionDefault.TRUE);
-            } else {
-                DefaultPermissions.registerPermission("handy.login", null, PermissionDefault.OP);
-            }
             commandMap.register(Manage.plugin.getDescription().getName(), new RegisterCommand());
-            if (BaseConfigCache.isUser_register) {
-                DefaultPermissions.registerPermission("handy.register", null, PermissionDefault.TRUE);
-            } else {
-                DefaultPermissions.registerPermission("handy.register", null, PermissionDefault.OP);
-            }
         }
         if (BaseConfigCache.isMessage) {
             commandMap.register(Manage.plugin.getDescription().getName(), new MsgAdminCommand());

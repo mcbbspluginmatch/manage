@@ -15,9 +15,6 @@ maxActive: 10
 # 是否启用登录系统
 isUser:
   isUse: true
-  permission:
-    login: true
-    register: true
 # 是否启用每个玩家加入/退出游戏消息提醒
 isMessage:
   isUse: true

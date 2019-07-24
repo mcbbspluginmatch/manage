@@ -18,8 +18,6 @@ public abstract class BaseConfigCache {
     public static Boolean isReport = false;
 
     public static Boolean isUser = false;
-    public static Boolean isUser_login = false;
-    public static Boolean isUser_register = false;
 
     public static Boolean isMessage = false;
     public static Boolean isMessage_msg = false;

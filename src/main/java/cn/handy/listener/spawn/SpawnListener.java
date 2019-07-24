@@ -21,7 +21,7 @@ public class SpawnListener implements Listener {
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
         // 如果有复活床的权限就复活到床
-        if (event.getPlayer().hasPermission("handy.spawn.bed")) {
+        if (event.getPlayer().hasPermission("handy.spawnBed")) {
             return;
         }
         // 传送到spawn地址
