@@ -208,7 +208,7 @@ public class UserListener implements Listener {
     @EventHandler
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         // 如果登录传送状态
-        if (BaseConstants.userLoginLocationStatus.get(event.getPlayer().getName())) {
+        if (BaseConstants.userLoginLocationStatus.get(event.getPlayer().getName()) != null) {
             BaseConstants.userLoginLocationStatus.remove(event.getPlayer().getName());
             return;
         }

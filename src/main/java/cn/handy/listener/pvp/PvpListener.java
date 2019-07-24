@@ -38,7 +38,7 @@ public class PvpListener implements Listener {
         val pvpService = Beans.getBeans().getPvpService();
         Pvp pvp = pvpService.findByUserName(userName);
         Boolean rst = true;
-        Boolean particle = true;
+        Boolean particle = false;
         if (pvp.getId() != null) {
             rst = pvp.getPvpStatus();
             particle = pvp.getParticle();
