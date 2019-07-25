@@ -10,6 +10,8 @@ import cn.handy.dao.secret.ISecretService;
 import cn.handy.dao.secret.IUserSecretService;
 import cn.handy.dao.secret.impl.SecretServiceImpl;
 import cn.handy.dao.secret.impl.UserSecretServiceImpl;
+import cn.handy.dao.spawn.ISpawnService;
+import cn.handy.dao.spawn.impl.SpawnServiceImpl;
 import cn.handy.dao.user.IUserService;
 import cn.handy.dao.user.impl.UserServiceImpl;
 import cn.handy.utils.sql.SqlManagerUtil;
@@ -26,6 +28,7 @@ public class Beans {
     private static ISecretService secretService = null;
     private static IUserSecretService userSecretService = null;
     private static IHomeService homeService = null;
+    private static ISpawnService spawnService = null;
     private static SqlManagerUtil sqlManagerUtil = null;
 
     private Beans() {
@@ -87,5 +90,12 @@ public class Beans {
             homeService = new HomeServiceImpl();
         }
         return homeService;
+    }
+
+    public ISpawnService getSpawnService() {
+        if (spawnService == null) {
+            spawnService = new SpawnServiceImpl();
+        }
+        return spawnService;
     }
 }

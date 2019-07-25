@@ -80,7 +80,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public User login(String userName, String passWord) {
-        User user = new User();
+        User user = null;
         try {
             String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_PASSWORD.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -89,6 +89,7 @@ public class UserServiceImpl implements IUserService {
             ps.setString(2, passWord);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                user = new User();
                 user.setId(rst.getInt(1));
                 user.setUserName(rst.getString(2));
                 user.setRealName(rst.getString(3));
@@ -146,7 +147,7 @@ public class UserServiceImpl implements IUserService {
      */
     @Override
     public User findByUserNameAndLoginIp(String userName, String loginIp) {
-        User user = new User();
+        User user = null;
         try {
             String selectStr = UserSqlEnum.SELECT_BY_USERNAME_AND_LOGIN_IP.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -155,6 +156,7 @@ public class UserServiceImpl implements IUserService {
             ps.setString(2, loginIp);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                user = new User();
                 user.setId(rst.getInt(1));
                 user.setUserName(rst.getString(2));
                 user.setRealName(rst.getString(3));

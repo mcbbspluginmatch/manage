@@ -10,16 +10,11 @@ homeDelayTime: 0
 homeWaitTime: 60
 # back传送等待时间(单位秒)(isHome启用时候生效)
 backWaitTime: 60
-# spawn位置设置(isSpawn启用时候生效)
-spawn:
-  world: world
-  x: 0
-  y: 72
-  z: 0
 # 死亡惩罚自定义命令(${player}表示自己)
 deathPenaltyCommand:
 - "say lol"
 - "say ${player}死了"
+
 # 同ip免密码登录
 ipLogin: true
 # 登录成功提醒消息,可使用颜色代码

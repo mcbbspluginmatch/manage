@@ -55,7 +55,7 @@ public class HomeServiceImpl implements IHomeService {
             // 查询有无数据
             val home1 = findByUserNameAndHomeName(home.getUserName(), home.getHomeName());
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
-            if (home1.getId() == null) {
+            if (home1 == null) {
                 String addStr = HomeSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setString(1, home.getUserName());
@@ -100,7 +100,7 @@ public class HomeServiceImpl implements IHomeService {
      */
     @Override
     public Home findByUserNameAndHomeName(String userName, String homeName) {
-        Home home = new Home();
+        Home home = null;
         try {
             String selectStr = HomeSqlEnum.SELECT_BY_USER_NAME_AND_HOME_NAME.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -109,6 +109,7 @@ public class HomeServiceImpl implements IHomeService {
             ps.setString(2, homeName);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                home = new Home();
                 home.setId(rst.getInt(1));
                 home.setUserName(rst.getString(2));
                 home.setHomeName(rst.getString(3));

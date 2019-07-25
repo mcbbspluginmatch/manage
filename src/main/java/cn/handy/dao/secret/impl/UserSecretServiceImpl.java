@@ -56,7 +56,7 @@ public class UserSecretServiceImpl implements IUserSecretService {
         try {
             val uSecret = findByUserNameAndSecretId(userSecret.getUserName(), userSecret.getSecretId());
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
-            if (uSecret.getId() == null) {
+            if (uSecret == null) {
                 String addStr = UserSecretSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setString(1, userSecret.getUserName());
@@ -95,7 +95,7 @@ public class UserSecretServiceImpl implements IUserSecretService {
      */
     @Override
     public UserSecret findByUserNameAndSecretId(String userName, Integer secretId) {
-        UserSecret userSecret = new UserSecret();
+        UserSecret userSecret = null;
         try {
             String selectStr = UserSecretSqlEnum.SELECT_BY_USER_NAME_AND_SECRET_ID.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -104,6 +104,7 @@ public class UserSecretServiceImpl implements IUserSecretService {
             ps.setInt(2, secretId);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                userSecret = new UserSecret();
                 userSecret.setId(rst.getInt(1));
                 userSecret.setUserName(rst.getString(2));
                 userSecret.setSectsId(rst.getInt(3));

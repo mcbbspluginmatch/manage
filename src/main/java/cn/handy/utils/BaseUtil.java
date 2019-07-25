@@ -2,6 +2,7 @@ package cn.handy.utils;
 
 import cn.handy.constants.BaseConstants;
 import cn.handy.entity.Home;
+import cn.handy.entity.Spawn;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -88,6 +89,18 @@ public class BaseUtil {
     /**
      * 获取位置
      *
+     * @param spawn
+     * @return
+     */
+    public static Location getLocation(Spawn spawn) {
+        return new Location(
+                Bukkit.getWorld(spawn.getWorld()), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getYaw(), spawn.getPitch()
+        );
+    }
+
+    /**
+     * 获取位置
+     *
      * @param world
      * @param x
      * @param y
@@ -98,5 +111,46 @@ public class BaseUtil {
         return new Location(
                 Bukkit.getWorld(world), x, y, z
         );
+    }
+
+    /**
+     * 获取传送spawn对应权限
+     *
+     * @param player
+     * @return
+     */
+    public static Integer getSpawnPermission(Player player) {
+        Integer num = 1;
+        if (player.hasPermission("handy.spawn.one")) {
+            num = 1;
+        }
+        if (player.hasPermission("handy.spawn.two")) {
+            num = 2;
+        }
+        if (player.hasPermission("handy.spawn.three")) {
+            num = 3;
+        }
+        if (player.hasPermission("handy.spawn.four")) {
+            num = 4;
+        }
+        if (player.hasPermission("handy.spawn.five")) {
+            num = 5;
+        }
+        if (player.hasPermission("handy.spawn.six")) {
+            num = 6;
+        }
+        if (player.hasPermission("handy.spawn.seven")) {
+            num = 7;
+        }
+        if (player.hasPermission("handy.spawn.eight")) {
+            num = 8;
+        }
+        if (player.hasPermission("handy.spawn.nine")) {
+            num = 9;
+        }
+        if (player.hasPermission("handy.spawn.ten")) {
+            num = 10;
+        }
+        return num;
     }
 }

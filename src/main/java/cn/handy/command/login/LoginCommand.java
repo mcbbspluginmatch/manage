@@ -33,7 +33,7 @@ public class LoginCommand extends Command {
         if (args != null && args.length == 1) {
             val userService = Beans.getBeans().getUserService();
             val user = userService.login(sendPlayer.getName().toLowerCase(), args[0]);
-            if (user.getId() != null) {
+            if (user != null) {
                 String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
                 sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage, sendPlayer.getName()));
                 BaseConstants.userSet.add(user);

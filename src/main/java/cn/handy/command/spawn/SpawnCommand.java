@@ -1,7 +1,7 @@
 package cn.handy.command.spawn;
 
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.config.ConfigUtil;
+import cn.handy.utils.Beans;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -31,11 +31,12 @@ public class SpawnCommand extends Command {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             val player = (Player) sender;
-            String world = ConfigUtil.langConfig.getString("spawn.world");
-            Double x = ConfigUtil.langConfig.getDouble("spawn.x");
-            Double y = ConfigUtil.langConfig.getDouble("spawn.y");
-            Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-            player.teleport(BaseUtil.getLocation(world, x, y, z));
+            val spawn = Beans.getBeans().getSpawnService().findById(BaseUtil.getSpawnPermission(player));
+            if (spawn != null) {
+                player.teleport(BaseUtil.getLocation(spawn));
+            } else {
+                player.sendMessage("op还没有设置过spawn");
+            }
         } else {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
         }

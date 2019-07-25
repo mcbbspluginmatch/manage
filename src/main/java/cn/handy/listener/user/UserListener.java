@@ -3,6 +3,7 @@ package cn.handy.listener.user;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.entity.Home;
+import cn.handy.entity.Spawn;
 import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
@@ -54,7 +55,7 @@ public class UserListener implements Listener {
             // 判断是否免密码使用ip登陆
             val ipLogin = ConfigUtil.langConfig.getBoolean("ipLogin");
             val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
-            if (ipLogin && user.getId() != null) {
+            if (ipLogin && user != null) {
                 player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
                 BaseConstants.userSet.add(user);
             } else {
@@ -71,12 +72,11 @@ public class UserListener implements Listener {
                     home.setWorld(player.getLocation().getWorld().getName());
                     val location = BaseUtil.getLocation(home);
                     BaseConstants.userLoginLocationMap.put(player.getName(), location);
-                    // 传送到spawn
-                    String world = ConfigUtil.langConfig.getString("spawn.world");
-                    Double x = ConfigUtil.langConfig.getDouble("spawn.x");
-                    Double y = ConfigUtil.langConfig.getDouble("spawn.y");
-                    Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-                    player.teleport(BaseUtil.getLocation(world, x, y, z));
+                    // 获取spawn地址进行传送
+                    Spawn spawn = Beans.getBeans().getSpawnService().findById(BaseUtil.getSpawnPermission(player));
+                    if (spawn != null) {
+                        player.teleport(BaseUtil.getLocation(spawn));
+                    }
                 }
                 player.sendMessage("§a请输入§e/l 密码 §a来登录游戏");
             }
@@ -87,11 +87,11 @@ public class UserListener implements Listener {
             }
             if (BaseConfigCache.isSpawn) {
                 BaseConstants.userLoginLocationStatus.put(player.getName(), true);
-                String world = ConfigUtil.langConfig.getString("spawn.world");
-                Double x = ConfigUtil.langConfig.getDouble("spawn.x");
-                Double y = ConfigUtil.langConfig.getDouble("spawn.y");
-                Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-                player.teleport(BaseUtil.getLocation(world, x, y, z));
+                // 获取spawn地址进行传送
+                Spawn spawn = Beans.getBeans().getSpawnService().findById(BaseUtil.getSpawnPermission(player));
+                if (spawn != null) {
+                    player.teleport(BaseUtil.getLocation(spawn));
+                }
             }
             player.sendMessage("§a请输入§e/reg 密码 重复密码 §a来注册游戏");
         }

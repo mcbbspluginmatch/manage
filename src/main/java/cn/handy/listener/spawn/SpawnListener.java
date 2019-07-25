@@ -1,7 +1,10 @@
 package cn.handy.listener.spawn;
 
+import cn.handy.entity.Spawn;
 import cn.handy.utils.BaseUtil;
-import cn.handy.utils.config.ConfigUtil;
+import cn.handy.utils.Beans;
+import lombok.val;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -20,16 +23,16 @@ public class SpawnListener implements Listener {
      */
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent event) {
+        val player = event.getPlayer();
         // 如果有复活床的权限就复活到床
-        if (event.getPlayer().hasPermission("handy.spawnBed")) {
+        if (player.hasPermission("handy.spawn.bed")) {
             return;
         }
-        // 传送到spawn地址
-        String world = ConfigUtil.langConfig.getString("spawn.world");
-        Double x = ConfigUtil.langConfig.getDouble("spawn.x");
-        Double y = ConfigUtil.langConfig.getDouble("spawn.y");
-        Double z = ConfigUtil.langConfig.getDouble("spawn.z");
-        event.setRespawnLocation(BaseUtil.getLocation(world, x, y, z));
+        // 获取spawn地址进行复活点设置传送
+        val spawn = Beans.getBeans().getSpawnService().findById(BaseUtil.getSpawnPermission(player));
+        if (spawn != null) {
+            event.setRespawnLocation(BaseUtil.getLocation(spawn));
+        }
     }
 
 }

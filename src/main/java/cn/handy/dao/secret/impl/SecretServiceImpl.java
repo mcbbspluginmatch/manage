@@ -43,7 +43,7 @@ public class SecretServiceImpl implements ISecretService {
             // 查询有无数据
             Secret sec = findById(secret.getId());
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
-            if (sec.getId() == null) {
+            if (sec == null) {
                 String addStr = SecretSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setInt(1, secret.getId());
@@ -80,7 +80,7 @@ public class SecretServiceImpl implements ISecretService {
 
     @Override
     public Secret findById(Integer id) {
-        Secret secret = new Secret();
+        Secret secret = null;
         try {
             String selectStr = SecretSqlEnum.SELECT_DATA.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -88,6 +88,7 @@ public class SecretServiceImpl implements ISecretService {
             ps.setInt(1, id);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                secret = new Secret();
                 secret.setId(rst.getInt(1));
                 secret.setSectsId(rst.getInt(2));
                 secret.setSectsName(rst.getString(3));

@@ -51,7 +51,7 @@ public class MsgCommand extends Command {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                Boolean rst = messageService.set(message);
+                                val rst = messageService.set(message);
                                 if (rst) {
                                     sendPlayer.sendMessage("设置成功");
                                 } else {
@@ -64,7 +64,7 @@ public class MsgCommand extends Command {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                Boolean rst = messageService.delete(sendPlayer.getName());
+                                val rst = messageService.delete(sendPlayer.getName());
                                 if (rst) {
                                     sendPlayer.sendMessage("删除成功");
                                 } else {
@@ -77,8 +77,8 @@ public class MsgCommand extends Command {
                         new BukkitRunnable() {
                             @Override
                             public void run() {
-                                Message user = messageService.findByUserName(sendPlayer.getName());
-                                if (user.getId() != null) {
+                                val user = messageService.findByUserName(sendPlayer.getName());
+                                if (user != null) {
                                     sendPlayer.sendMessage(ChatColor.GOLD + user.getUserName() + "进入游戏提醒为:\n"
                                             + ChatColor.GOLD + user.getJoinMessage() + "退出游戏提醒为:\n"
                                             + ChatColor.GOLD + user.getQuitMessage());

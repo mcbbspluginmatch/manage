@@ -9,9 +9,11 @@ import lombok.Data;
  */
 @Data
 public class Spawn {
+    private Integer id;
+    private double x;
+    private double y;
+    private double z;
+    private float yaw;
+    private float pitch;
     private String world;
-    private Double x;
-    private Double y;
-    private Double z;
-    private String permission;
 }

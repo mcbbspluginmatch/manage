@@ -113,7 +113,7 @@ public abstract class BaseConstants {
                     "§e§m一一一一一一一§f[§e个性消息§f]§e§m一一一一一一一";
 
     public final static String MANAGE_MSG =
-            "§e§m一一一一一一一§f[§eMANAGE§f]§e§m一一一一一一一\n" +
+            "§e§m一一一一一一一§f[§eMANAGE管理§f]§e§m一一一一一一一\n" +
                     "§e/manage reload help     " + "§f重载本插件的help文本\n" +
                     "§e/manage reload lang     " + "§f重载本插件的lang文本\n" +
                     "§e/manage reload secret   " + "§f重载本插件的secret文本";
@@ -134,9 +134,23 @@ public abstract class BaseConstants {
                     "§e/secret see   " + "§f查询手上无字天书的解锁事件";
 
     public final static String HOME_MSG =
-            "§e§m一一一一一一一§f[§e临江仙§f]§e§m一一一一一一一\n" +
+            "§e§m一一一一一一一§f[§e家设置§f]§e§m一一一一一一一\n" +
                     "§e/home [家名]     " + "§f回到对应的家中\n" +
                     "§e/setHome [家名]     " + "§f设置家";
+    public final static String SPAWN_MSG =
+            "§e§m一一一一一一一§f[§eSpawn设置§f]§e§m一一一一一一一\n" +
+                    "§e/setSpawn [1-10]     " + "§f设置spawn位置1到10\n" +
+                    "§e/子参数1,权限:     " + "§fhandy.spawn.one\n"+
+                    "§e/子参数2,权限:     " + "§fhandy.spawn.two\n"+
+                    "§e/子参数3,权限:     " + "§fhandy.spawn.three\n"+
+                    "§e/子参数4,权限:     " + "§fhandy.spawn.four\n"+
+                    "§e/子参数5,权限:     " + "§fhandy.spawn.five\n"+
+                    "§e/子参数6,权限:     " + "§fhandy.spawn.six\n"+
+                    "§e/子参数7,权限:     " + "§fhandy.spawn.seven\n"+
+                    "§e/子参数8,权限:     " + "§fhandy.spawn.eight\n"+
+                    "§e/子参数9,权限:     " + "§fhandy.spawn.nine\n"+
+                    "§e/子参数10,权限:     " + "§fhandy.spawn.ten\n"+
+                    "§e§m一一一一一一一§f[§e不给权限默认回到1§f]§e§m一一一一一一一";
     /**
      * 命令白名单正则
      */

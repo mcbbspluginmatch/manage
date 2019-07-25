@@ -39,7 +39,7 @@ public class PvpListener implements Listener {
         Pvp pvp = pvpService.findByUserName(userName);
         Boolean rst = true;
         Boolean particle = false;
-        if (pvp.getId() != null) {
+        if (pvp != null) {
             rst = pvp.getPvpStatus();
             particle = pvp.getParticle();
         }

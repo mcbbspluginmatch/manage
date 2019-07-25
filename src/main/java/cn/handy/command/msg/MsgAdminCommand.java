@@ -54,7 +54,7 @@ public class MsgAdminCommand extends Command {
                     break;
                 case "see":
                     Message user = messageService.findByUserName(args[1]);
-                    if (user.getId() != null) {
+                    if (user != null) {
                         sender.sendMessage(ChatColor.GOLD + user.getUserName() + "  |  "
                                 + ChatColor.GOLD + user.getJoinMessage() + "  |  "
                                 + ChatColor.GOLD + user.getQuitMessage());

@@ -27,7 +27,7 @@ public class MsgListener implements Listener {
         val messageService = Beans.getBeans().getMessageService();
         val message = messageService.findByUserName(userName);
         String joinMessage = ConfigUtil.langConfig.getString("joinMessage");
-        if (message.getId() != null) {
+        if (message != null) {
             joinMessage = message.getJoinMessage();
         }
         joinMessage = BaseUtil.replaceChatColorAndName(joinMessage, userName);
@@ -45,7 +45,7 @@ public class MsgListener implements Listener {
         val messageService = Beans.getBeans().getMessageService();
         val message = messageService.findByUserName(userName);
         String quitMessage = ConfigUtil.langConfig.getString("quitMessage");
-        if (message.getId() != null) {
+        if (message != null) {
             quitMessage = message.getQuitMessage();
         }
         quitMessage = BaseUtil.replaceChatColorAndName(quitMessage, userName);

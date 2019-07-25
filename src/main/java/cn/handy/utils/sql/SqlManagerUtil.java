@@ -75,6 +75,10 @@ public class SqlManagerUtil {
         if (BaseConfigCache.isHome) {
             Beans.getBeans().getHomeService().create();
         }
+        // 创建spawn表
+        if (BaseConfigCache.isHome) {
+            Beans.getBeans().getSpawnService().create();
+        }
         if (BaseConfigCache.isUseMySql) {
             // 创建一个每小时执行的心跳包
             new BukkitRunnable() {

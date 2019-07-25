@@ -114,7 +114,7 @@ public class PvpServiceImpl implements IPvpService {
      */
     @Override
     public Pvp findByUserName(String userName) {
-        Pvp pvp = new Pvp();
+        Pvp pvp = null;
         try {
             String selectStr = PvpSqlEnum.SELECT_BY_USERNAME.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -122,6 +122,7 @@ public class PvpServiceImpl implements IPvpService {
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                pvp = new Pvp();
                 pvp.setId(rst.getInt(1));
                 pvp.setUserName(rst.getString(2));
                 pvp.setPvpStatus(rst.getBoolean(3));

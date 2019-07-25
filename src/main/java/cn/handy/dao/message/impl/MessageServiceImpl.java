@@ -54,7 +54,7 @@ public class MessageServiceImpl implements IMessageService {
             // 查询有无数据
             val msg = findByUserName(message.getUserName());
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
-            if (msg.getId() == null) {
+            if (msg == null) {
                 String addStr = MsgSqlEnum.ADD_DATA.getCommand();
                 PreparedStatement ps = conn.prepareStatement(addStr);
                 ps.setString(1, message.getUserName());
@@ -112,7 +112,7 @@ public class MessageServiceImpl implements IMessageService {
      */
     @Override
     public Message findByUserName(String userName) {
-        Message message = new Message();
+        Message message = null;
         try {
             String selectStr = MsgSqlEnum.SELECT_DATA.getCommand();
             Connection conn = Beans.getBeans().getSqlManagerUtil().getConnFromPool();
@@ -120,6 +120,7 @@ public class MessageServiceImpl implements IMessageService {
             ps.setString(1, userName);
             val rst = ps.executeQuery();
             while (rst.next()) {
+                message = new Message();
                 message.setId(rst.getInt(1));
                 message.setUserName(rst.getString(2));
                 message.setJoinMessage(rst.getString(3));
