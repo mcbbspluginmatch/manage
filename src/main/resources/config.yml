@@ -49,7 +49,7 @@ isPvp:
     pvp: true
 # 是否开启武林秘籍系统
 isSecret:
-  isUse: true
+  isUse: false
   permission:
     secret: true
     secretAdmin: false
