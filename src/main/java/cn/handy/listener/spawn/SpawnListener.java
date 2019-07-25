@@ -1,10 +1,8 @@
 package cn.handy.listener.spawn;
 
-import cn.handy.entity.Spawn;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import lombok.val;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerRespawnEvent;

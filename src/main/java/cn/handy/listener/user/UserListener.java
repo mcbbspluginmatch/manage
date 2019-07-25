@@ -12,6 +12,7 @@ import cn.handy.utils.secret.SecretUtil;
 import lombok.val;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
@@ -43,7 +44,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerJoinGame(PlayerJoinEvent event) {
         // 发送登录提醒
         Player player = event.getPlayer();
@@ -102,7 +103,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuitGame(PlayerQuitEvent event) {
         // 清空用户登录缓存
         for (User user : BaseConstants.userSet) {
@@ -118,7 +119,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerCommandPreprocess(PlayerCommandPreprocessEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
@@ -137,7 +138,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
@@ -150,7 +151,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
@@ -163,7 +164,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onInventoryOpen(InventoryOpenEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
@@ -176,7 +177,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onInventoryClick(InventoryClickEvent event) {
         if (!(event.getWhoClicked() instanceof Player) || isLogin(event.getWhoClicked().getName())) {
             return;
@@ -189,7 +190,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) {
             return;
@@ -205,7 +206,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         // 如果登录传送状态
         if (BaseConstants.userLoginLocationStatus.get(event.getPlayer().getName()) != null) {
@@ -224,7 +225,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
@@ -237,7 +238,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityPickupItem(EntityPickupItemEvent event) {
         if (!BaseUtil.isPlayer(event.getEntity())) {
             return;
@@ -253,7 +254,7 @@ public class UserListener implements Listener {
      *
      * @param event
      */
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerMove(PlayerMoveEvent event) {
         if (isLogin(event.getPlayer().getName())) {
             return;
