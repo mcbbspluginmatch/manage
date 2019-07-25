@@ -31,12 +31,12 @@ public class TpCommand extends Command {
             return true;
         }
         val rst = BaseUtil.isPlayer(sender);
-        Player sendPlayer = (Player) sender;
         // tp到玩家坐标
         if (args != null && args.length == 1) {
             if (!rst) {
                 sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
             }
+            Player sendPlayer = (Player) sender;
             Player receivePlayer = Bukkit.getServer().getPlayer(args[0]);
             if (receivePlayer != null) {
                 if (sendPlayer.getName().equalsIgnoreCase(receivePlayer.getName())) {
@@ -55,15 +55,16 @@ public class TpCommand extends Command {
             Player player2 = Bukkit.getServer().getPlayer(args[1]);
             if (player1 != null && player2 != null) {
                 player1.teleport(player2.getLocation());
-                sendPlayer.sendMessage(ChatColor.GOLD + "传送成功");
+                sender.sendMessage(ChatColor.GOLD + "传送成功");
             } else {
-                sendPlayer.sendMessage(ChatColor.RED + "你只能向在线玩家发送传送请求!");
+                sender.sendMessage(ChatColor.RED + "你只能向在线玩家发送传送请求!");
             }
             // tp 到 xyz
         } else if (args != null && args.length == 3) {
             if (!rst) {
                 sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
             }
+            Player sendPlayer = (Player) sender;
             val location = BaseUtil.getLocation(sendPlayer.getLocation().getWorld().getName(), Double.valueOf(args[0]), Double.valueOf(args[1]), Double.valueOf(args[2]));
             sendPlayer.teleport(location);
             sendPlayer.sendMessage(ChatColor.GOLD + "传送成功");
@@ -71,14 +72,14 @@ public class TpCommand extends Command {
         } else if (args != null && args.length == 4) {
             Player player = Bukkit.getServer().getPlayer(args[0]);
             if (player != null) {
-                val location = BaseUtil.getLocation(sendPlayer.getLocation().getWorld().getName(), Double.valueOf(args[1]), Double.valueOf(args[2]), Double.valueOf(args[3]));
+                val location = BaseUtil.getLocation(player.getLocation().getWorld().getName(), Double.valueOf(args[1]), Double.valueOf(args[2]), Double.valueOf(args[3]));
                 player.teleport(location);
-                sendPlayer.sendMessage(ChatColor.GOLD + "传送成功");
+                sender.sendMessage(ChatColor.GOLD + "传送成功");
             } else {
-                sendPlayer.sendMessage(ChatColor.RED + "你只能向在线玩家发送传送请求!");
+                sender.sendMessage(ChatColor.RED + "你只能向在线玩家发送传送请求!");
             }
         } else {
-            sendPlayer.sendMessage(BaseConstants.TP_MSG);
+            sender.sendMessage(BaseConstants.TP_MSG);
         }
         return true;
     }
