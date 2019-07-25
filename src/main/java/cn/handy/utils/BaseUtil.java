@@ -121,35 +121,35 @@ public class BaseUtil {
      */
     public static Integer getSpawnPermission(Player player) {
         Integer num = 1;
-        if (player.hasPermission("handy.spawn.one")) {
-            num = 1;
-        }
-        if (player.hasPermission("handy.spawn.two")) {
-            num = 2;
-        }
-        if (player.hasPermission("handy.spawn.three")) {
-            num = 3;
-        }
-        if (player.hasPermission("handy.spawn.four")) {
-            num = 4;
-        }
-        if (player.hasPermission("handy.spawn.five")) {
-            num = 5;
-        }
-        if (player.hasPermission("handy.spawn.six")) {
-            num = 6;
-        }
-        if (player.hasPermission("handy.spawn.seven")) {
-            num = 7;
-        }
-        if (player.hasPermission("handy.spawn.eight")) {
-            num = 8;
+        if (player.hasPermission("handy.spawn.ten")) {
+            num = 10;
         }
         if (player.hasPermission("handy.spawn.nine")) {
             num = 9;
         }
-        if (player.hasPermission("handy.spawn.ten")) {
-            num = 10;
+        if (player.hasPermission("handy.spawn.eight")) {
+            num = 8;
+        }
+        if (player.hasPermission("handy.spawn.seven")) {
+            num = 7;
+        }
+        if (player.hasPermission("handy.spawn.six")) {
+            num = 6;
+        }
+        if (player.hasPermission("handy.spawn.five")) {
+            num = 5;
+        }
+        if (player.hasPermission("handy.spawn.four")) {
+            num = 4;
+        }
+        if (player.hasPermission("handy.spawn.three")) {
+            num = 3;
+        }
+        if (player.hasPermission("handy.spawn.two")) {
+            num = 2;
+        }
+        if (player.hasPermission("handy.spawn.one")) {
+            num = 1;
         }
         return num;
     }
