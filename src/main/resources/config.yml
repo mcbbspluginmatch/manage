@@ -47,7 +47,7 @@ isPvp:
   isUse: true
   permission:
     pvp: true
-# 是否开启武林秘籍系统
+# 是否开启武林秘籍系统(开发中-不要启用)
 isSecret:
   isUse: false
   permission:
