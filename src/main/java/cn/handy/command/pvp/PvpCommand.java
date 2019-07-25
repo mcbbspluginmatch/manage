@@ -43,7 +43,7 @@ public class PvpCommand extends Command {
             final IPvpService pvpService = Beans.getBeans().getPvpService();
             final Pvp pvp = new Pvp();
             pvp.setUserName(sendPlayer.getName());
-            pvp.setParticle(true);
+            pvp.setParticle(false);
             if (args[0].equalsIgnoreCase("on")) {
                 pvp.setPvpStatus(true);
                 BaseConstants.PvpMap.put(sendPlayer.getName(), true);

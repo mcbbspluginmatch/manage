@@ -1,6 +1,5 @@
 package cn.handy.constants;
 
-import cn.handy.entity.Spawn;
 import cn.handy.entity.User;
 import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
@@ -140,17 +139,23 @@ public abstract class BaseConstants {
     public final static String SPAWN_MSG =
             "§e§m一一一一一一一§f[§eSpawn设置§f]§e§m一一一一一一一\n" +
                     "§e/setSpawn [1-10]     " + "§f设置spawn位置1到10\n" +
-                    "§e/子参数1,权限:     " + "§fhandy.spawn.one\n"+
-                    "§e/子参数2,权限:     " + "§fhandy.spawn.two\n"+
-                    "§e/子参数3,权限:     " + "§fhandy.spawn.three\n"+
-                    "§e/子参数4,权限:     " + "§fhandy.spawn.four\n"+
-                    "§e/子参数5,权限:     " + "§fhandy.spawn.five\n"+
-                    "§e/子参数6,权限:     " + "§fhandy.spawn.six\n"+
-                    "§e/子参数7,权限:     " + "§fhandy.spawn.seven\n"+
-                    "§e/子参数8,权限:     " + "§fhandy.spawn.eight\n"+
-                    "§e/子参数9,权限:     " + "§fhandy.spawn.nine\n"+
-                    "§e/子参数10,权限:     " + "§fhandy.spawn.ten\n"+
+                    "§e/子参数1,权限:     " + "§fhandy.spawn.one\n" +
+                    "§e/子参数2,权限:     " + "§fhandy.spawn.two\n" +
+                    "§e/子参数3,权限:     " + "§fhandy.spawn.three\n" +
+                    "§e/子参数4,权限:     " + "§fhandy.spawn.four\n" +
+                    "§e/子参数5,权限:     " + "§fhandy.spawn.five\n" +
+                    "§e/子参数6,权限:     " + "§fhandy.spawn.six\n" +
+                    "§e/子参数7,权限:     " + "§fhandy.spawn.seven\n" +
+                    "§e/子参数8,权限:     " + "§fhandy.spawn.eight\n" +
+                    "§e/子参数9,权限:     " + "§fhandy.spawn.nine\n" +
+                    "§e/子参数10,权限:     " + "§fhandy.spawn.ten\n" +
                     "§e§m一一一一一一一§f[§e不给权限默认回到1§f]§e§m一一一一一一一";
+    public final static String TP_MSG =
+            "§e§m一一一一一一一§f[§eTp功能§f]§e§m一一一一一一一\n" +
+                    "§e/tp [玩家名]     " + "§传送到玩家地点\n" +
+                    "§e/tp [x] [y] [z]    " + "§传送到xyz坐标\n" +
+                    "§e/tp [玩家A] [玩家B]     " + "§传送玩家A到玩家B坐标\n" +
+                    "§e/tp [玩家名] [x] [y] [z]    " + "§传送玩家到xyz坐标";
     /**
      * 命令白名单正则
      */
