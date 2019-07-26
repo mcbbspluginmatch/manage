@@ -1,5 +1,6 @@
 package cn.handy.listener.showdamage;
 
+import cn.handy.constants.MonsterEnum;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.msg.SendMessage;
 import net.md_5.bungee.api.ChatColor;
@@ -59,7 +60,7 @@ public class ShowDamageListener implements Listener {
             }
             double maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             SendMessage.sendActionBar(damagePlayer,
-                    ChatColor.GREEN + name + ChatColor.WHITE + finalDamage + " / " + maxHealth);
+                    ChatColor.GREEN + MonsterEnum.getChName(name) + ChatColor.WHITE + finalDamage + " / " + maxHealth);
         }
     }
 }
