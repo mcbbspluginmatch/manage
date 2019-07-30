@@ -38,7 +38,7 @@ public class SpawnCommand extends Command {
             // 判断是否冷却
             Long keepAlive;
             val spawnWaitTime = ConfigUtil.langConfig.getLong("spawnWaitTime");
-            if (BaseConstants.backWaitTime.containsKey(player.getName())) {
+            if (BaseConstants.spawnWaitTime.containsKey(player.getName())) {
                 keepAlive = (System.currentTimeMillis() - BaseConstants.spawnWaitTime.get(player.getName())) / 1000L;
                 if (keepAlive < spawnWaitTime) {
                     player.sendMessage(ChatColor.AQUA + "你必须等待" + (spawnWaitTime - keepAlive) + "秒后,才可以继续使用传送");
