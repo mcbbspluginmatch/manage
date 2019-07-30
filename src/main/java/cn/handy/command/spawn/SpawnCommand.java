@@ -57,6 +57,7 @@ public class SpawnCommand extends Command {
                     @Override
                     public void run() {
                         player.teleport(BaseUtil.getLocation(spawn));
+                        BaseConstants.spawnWaitTime.put(player.getName(), System.currentTimeMillis());
                     }
                 }.runTaskLater(Manage.plugin, spawnDelayTime * 20);
 

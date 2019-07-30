@@ -56,6 +56,7 @@ public class BackCommand extends Command {
                     @Override
                     public void run() {
                         player.teleport(location);
+                        BaseConstants.backWaitTime.put(player.getName(), System.currentTimeMillis());
                     }
                 }.runTaskLater(Manage.plugin, backDelayTime * 20);
             } else {
