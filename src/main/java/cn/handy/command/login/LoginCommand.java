@@ -36,7 +36,7 @@ public class LoginCommand extends Command {
             if (user != null) {
                 String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
                 sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage, sendPlayer.getName()));
-                BaseConstants.userSet.add(user);
+                BaseConstants.playerNameList.add(user.getUserName());
                 // 保存本次登录ip和时间
                 user.setLoginDate(new Date());
                 user.setLoginIp(sendPlayer.getAddress().getAddress().getHostAddress());

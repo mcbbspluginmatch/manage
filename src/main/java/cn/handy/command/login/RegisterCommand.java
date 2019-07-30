@@ -45,7 +45,7 @@ public class RegisterCommand extends Command {
                 if (rst) {
                     String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
                     sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage, sendPlayer.getName()));
-                    BaseConstants.userSet.add(user);
+                    BaseConstants.playerNameList.add(user.getUserName());
                 } else {
                     sender.sendMessage("注册失败");
                 }

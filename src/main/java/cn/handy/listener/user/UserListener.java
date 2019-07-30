@@ -4,7 +4,6 @@ import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
 import cn.handy.entity.Home;
 import cn.handy.entity.Spawn;
-import cn.handy.entity.User;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
 import cn.handy.utils.config.ConfigUtil;
@@ -14,12 +13,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
@@ -58,7 +61,7 @@ public class UserListener implements Listener {
             val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
             if (ipLogin && user != null) {
                 player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
-                BaseConstants.userSet.add(user);
+                BaseConstants.playerNameList.add(user.getUserName());
             } else {
                 // 如果开启了spawn,登录的时候回到spawn,登录成功后回到当前位置
                 if (BaseConfigCache.isSpawn) {
@@ -105,11 +108,11 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerQuitGame(PlayerQuitEvent event) {
-        // 清空用户登录缓存
-        for (User user : BaseConstants.userSet) {
-            if (user.getUserName().equals(event.getPlayer().getName().toLowerCase())) {
-                BaseConstants.userSet.remove(user);
-                break;
+        Iterator<String> iterator = BaseConstants.playerNameList.iterator();
+        while (iterator.hasNext()) {
+            String playerName = iterator.next();
+            if (playerName.equals(event.getPlayer().getName().toLowerCase())) {
+                iterator.remove();
             }
         }
     }
@@ -140,10 +143,9 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -153,10 +155,9 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerInteract(PlayerInteractEvent event) {
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -166,10 +167,26 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onInventoryOpen(InventoryOpenEvent event) {
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (event.getPlayer() instanceof Player) {
+            if (!isLogin(event.getPlayer().getName())) {
+                event.setCancelled(true);
+            }
         }
-        event.setCancelled(true);
+    }
+
+    /**
+     * 储存伤害事件的数据
+     *
+     * @param event
+     */
+    @EventHandler
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            val player = (Player) event.getEntity();
+            if (!isLogin(player.getName())) {
+                event.setCancelled(true);
+            }
+        }
     }
 
     /**
@@ -192,13 +209,12 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) {
-            return;
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
+            if (!isLogin(player.getName())) {
+                event.setCancelled(true);
+            }
         }
-        if (isLogin(event.getDamager().getName())) {
-            return;
-        }
-        event.setCancelled(true);
     }
 
     /**
@@ -213,11 +229,9 @@ public class UserListener implements Listener {
             BaseConstants.userLoginLocationStatus.remove(event.getPlayer().getName());
             return;
         }
-        // 判断是否登录
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -227,10 +241,9 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -243,10 +256,9 @@ public class UserListener implements Listener {
         if (!BaseUtil.isPlayer(event.getEntity())) {
             return;
         }
-        if (isLogin(event.getEntity().getName())) {
-            return;
+        if (!isLogin(event.getEntity().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
     }
 
     /**
@@ -256,14 +268,45 @@ public class UserListener implements Listener {
      */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (isLogin(event.getPlayer().getName())) {
-            return;
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        if ((Math.abs(event.getFrom().getZ()) - Math.abs(event.getTo().getZ())) == 0
-                && (Math.abs(event.getFrom().getX()) - Math.abs(event.getTo().getX())) == 0) {
-            return;
+    }
+
+    /**
+     * 当一个方块被玩家破坏的时候，调用本事件.
+     *
+     * @param event
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onBlockBreakEvent(BlockBreakEvent event) {
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
         }
-        event.setCancelled(true);
+    }
+
+    /**
+     * 当一个方块被玩家放置的时候触发此事件.
+     *
+     * @param event
+     */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlace(BlockPlaceEvent event) {
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
+        }
+    }
+
+    /**
+     * 当玩家消耗完物品时, 此事件将触发 例如:(食物, 药水, 牛奶桶).
+     *
+     * @param event
+     */
+    @EventHandler
+    public void onItemConsume(PlayerItemConsumeEvent event) {
+        if (!isLogin(event.getPlayer().getName())) {
+            event.setCancelled(true);
+        }
     }
 
 
@@ -271,14 +314,9 @@ public class UserListener implements Listener {
      * 判断是否登录
      *
      * @param userName
-     * @return true是
+     * @return true是已登录
      */
     private Boolean isLogin(String userName) {
-        for (User user : BaseConstants.userSet) {
-            if (user.getUserName().equals(userName.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
+        return BaseConstants.playerNameList.contains(userName.toLowerCase());
     }
 }

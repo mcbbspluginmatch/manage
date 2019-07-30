@@ -43,7 +43,7 @@ public abstract class BaseConstants {
     /**
      * 用户登录缓存信息
      */
-    public static Set<User> userSet = new HashSet<User>();
+    public static List<String> playerNameList = new ArrayList<>();
 
     /**
      * 用户PVP缓存信息
