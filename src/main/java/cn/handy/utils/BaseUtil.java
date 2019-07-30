@@ -153,4 +153,19 @@ public class BaseUtil {
         }
         return num;
     }
+
+    /**
+     * 金额验证
+     *
+     * @param str
+     * @return true是金额
+     */
+    public static Boolean isMoney(String str) {
+        Matcher isNum = BaseConstants.MONEY.matcher(str);
+        if (!isNum.matches()) {
+            return false;
+        }
+        return true;
+    }
+
 }

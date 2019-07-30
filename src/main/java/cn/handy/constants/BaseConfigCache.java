@@ -58,5 +58,9 @@ public abstract class BaseConfigCache {
     public static Boolean isShowDamage = false;
     public static Boolean isDeathPenalty = false;
 
+    /**
+     * 是否开启经济
+     */
+    public static Boolean isVault = false;
 }
 

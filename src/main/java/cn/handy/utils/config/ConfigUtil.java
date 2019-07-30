@@ -134,5 +134,7 @@ public class ConfigUtil {
         BaseConfigCache.isShowDamage = ConfigUtil.config.getBoolean("isShowDamage.isUse");
 
         BaseConfigCache.isDeathPenalty = ConfigUtil.config.getBoolean("isDeathPenalty.isUse");
+
+        BaseConfigCache.isVault = ConfigUtil.config.getBoolean("isVault.isUse");
     }
 }

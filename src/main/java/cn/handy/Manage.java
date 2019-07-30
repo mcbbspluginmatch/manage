@@ -5,10 +5,13 @@ import cn.handy.entity.PluginVersions;
 import cn.handy.utils.Beans;
 import cn.handy.utils.PluginVersionUtil;
 import cn.handy.utils.ReportUtil;
+import cn.handy.utils.VaultUtil;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
 import cn.handy.utils.secret.SecretUtil;
+import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,7 +23,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
-    private final static String PLUGIN_VERSION = "5.0.7";
+    private final static String PLUGIN_VERSION = "5.0.8";
 
     /**
      * 启用插件时调用
@@ -30,6 +33,9 @@ public class Manage extends JavaPlugin {
         plugin = this;
         // 加载配置文件
         ConfigUtil.getConfig();
+        // 加载vault插件
+        VaultUtil.vault();
+
         // 注册监听器
         ListenerUtil.getListener();
         // 注册命令

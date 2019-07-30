@@ -1,11 +1,13 @@
 package cn.handy.constants;
 
-import cn.handy.entity.User;
 import org.bukkit.Location;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -170,4 +172,9 @@ public abstract class BaseConstants {
      * 数字正则
      */
     public final static Pattern NUMERIC = Pattern.compile("^-?\\d+(\\.\\d+)?$");
+
+    /**
+     * 金额正则
+     */
+    public final static Pattern MONEY = Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$");
 }

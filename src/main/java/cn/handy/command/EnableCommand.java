@@ -21,6 +21,10 @@ import cn.handy.command.tp.TpCommand;
 import cn.handy.command.tp.TpaCommand;
 import cn.handy.command.tp.TpacceptCommand;
 import cn.handy.command.tp.TpdenyCommand;
+import cn.handy.command.vault.BalTopCommand;
+import cn.handy.command.vault.EcoCommand;
+import cn.handy.command.vault.MoneyCommand;
+import cn.handy.command.vault.PayCommand;
 import cn.handy.constants.BaseConfigCache;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
@@ -176,6 +180,12 @@ public class EnableCommand {
             } else {
                 DefaultPermissions.registerPermission("handy.setSpawn", null, PermissionDefault.OP);
             }
+        }
+        if (BaseConfigCache.isVault) {
+            commandMap.register(Manage.plugin.getDescription().getName(), new BalTopCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new EcoCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new MoneyCommand());
+            commandMap.register(Manage.plugin.getDescription().getName(), new PayCommand());
         }
     }
 }
