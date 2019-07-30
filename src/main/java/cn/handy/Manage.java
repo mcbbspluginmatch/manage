@@ -9,8 +9,6 @@ import cn.handy.utils.VaultUtil;
 import cn.handy.utils.config.ConfigUtil;
 import cn.handy.utils.listener.ListenerUtil;
 import cn.handy.utils.secret.SecretUtil;
-import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
  */
 public class Manage extends JavaPlugin {
     public static Plugin plugin;
+    public static Server server;
     private final static String PLUGIN_VERSION = "5.0.8";
 
     /**
@@ -31,6 +30,7 @@ public class Manage extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        server = getServer();
         // 加载配置文件
         ConfigUtil.getConfig();
         // 加载vault插件

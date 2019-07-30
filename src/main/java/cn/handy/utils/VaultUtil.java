@@ -32,10 +32,10 @@ public class VaultUtil {
     }
 
     private static boolean setupEconomy() {
-        if (Manage.plugin.getServer().getPluginManager().getPlugin("Vault") == null) {
+        if (Manage.server.getPluginManager().getPlugin("Vault") == null) {
             return false;
         }
-        RegisteredServiceProvider<Economy> rsp = Manage.plugin.getServer().getServicesManager().getRegistration(Economy.class);
+        RegisteredServiceProvider<Economy> rsp = Manage.server.getServicesManager().getRegistration(Economy.class);
         if (rsp == null) {
             return false;
         }
@@ -44,13 +44,13 @@ public class VaultUtil {
     }
 
     private static boolean setupChat() {
-        RegisteredServiceProvider<Chat> rsp = Manage.plugin.getServer().getServicesManager().getRegistration(Chat.class);
+        RegisteredServiceProvider<Chat> rsp = Manage.server.getServicesManager().getRegistration(Chat.class);
         chat = rsp.getProvider();
         return chat != null;
     }
 
     private static boolean setupPermissions() {
-        RegisteredServiceProvider<Permission> rsp = Manage.plugin.getServer().getServicesManager().getRegistration(Permission.class);
+        RegisteredServiceProvider<Permission> rsp = Manage.server.getServicesManager().getRegistration(Permission.class);
         perms = rsp.getProvider();
         return perms != null;
     }
