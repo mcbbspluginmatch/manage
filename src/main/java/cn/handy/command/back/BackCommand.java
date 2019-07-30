@@ -39,7 +39,7 @@ public class BackCommand extends Command {
             Long keepAlive;
             val backWaitTime = ConfigUtil.langConfig.getLong("backWaitTime");
             if (BaseConstants.backWaitTime.containsKey(player.getName())) {
-                keepAlive = (System.currentTimeMillis() - BaseConstants.tpaWaitTime.get(player.getName())) / 1000L;
+                keepAlive = (System.currentTimeMillis() - BaseConstants.backWaitTime.get(player.getName())) / 1000L;
                 if (keepAlive < backWaitTime) {
                     player.sendMessage(ChatColor.AQUA + "你必须等待" + (backWaitTime - keepAlive) + "秒后,才可以继续使用传送");
                     return true;
