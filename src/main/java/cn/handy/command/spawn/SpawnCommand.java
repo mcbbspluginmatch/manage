@@ -1,12 +1,16 @@
 package cn.handy.command.spawn;
 
+import cn.handy.Manage;
+import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.Beans;
+import cn.handy.utils.config.ConfigUtil;
 import lombok.val;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
@@ -31,9 +35,31 @@ public class SpawnCommand extends Command {
         val rst = BaseUtil.isPlayer(sender);
         if (rst) {
             val player = (Player) sender;
+            // 判断是否冷却
+            Long keepAlive;
+            val spawnWaitTime = ConfigUtil.langConfig.getLong("spawnWaitTime");
+            if (BaseConstants.backWaitTime.containsKey(player.getName())) {
+                keepAlive = (System.currentTimeMillis() - BaseConstants.spawnWaitTime.get(player.getName())) / 1000L;
+                if (keepAlive < spawnWaitTime) {
+                    player.sendMessage(ChatColor.AQUA + "你必须等待" + (spawnWaitTime - keepAlive) + "秒后,才可以继续使用传送");
+                    return true;
+                }
+            }
+
             val spawn = Beans.getBeans().getSpawnService().findById(BaseUtil.getSpawnPermission(player));
             if (spawn != null) {
-                player.teleport(BaseUtil.getLocation(spawn));
+                // 传送延迟
+                val spawnDelayTime = ConfigUtil.langConfig.getLong("spawnDelayTime");
+                if (spawnDelayTime > 0) {
+                    player.sendMessage(ChatColor.GRAY + "" + spawnDelayTime + "秒后开始传送...");
+                }
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.teleport(BaseUtil.getLocation(spawn));
+                    }
+                }.runTaskLater(Manage.plugin, spawnDelayTime * 20);
+
             } else {
                 player.sendMessage("op还没有设置过spawn");
             }

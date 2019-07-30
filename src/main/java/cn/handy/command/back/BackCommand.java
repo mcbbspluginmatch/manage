@@ -1,5 +1,6 @@
 package cn.handy.command.back;
 
+import cn.handy.Manage;
 import cn.handy.constants.BaseConstants;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.config.ConfigUtil;
@@ -9,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * @author hanshuai
@@ -45,7 +47,17 @@ public class BackCommand extends Command {
             }
             Location location = BaseConstants.backMap.get(player.getName());
             if (location != null) {
-                player.teleport(location);
+                // 传送延迟
+                val backDelayTime = ConfigUtil.langConfig.getLong("backDelayTime");
+                if (backDelayTime > 0) {
+                    player.sendMessage(ChatColor.GRAY + "" + backDelayTime + "秒后开始传送...");
+                }
+                new BukkitRunnable() {
+                    @Override
+                    public void run() {
+                        player.teleport(location);
+                    }
+                }.runTaskLater(Manage.plugin, backDelayTime * 20);
             } else {
                 sender.sendMessage(ChatColor.AQUA + "没有需要回去的位置");
             }

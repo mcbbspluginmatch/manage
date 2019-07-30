@@ -21,6 +21,11 @@ public abstract class BaseConstants {
     public static Map<String, Long> tpaWaitTime = new HashMap();
 
     /**
+     * spawn指令传送cdMap
+     */
+    public static Map<String, Long> spawnWaitTime = new HashMap();
+
+    /**
      * tpa传送map
      */
     public static Map<String, String> currentRequest = new HashMap();

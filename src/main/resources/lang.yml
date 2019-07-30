@@ -2,15 +2,25 @@
 tpaDelayTime: 0
 # tpa传送等待时间(单位秒)(isTp启用时候生效)
 tpaWaitTime: 60
+
 # home数量
 homeCount: 3
 # home传送延迟时间(单位秒)(isHome启用时候生效)
 homeDelayTime: 0
 # home传送等待时间(单位秒)(isHome启用时候生效)
 homeWaitTime: 60
-# back传送等待时间(单位秒)(isHome启用时候生效)
+
+# back传送延迟时间(单位秒)(isBack启用时候生效)
+backDelayTime: 0
+# back传送等待时间(单位秒)(isBack启用时候生效)
 backWaitTime: 60
-# 死亡惩罚自定义命令(${player}表示自己)
+
+# spawn传送延迟时间(单位秒)(isSpawn启用时候生效)
+spawnDelayTime: 0
+# spawn传送等待时间(单位秒)(isSpawn启用时候生效)
+spawnWaitTime: 60
+
+# 死亡惩罚自定义命令(${player}表示死亡的玩家)
 deathPenaltyCommand:
 - "say ${player}死了"
 
