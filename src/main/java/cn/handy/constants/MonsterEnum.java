@@ -57,8 +57,8 @@ public enum MonsterEnum {
 
     public static String getChName(String enName) {
         for (MonsterEnum monsterEnum : MonsterEnum.values()) {
-            if (monsterEnum.monsterEnName.equals(enName)) {
-                return monsterEnum.monsterChName;
+            if (monsterEnum.getMonsterEnName().equals(enName)) {
+                return monsterEnum.getMonsterChName();
             }
         }
         return enName;
