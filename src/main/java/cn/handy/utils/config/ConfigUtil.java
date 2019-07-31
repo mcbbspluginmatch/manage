@@ -3,7 +3,6 @@ package cn.handy.utils.config;
 import cn.handy.Manage;
 import cn.handy.constants.BaseConfigCache;
 import cn.handy.constants.BaseConstants;
-import lombok.val;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -15,7 +14,7 @@ import java.io.File;
  * @date 2019/6/21 9:54
  */
 public class ConfigUtil {
-    public static FileConfiguration config, helpConfig, langConfig, secretConfig;
+    public static FileConfiguration config, langConfig, secretConfig;
 
     /**
      * 初始化加载文件
@@ -37,30 +36,10 @@ public class ConfigUtil {
         // 加载lang
         getLangConfig();
 
-        // 加载help
-        if (BaseConfigCache.isHelp) {
-            getHelpConfig();
-        }
         // 加载Secret
         if (BaseConfigCache.isSecret) {
             getSecretConfig();
         }
-    }
-
-    /**
-     * 加载help文件
-     */
-    public static void getHelpConfig() {
-        // 创建help
-        if (BaseConfigCache.isHelp) {
-            File helpFile = new File(Manage.plugin.getDataFolder(), "help.yml");
-            if (!(helpFile.exists())) {
-                Manage.plugin.saveResource("help.yml", false);
-            }
-            helpConfig = YamlConfiguration.loadConfiguration(helpFile);
-        }
-        //加载 help缓存
-        BaseConstants.helpList = ConfigUtil.helpConfig.getStringList("helps");
     }
 
     /**
@@ -72,6 +51,8 @@ public class ConfigUtil {
             Manage.plugin.saveResource("lang.yml", false);
         }
         langConfig = YamlConfiguration.loadConfiguration(langFile);
+        //加载 help缓存
+        BaseConstants.helpList = ConfigUtil.langConfig.getStringList("helps");
     }
 
     /**
@@ -93,8 +74,10 @@ public class ConfigUtil {
         BaseConfigCache.isReport = ConfigUtil.config.getBoolean("isReport");
 
         BaseConfigCache.isMessage = ConfigUtil.config.getBoolean("isMessage.isUse");
-        BaseConfigCache.isMessage_msg = ConfigUtil.config.getBoolean("isMessage.permission.msg");;
-        BaseConfigCache.isMessage_msgAdmin = ConfigUtil.config.getBoolean("isMessage.permission.msgAdmin");;
+        BaseConfigCache.isMessage_msg = ConfigUtil.config.getBoolean("isMessage.permission.msg");
+        ;
+        BaseConfigCache.isMessage_msgAdmin = ConfigUtil.config.getBoolean("isMessage.permission.msgAdmin");
+        ;
 
         BaseConfigCache.isUser = ConfigUtil.config.getBoolean("isUser.isUse");
 
@@ -108,8 +91,8 @@ public class ConfigUtil {
         BaseConfigCache.isTp_tp = ConfigUtil.config.getBoolean("isTp.permission.tp");
         BaseConfigCache.isTp_tpa = ConfigUtil.config.getBoolean("isTp.permission.tpa");
 
-        BaseConfigCache.isGift =  ConfigUtil.config.getBoolean("isGift.isUse");
-        BaseConfigCache.isGift_gift =  ConfigUtil.config.getBoolean("isGift.permission.gift");
+        BaseConfigCache.isGift = ConfigUtil.config.getBoolean("isGift.isUse");
+        BaseConfigCache.isGift_gift = ConfigUtil.config.getBoolean("isGift.permission.gift");
 
         BaseConfigCache.isPvp = ConfigUtil.config.getBoolean("isPvp.isUse");
         BaseConfigCache.isPvp_pvp = ConfigUtil.config.getBoolean("isPvp.permission.pvp");

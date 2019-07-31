@@ -38,5 +38,21 @@ joinMessage: 欢迎 ${player} 加入服务器
 # 默认全部玩家离开游戏欢迎语句,可使用颜色代码(isMessage启用时候生效)
 quitMessage: ${player} 离开了服务器
 
+# /Help指令出现的提醒,可以无限复制粘贴扩充(超过10条会自动显示下一页),可使用颜色代码§
+helps:
+- "§e§m一一一一一一一§f[§e临江仙§f]§e§m一一一一一一一"
+- "§e/msg   §f设置加入/退出消息提醒"
+- "§e/hat   §f将手上的物品带在头上"
+- "§e/pvp on   §f设置自己PVP为开启状态"
+- "§e/pvp off   §f设置自己PVP为关闭状态"
+- "§e/pvp lizi on   §f设置自己PVP粒子效果为开启状态"
+- "§e/pvp lizi off   §f设置自己PVP粒子效果为关闭状态"
+- "§e/secret   §f查询自己的门派和功法情况"
+- "§e/home [家名]  §f传送回对应的家"
+- "§e/sethome [家名]   §f设置家"
+- "§e/tpa [名字]   §f请求传送到一个玩家的位置"
+- "§e/tpaccept   §f接受玩家传送"
+- "§e/tpdeny   §f拒绝玩家传送"
+
 
 
