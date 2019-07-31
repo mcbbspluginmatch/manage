@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author hanshuai
@@ -43,8 +44,10 @@ public class RegisterCommand extends Command {
                 user.setLoginDate(new Date());
                 val rst = userService.register(user);
                 if (rst) {
-                    String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
-                    sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage, sendPlayer.getName()));
+                    List<String> loginMessage = ConfigUtil.langConfig.getStringList("loginMessage");
+                    for (String str : loginMessage) {
+                        sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(str, sendPlayer.getName()));
+                    }
                     BaseConstants.playerNameList.add(user.getUserName());
                 } else {
                     sender.sendMessage("注册失败");

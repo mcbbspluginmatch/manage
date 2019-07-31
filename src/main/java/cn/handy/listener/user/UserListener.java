@@ -23,6 +23,7 @@ import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -61,6 +62,10 @@ public class UserListener implements Listener {
             val user = userService.findByUserNameAndLoginIp(userName, player.getAddress().getAddress().getHostAddress());
             if (ipLogin && user != null) {
                 player.sendMessage("§aip跟上次登录ip相同,免密码登录成功!");
+                List<String> loginMessage = ConfigUtil.langConfig.getStringList("loginMessage");
+                for (String str : loginMessage) {
+                    player.sendMessage(BaseUtil.replaceChatColorAndName(str, player.getName()));
+                }
                 BaseConstants.playerNameList.add(user.getUserName());
             } else {
                 // 如果开启了spawn,登录的时候回到spawn,登录成功后回到当前位置

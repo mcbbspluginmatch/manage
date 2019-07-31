@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author hanshuai
@@ -34,8 +35,10 @@ public class LoginCommand extends Command {
             val userService = Beans.getBeans().getUserService();
             val user = userService.login(sendPlayer.getName().toLowerCase(), args[0]);
             if (user != null) {
-                String loginMessage = ConfigUtil.langConfig.getString("loginMessage");
-                sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(loginMessage, sendPlayer.getName()));
+                List<String> loginMessage = ConfigUtil.langConfig.getStringList("loginMessage");
+                for (String str : loginMessage) {
+                    sendPlayer.sendMessage(BaseUtil.replaceChatColorAndName(str, sendPlayer.getName()));
+                }
                 BaseConstants.playerNameList.add(user.getUserName());
                 // 保存本次登录ip和时间
                 user.setLoginDate(new Date());

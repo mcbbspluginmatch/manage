@@ -52,15 +52,13 @@ public class ShowDamageListener implements Listener {
             if (finalDamage < 0) {
                 finalDamage = 0;
             }
-            String name = "";
+            String name = livingEntity.getName();
             if (livingEntity.getCustomName() != null) {
-                name = livingEntity.getCustomName() + ":";
-            } else {
-                name = livingEntity.getName() + ":";
+                name = livingEntity.getCustomName();
             }
             double maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
             SendMessage.sendActionBar(damagePlayer,
-                    ChatColor.GREEN + MonsterEnum.getChName(name) + ChatColor.WHITE + finalDamage + " / " + maxHealth);
+                    ChatColor.GREEN + MonsterEnum.getChName(name) + ":" + ChatColor.WHITE + finalDamage + " / " + maxHealth);
         }
     }
 }

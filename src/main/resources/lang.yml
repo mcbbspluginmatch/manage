@@ -20,14 +20,18 @@ spawnDelayTime: 0
 # spawn传送等待时间(单位秒)(isSpawn启用时候生效)
 spawnWaitTime: 60
 
-# 死亡惩罚自定义命令(${player}表示死亡的玩家)
+# 死亡惩罚自定义命令,可多行(${player}表示死亡的玩家)
 deathPenaltyCommand:
 - "say ${player}死了"
+- "say 更多命令"
 
 # 同ip免密码登录
 ipLogin: true
-# 登录成功提醒消息,可使用颜色代码
-loginMessage: ${player},你登录成功啦!
+# 登录成功提醒消息,可使用颜色代码可多行
+loginMessage:
+- "欢迎来到服务器"
+- "${player},你登录成功啦!"
+- "希望你玩的开心"
 
 # 默认全部玩家加入游戏欢迎语句,可使用颜色代码(isMessage启用时候生效)
 joinMessage: 欢迎 ${player} 加入服务器
