@@ -28,17 +28,14 @@ public class ManageCommand extends Command {
             return true;
         }
         if (args != null && args.length == 2) {
-            if (args[0].equals("reload") && args[1].equals("help")) {
-                ConfigUtil.getHelpConfig();
-                sender.sendMessage(ChatColor.AQUA + "manage重载help.yml成功!");
-            } else if (args[0].equals("reload") && args[1].equals("lang")) {
+            if (args[0].equals("reload") && args[1].equals("lang")) {
                 ConfigUtil.getLangConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载lang.yml成功!");
             } else if (args[0].equals("reload") && args[1].equals("secret")) {
                 ConfigUtil.getSecretConfig();
                 SecretUtil.getSecretConfig();
                 sender.sendMessage(ChatColor.AQUA + "manage重载secret.yml成功!");
-            }else {
+            } else {
                 sender.sendMessage(BaseConstants.MANAGE_MSG);
             }
         } else {
