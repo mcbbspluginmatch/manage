@@ -46,6 +46,7 @@ public enum HomeSqlEnum {
                     ");"
     ),
     ADD_DATA(
+        //id都是自增了 为什么插入的时候还要指定 - a39
             "INSERT INTO `mg_home`" +
                     "(`id`, `userName`, `homeName`, `x`, `y`, `z`, `yaw`, `pitch`, `world`)" +
                     " VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);"

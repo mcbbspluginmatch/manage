@@ -69,6 +69,7 @@ public class ConfigUtil {
     /**
      * 保存各个独立模块开启状态
      */
+    //难道只有我觉得方法名应该是load吗 - a39
     private static void saveConfigCache() {
         BaseConfigCache.isUseMySql = ConfigUtil.config.getBoolean("isUseMySql");
         BaseConfigCache.isReport = ConfigUtil.config.getBoolean("isReport");

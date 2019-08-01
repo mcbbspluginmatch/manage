@@ -48,6 +48,7 @@ public class PluginVersionUtil {
     public static PluginVersions getPluginVersion(String pluginName, String queryPassWord, String mcVersions) {
         PluginVersions pluginVersions = null;
         try {
+            //首先 没有其他线程修改的时候应该使用StringBuilder 而且都使用StringBuffer了 内部还用字符串连接 那使用的意义在哪 - a39
             StringBuffer stringBuffer = new StringBuffer();
             stringBuffer.append("plugin=" + pluginName);
             stringBuffer.append("&queryPassWord=" + queryPassWord);

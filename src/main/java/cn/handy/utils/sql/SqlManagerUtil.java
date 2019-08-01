@@ -28,6 +28,7 @@ public class SqlManagerUtil {
     private static String sqLiteDriver = "org.sqlite.JDBC";
     private int initSize = ConfigUtil.langConfig.getInt("initSize");
     private int maxActive = ConfigUtil.langConfig.getInt("maxActive");
+    //链表不是线程安全的 javadoc中也说明了需要通过Collections.synchronizedList(new LinkedList(...));来变得线程安全 - a39
     private LinkedList<Connection> connList = new LinkedList<Connection>();
 
     //声明对象时自动注册驱动

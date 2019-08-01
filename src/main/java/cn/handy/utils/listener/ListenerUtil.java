@@ -23,6 +23,7 @@ public class ListenerUtil {
     /**
      * 注册对应监听器
      */
+    //get??? 不应该是register吗 (算了 小细节不在意) - a39
     public static void getListener() {
         if (BaseConfigCache.isUser) {
             Bukkit.getPluginManager().registerEvents(new UserListener(), Manage.plugin);

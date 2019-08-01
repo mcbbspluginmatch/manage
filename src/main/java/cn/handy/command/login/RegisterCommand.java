@@ -37,6 +37,7 @@ public class RegisterCommand extends Command {
                 User user = new User();
                 user.setUserName(sendPlayer.getName().toLowerCase());
                 user.setRealName(sendPlayer.getName());
+                //没有进行哈希处理 密码明文储存 - a39
                 user.setPassWord(args[0]);
                 user.setRegIp(sendPlayer.getAddress().getAddress().getHostAddress());
                 user.setRegDate(new Date());
