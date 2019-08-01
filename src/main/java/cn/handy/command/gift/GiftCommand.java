@@ -45,7 +45,7 @@ public class GiftCommand extends Command {
             } else {
                 // 如果有子参数为玩家就给这个玩家发送礼物
                 if (args != null && args.length > 0) {
-                    val player = Bukkit.getServer().getPlayer(args[0]);
+                    val player = Bukkit.getServer().getPlayer(args[0]); // 乱写一个玩家就会报错，虽然不会造成损失 —— 754503921
                     PlayerInventory inventory = player.getInventory();
                     inventory.addItem(gift);
                     sender.sendMessage(ChatColor.AQUA + "礼物成功发给了" + player.getName());

@@ -33,6 +33,11 @@ public class LoginCommand extends Command {
         val sendPlayer = (Player) sender;
         if (args != null && args.length == 1) {
             val userService = Beans.getBeans().getUserService();
+            // 主线程上的数据库操作
+            // 保存明文密码
+            // 没有对暴力破解进行防护
+            // 登录后可以再次登录
+            // 理论上一直 /login 可以把服卡死 —— 754503921
             val user = userService.login(sendPlayer.getName().toLowerCase(), args[0]);
             if (user != null) {
                 List<String> loginMessage = ConfigUtil.langConfig.getStringList("loginMessage");

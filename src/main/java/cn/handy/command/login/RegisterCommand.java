@@ -42,6 +42,8 @@ public class RegisterCommand extends Command {
                 user.setRegDate(new Date());
                 user.setLoginIp(sendPlayer.getAddress().getAddress().getHostAddress());
                 user.setLoginDate(new Date());
+                // 跟 Login 那个有大致相同的问题
+                // 看看 AuthMe 写了多少代码，还是对用户安全多上上心 —— 754503921
                 val rst = userService.register(user);
                 if (rst) {
                     List<String> loginMessage = ConfigUtil.langConfig.getStringList("loginMessage");
