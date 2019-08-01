@@ -38,6 +38,7 @@ public class PvpCommand extends Command {
             sender.sendMessage(ChatColor.RED + "控制台不能使用该命令");
             return true;
         }
+        //代码冗杂，Player对象完全只需类型转换一次 —— mimimis
         if (args != null && args.length == 1) {
             final Player sendPlayer = (Player) sender;
             final IPvpService pvpService = Beans.getBeans().getPvpService();
