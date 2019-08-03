@@ -43,6 +43,7 @@ public class LotteryUtil {
          * @return
          */
         public boolean isContainKey(double element) {
+            //为什么不直接return element > minElement && element <= maxElement  —— yinyangshi
             boolean flag = false;
             if (element > minElement && element <= maxElement) {
                 flag = true;
@@ -67,6 +68,7 @@ public class LotteryUtil {
      * @param list 为奖品的概率
      */
     public LotteryUtil(List<Double> list) {
+        //如果list 为 null呢 —— yinyangshi
         lotteryList = new ArrayList<ContinuousList>();
         if (list.size() == 0) {
             throw new IllegalArgumentException("抽奖集合不能为空！");
