@@ -35,6 +35,7 @@ public class BaseUtil {
      * @return
      */
     public static Boolean isNumeric(String str) {
+        //Boolean? 为什么不直接return ?
         Matcher isNum = BaseConstants.NUMERIC.matcher(str);
         if (!isNum.matches()) {
             return false;
@@ -121,6 +122,7 @@ public class BaseUtil {
      */
     public static Integer getSpawnPermission(Player player) {
         Integer num = 1;
+        //为什么要用Integer
         if (player.hasPermission("handy.spawn.ten")) {
             num = 10;
         }
@@ -161,6 +163,7 @@ public class BaseUtil {
      * @return true是金额
      */
     public static Boolean isMoney(String str) {
+        //为什么返回Boolean ????? 为什么不直接返回结果??? ——yinyangshi
         Matcher isNum = BaseConstants.MONEY.matcher(str);
         if (!isNum.matches()) {
             return false;
