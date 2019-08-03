@@ -1,5 +1,5 @@
 package cn.handy.listener.showdamage;
-//我认为不需要单独一个包
+//我认为不需要单独一个包 —— yys
 import cn.handy.constants.MonsterEnum;
 import cn.handy.utils.BaseUtil;
 import cn.handy.utils.msg.SendMessage;
