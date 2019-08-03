@@ -51,7 +51,7 @@ public enum MonsterEnum {
     Giant("Giant ", "巨人"),
     Undead_Horse("Undead_Horse", "僵尸马"),
     Skeleton_Horse("Skeleton_Horse", "骷髅马");
-
+    //不支持自定义？ —— yys
     public String monsterEnName;
     public String monsterChName;
 
