@@ -135,6 +135,7 @@ public class SecretSetListener implements Listener {
             Boolean rst = false;
             switch (entityType) {
                 // 猪人
+                    //合并下？—— yys
                 case PIG_ZOMBIE:
                     rst = true;
                     break;
