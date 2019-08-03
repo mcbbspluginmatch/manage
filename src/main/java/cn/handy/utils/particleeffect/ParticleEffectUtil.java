@@ -23,6 +23,7 @@ public class ParticleEffectUtil {
      * @param player
      */
     public static void particleEffect(Player player) {
+        //player会在切换世界的时候失效 ——yys
         new BukkitRunnable() {
             @Override
             public void run() {
