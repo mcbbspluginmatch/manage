@@ -79,6 +79,7 @@ public class ReportUtil {
         PrintStream ps = new PrintStream(conn.getOutputStream());
         ps.print(param);
         ps.close();
+        //twtr呢
         BufferedReader bReader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
         String line, resultStr = "";
         while (null != (line = bReader.readLine())) {
@@ -103,6 +104,7 @@ public class ReportUtil {
         connection.setConnectTimeout(3000);
         connection.setReadTimeout(3000);
         connection.connect();
+        //twtr呢??
         in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         String line;
         while ((line = in.readLine()) != null) {
