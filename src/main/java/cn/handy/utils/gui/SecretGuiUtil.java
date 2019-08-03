@@ -40,6 +40,7 @@ public class SecretGuiUtil {
         return inv;
     }
 
+    //生成玩家？ 如果不看代码这个注释是不是有点歧义 ——yys
     /**
      * 生成玩家
      *
