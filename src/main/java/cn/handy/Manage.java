@@ -30,6 +30,7 @@ public class Manage extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
+        //我觉得根据英语就能看懂的代码 不需要打注释吧  —— yinyangshi
         server = getServer();
         // 加载配置文件
         ConfigUtil.getConfig();
