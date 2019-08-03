@@ -26,6 +26,7 @@ public class VaultUtil {
                 Manage.plugin.getLogger().info("没有找到vault插件,已经默认关闭相关模块");
                 BaseConfigCache.isVault = false;
             }
+            //及时清理不用的代码——yinyangshi
             //setupPermissions();
             //setupChat();
         }
