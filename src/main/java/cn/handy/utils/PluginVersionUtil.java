@@ -21,6 +21,7 @@ public class PluginVersionUtil {
     private final static String URL_STR = "http://106.12.43.142/plugin/findByPlugin";
 
     public static void main(String[] args) {
+        //及时清理 —— yinyangshi
         //TODO  以下的内容写到onEnable里
         // 插件版本号-保持跟目前插件版本相同
         String version = "1.0.0";
